@@ -1,0 +1,1 @@
+# plugins-disable-payment-method-for-woocommerce
