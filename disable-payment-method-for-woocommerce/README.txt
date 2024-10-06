@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.6.1
-Stable tag: 1.1.7.62
+Stable tag: 1.1.7.63
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -226,6 +226,9 @@ Leave the currency field blank if you have single currency in your website
 Yes the Free version and PRO version both are HPOS compatible
 
 == Changelog ==
+
+= 1.1.7.63 =
+* Tested for WC 9.3.3
 
 = 1.1.7.62 =
 * Tested for WC 9.3.0
