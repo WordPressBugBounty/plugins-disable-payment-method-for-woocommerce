@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              piwebsolution.com
- * @since             1.1.7.63
+ * @since             1.1.7.64
  * @package           Disable_Payment_Method_For_Woocommerce
  *
  * @wordpress-plugin
  * Plugin Name:       Disable payment method / COD fees for Order for WooCommerce
  * Plugin URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * Description:       Disable any payment method based on various conditions 
- * Version:           1.1.7.63
+ * Version:           1.1.7.64
  * Author:            PI Websolution
  * Author URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * License:           GPL-2.0+
@@ -38,7 +38,7 @@ if(!is_plugin_active( 'woocommerce/woocommerce.php')){
     function pisol_dpmw_woo_active() {
         ?>
         <div class="error notice">
-            <p><?php _e( 'Disable payment method for WooCommerce plugin need WooCommerce active, so activate WooCommerce in your website', 'disable-payment-method-for-woocommerce' ); ?></p>
+            <p><?php esc_html_e( 'Disable payment method for WooCommerce plugin need WooCommerce active, so activate WooCommerce in your website', 'disable-payment-method-for-woocommerce' ); ?></p>
         </div>
         <?php
     }
@@ -50,7 +50,7 @@ if(is_plugin_active( 'disable-payment-method-for-woocommerce-pro/disable-payment
     function pi_dpmw_my_free_pro_notice() {
         ?>
         <div class="error notice">
-            <p><?php _e( 'Please deactivate the free version of <strong>Disable payment method for WooCommerce</strong> as you have the PRO version'); ?></p>
+            <p><?php esc_html_e( 'Please deactivate the free version of <strong>Disable payment method for WooCommerce</strong> as you have the PRO version', 'disable-payment-method-for-woocommerce'); ?></p>
         </div>
         <?php
     }
@@ -61,10 +61,10 @@ if(is_plugin_active( 'disable-payment-method-for-woocommerce-pro/disable-payment
 
 /**
  * Currently plugin version.
- * Start at version 1.1.7.63 and use SemVer - https://semver.org
+ * Start at version 1.1.7.64 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.7.63' );
+define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.7.64' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_URL', 'https://www.piwebsolution.com' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/admin/advance-fees/templates/' );
 
@@ -122,7 +122,7 @@ add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'pisol_dpmw_li
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.1.7.63
+ * @since    1.1.7.64
  */
 function run_disable_payment_method_for_woocommerce() {
 

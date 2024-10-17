@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.6.1
-Stable tag: 1.1.7.63
+Stable tag: 1.1.7.64
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
