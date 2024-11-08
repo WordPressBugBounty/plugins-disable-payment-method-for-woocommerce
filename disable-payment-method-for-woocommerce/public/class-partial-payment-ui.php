@@ -350,9 +350,17 @@ class Pi_dpmw_partial_payment_ui{
 
         if(empty($fees_selected)) return $cart_total;
 
+        $includes_tax_value = '';
+        $position = strpos($cart_total, '</strong>');
+
+        if ($position !== false) {
+            $after_strong = substr($cart_total, $position + strlen('</strong>'));
+            $includes_tax_value = trim($after_strong);
+        }
+
         $total = Session::getOriginalTotal();
 
-        return '<strong>'.wc_price( $total ).'</strong>';
+        return '<strong>'.wc_price( $total ).'</strong> '.$includes_tax_value;
     }
 
     public function orderTotal( $formatted_total, $order){
