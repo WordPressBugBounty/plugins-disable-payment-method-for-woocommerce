@@ -36,6 +36,8 @@ class pisol_dpmw_options{
 
             array('field'=>'pi_dpmw_remove_payment_methods_selected','label'=>__('Remove payment method when partial payment selected'), 'desc'=>__('Remove Payment methods for when partial payment option is selected by the customer during checkout'),'type'=>'multiselect','default'=>array('cod'), 'value'=>$this->paymentMethods()),
 
+            array('field'=>'pi_dpmw_default_order_status','label'=>__('Default order status of partially paid order'), 'desc'=>__('This will be the order status of the main order once it is partially paid '),'type'=>'select','default'=> 'partial-paid', 'value'=> $this->order_status()),
+
             array('field'=>'pi_dpmw_excluded_products','label'=>__('Exclude product from partial payment'), 'desc'=>__('User will have to pay this product total amount even when they select for partial payment, It is just like you are excluding this product to be part of partial payment option E.g: if you set 10 as partial payment amount and there is no excluded product then user will pay 10 and checkout, but if there is some excluded product and non excluded product in the cart excluded product is of 20, so now user will pay 10+20 = 30 and then checkout, so he will be paying in full for the excluded product'),'type'=>'multiselect','default'=>array(), 'value'=>[], 'pro'=>true),
 
             array('field'=>'title', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Labels"), 'type'=>"setting_category"),
@@ -156,6 +158,16 @@ class pisol_dpmw_options{
         }
     
         return $output;
+    }
+
+    function order_status(){
+        $order_status = wc_get_order_statuses();
+        $processed = array();
+        foreach($order_status as  $key => $val){
+            $new_key = str_replace('wc-','',$key);
+            $processed[$new_key] = $val;
+        }
+        return $processed;
     }
 }
 

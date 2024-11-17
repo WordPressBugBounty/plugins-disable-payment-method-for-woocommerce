@@ -1,5 +1,6 @@
 <?php
 use PISOL\DPMW\Session;
+use Automattic\WooCommerce\Utilities\OrderUtil;
 class Pi_dpmw_partial_payment{
 
     protected static $instance = null;
@@ -125,6 +126,14 @@ class Pi_dpmw_partial_payment{
 
 		$order->update_meta_data( '_generate_deposit_orders', 1, true );
         $order->save();
+
+        /**
+         * using this we will set the default order status we should not do it using set_state on order object as it will trigger hooks and we dont want that
+         */
+        $default_status = get_option('pi_dpmw_default_order_status','partial-paid');
+        if($default_status != 'partial-paid'){
+            self::update_order_status_silently( $order, $default_status );
+        }
 	}
 
 	static function create_pending_payment_order( $parent_order_id ){
@@ -231,6 +240,35 @@ class Pi_dpmw_partial_payment{
         }
 
         return $deposit_payment_order_id;
+    }
+
+     /**
+     * will update the default order status using this , as we dont want to trigger hooks
+     * and this change of status will not work for Non online payment method like COD, BACS, Cheque
+     */
+    static function update_order_status_silently( $order, $new_status ) {
+        if ( ! $order instanceof WC_Order ) {
+            return false;
+        }
+    
+        $order_id = $order->get_id();
+        $new_status = 'wc-' . sanitize_title( $new_status );
+    
+        if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+            global $wpdb;
+            $result = $wpdb->update(
+                "{$wpdb->prefix}wc_orders",
+                ['status' => $new_status],
+                ['id' => $order_id]
+            );
+        } else {
+            wp_update_post(array(
+                'ID' => $order_id,
+                'post_status' => $new_status
+            ));
+        }
+    
+        return true;
     }
 
     function order_class($classname, $order_type, $order_id ){
