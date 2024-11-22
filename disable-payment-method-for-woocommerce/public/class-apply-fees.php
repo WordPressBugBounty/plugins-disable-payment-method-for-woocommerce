@@ -135,7 +135,7 @@ class Pi_dpmw_Apply_fees{
 
         if ( ! empty( $method ) ) {
 
-            $user_payment_method = $this->getUserSelectedPaymentMethod();
+            $user_payment_method = self::getUserSelectedPaymentMethod();
 
             $payment_methods = get_post_meta($method->ID, 'disable_payment_methods', true);
 
@@ -152,7 +152,7 @@ class Pi_dpmw_Apply_fees{
         return false;
     }
 
-    function getUserSelectedPaymentMethod(){
+    static function getUserSelectedPaymentMethod(){
 
         if(function_exists('WC') && isset(WC()->session) && is_object(WC()->session)) {
             

@@ -26,6 +26,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-apply-order-
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-phone-pay.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wc-partial-order-pay.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-js.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-safety.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/includes.php';
 

@@ -5,6 +5,7 @@
         this.init = function () {
             this.detectPaymentChange();
             this.codDepositChange();
+            this.preventReloadDoAjaxAgain();
         }
 
         this.detectPaymentChange = function () {
@@ -22,6 +23,14 @@
             var parent = this;
             jQuery('body').on('change', 'input[name="pi-cod-deposit"]', function () {
                 parent.cartReload();
+            });
+        }
+
+        this.preventReloadDoAjaxAgain = function () {
+            jQuery(document.body).on('updated_checkout', function(event, response) {
+                if (response && response.fragments && response.fragments['stop_reload_do_ajax_again']) {
+                    jQuery("body").trigger('update_checkout');
+                }
             });
         }
     }
