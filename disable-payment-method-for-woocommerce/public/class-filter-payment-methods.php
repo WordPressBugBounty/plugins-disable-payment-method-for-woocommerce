@@ -2,7 +2,7 @@
 
 class pisol_dpmw_filter_payment_methods{
     function __construct(){
-        add_filter('woocommerce_available_payment_gateways', [$this, 'filterPaymentMethods']);
+        add_filter('woocommerce_available_payment_gateways', [$this, 'filterPaymentMethods'], PHP_INT_MAX-20);
     }
 
     function filterPaymentMethods($gateways){
