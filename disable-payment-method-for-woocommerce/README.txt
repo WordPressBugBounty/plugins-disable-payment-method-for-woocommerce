@@ -3,8 +3,8 @@ Contributors: rajeshsingh520
 Donate link: piwebsolution.com
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
-Tested up to: 6.7.0
-Stable tag: 1.1.7.71
+Tested up to: 6.7.1
+Stable tag: 1.1.7.72
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -229,6 +229,9 @@ Yes the Free version and PRO version both are HPOS compatible
 No, it doesn't support WooCommerce checkout Block, your checkout page should be the made using classic short code [woocommerce_checkout]
 
 == Changelog ==
+
+= 1.1.7.72 =
+* Tested for WP 6.7.1
 
 = 1.1.7.71 =
 * Increased the execution priority of gateway filter so it can remove any payment gateway (as Satispay was not been removed)
