@@ -19,7 +19,7 @@ class PaymentSafety{
     public function __construct(){
         add_filter('woocommerce_update_order_review_fragments', [$this, 'stopReloadDoAjax']);
 
-        add_filter('woocommerce_available_payment_gateways', array($this,'filterGateways'), PHP_INT_MAX);
+        add_filter('woocommerce_available_payment_gateways', array($this,'filterGateways'), PHP_INT_MAX - 10);
     }
 
     
