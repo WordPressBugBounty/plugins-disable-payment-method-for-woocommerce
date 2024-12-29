@@ -120,11 +120,12 @@ class Pi_dpmw_partial_payment{
 	function generate_deposit_order( $order ){
 		$parent_order_id = $order->get_id();
 
-		$pending_amt_order_id = self::create_pending_payment_order( $parent_order_id );
+		$pending_amt_order_id = self::create_pending_payment_order( $order );
 
-        $partial_amt_order_id = self::create_partial_payment_order( $parent_order_id );
+        $partial_amt_order_id = self::create_partial_payment_order( $order );
 
 		$order->update_meta_data( '_generate_deposit_orders', 1, true );
+
         $order->save();
 
         /**
@@ -136,8 +137,9 @@ class Pi_dpmw_partial_payment{
         }
 	}
 
-	static function create_pending_payment_order( $parent_order_id ){
-        $order = wc_get_order( $parent_order_id );
+	static function create_pending_payment_order( $parent_order ){
+        $order = $parent_order;
+        $parent_order_id = $order->get_id();
         $pending_payment_order_id = $order->get_meta( '_generated_balance_amt_order', true );
 
         //require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shop-deposit-order.php';
@@ -177,8 +179,9 @@ class Pi_dpmw_partial_payment{
         return $pending_payment_order_id;
     }
 
-    static function create_partial_payment_order( $parent_order_id ){
-        $order = wc_get_order( $parent_order_id );
+    static function create_partial_payment_order( $parent_order ){
+        $order = $parent_order;
+        $parent_order_id = $order->get_id();
         $deposit_payment_order_id = $order->get_meta( '_generated_deposit_amt_order', true );
 
         //require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shop-deposit-order.php';
@@ -227,7 +230,7 @@ class Pi_dpmw_partial_payment{
 
             if(!empty($deposit_payment_order_id)){
 				$order->update_meta_data( '_generated_deposit_amt_order', $deposit_payment_order_id, true );
-                $order->set_status( 'partial-paid' );
+                //$order->set_status( 'partial-paid' );
 
                 /**
                  * we will set the main order back to original total after payment so the that way all report is correct as order is gone back to original total and we dont have to change the total display any more 
@@ -252,6 +255,13 @@ class Pi_dpmw_partial_payment{
         }
     
         $order_id = $order->get_id();
+
+        $existing_status = $order->get_status();
+        
+        if ( $existing_status === $new_status ) {
+            return true;
+        }
+
         $new_status = 'wc-' . sanitize_title( $new_status );
     
         if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
@@ -267,6 +277,7 @@ class Pi_dpmw_partial_payment{
                 'post_status' => $new_status
             ));
         }
+        $order->add_order_note( sprintf( 'Order status changed to %s.', $new_status ) );
     
         return true;
     }

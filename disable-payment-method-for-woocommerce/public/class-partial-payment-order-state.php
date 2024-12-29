@@ -27,8 +27,13 @@ class Pi_dpmw_partial_payment_order_state{
                     $parent_order->set_status($to);
                     $parent_order->save();
                 }elseif($to == 'completed'){
-                    $parent_order->set_status('partial-paid');
-                    $parent_order->save();
+                    $default_status = 'partial-paid';
+                    $default_wanted = get_option('pi_dpmw_default_order_status','partial-paid');
+                    $present_status = $parent_order->get_status();
+                    if($default_wanted != $present_status){
+                        $parent_order->set_status( $default_status );
+                        $parent_order->save();
+                    }
                 }
 
             }
