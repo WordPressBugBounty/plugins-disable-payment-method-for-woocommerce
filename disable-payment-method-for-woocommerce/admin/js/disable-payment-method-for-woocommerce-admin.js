@@ -70,6 +70,14 @@
 			jQuery(this).parent().children('input').val("");
 		});
 
+		jQuery(document).on('click', '.pi-dpmw-delete', function (e) {
+			//show confirmation dialog
+			var choice = confirm("Are you sure you want to delete it ?");
+			if (!choice) {
+				e.preventDefault();
+			}
+		});
+
 		jQuery("body").on("focus", ".date-picker", function () {
 			if(jQuery.fn.flatpickr != undefined){
 				jQuery(this).flatpickr({
