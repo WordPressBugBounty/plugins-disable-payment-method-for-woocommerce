@@ -26,7 +26,7 @@
 
         this.addRule = function () {
             var parent = this;
-            jQuery("#pi-add-" + parent.slug + "-rule").click(function () {
+            jQuery("#pi-add-" + parent.slug + "-rule, .pi-add-" + parent.slug + "-rule").click(function () {
                 parent.target = $(this).data('target');
                 parent.addRow();
                 parent.increaseCounter();

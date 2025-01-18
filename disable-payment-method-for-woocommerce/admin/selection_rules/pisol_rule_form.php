@@ -106,3 +106,8 @@ echo wp_kses($this->savedRows(),
     )
 ); ?>
 </div>
+<div class="row bg-primary">
+    <div class="col-12 text-right py-3">
+    <a href="javascript:void(0);" class="btn btn-secondary btn-sm pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
+    </div>
+</div>
