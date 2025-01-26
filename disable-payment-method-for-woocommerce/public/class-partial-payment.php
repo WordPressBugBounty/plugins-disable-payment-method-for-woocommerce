@@ -83,8 +83,9 @@ class Pi_dpmw_partial_payment{
     public function manage_deposit_orders_online( $order_id, $order ) {
         if(empty($order)) return;
 
-        if ( self::isDepositOrder( $order ) && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
+        if ( self::isDepositOrder( $order ) && !self::is_generation_locked( $order->get_id() )  && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
             // create deposit orders based on parent order
+            self::set_generation_lock( $order->get_id() );
             $this->generate_deposit_order( $order );
         }
     }
@@ -92,8 +93,9 @@ class Pi_dpmw_partial_payment{
 	public function manage_deposit_orders( $orderId ) {
 
         $order = wc_get_order( $orderId );
-        if ( self::isDepositOrder( $order ) && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
+        if ( self::isDepositOrder( $order ) && !self::is_generation_locked( $order->get_id() )  && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
             // create deposit orders based on parent order
+            self::set_generation_lock( $order->get_id() );
             $this->generate_deposit_order( $order );
         }
         
@@ -101,13 +103,27 @@ class Pi_dpmw_partial_payment{
 
 	public function offline_deposit_orders(  $status, $order ) {
 
-        if ( self::isDepositOrder( $order ) && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
+        if ( self::isDepositOrder( $order ) && !self::is_generation_locked( $order->get_id() )  && $order->get_meta( '_generate_deposit_orders', true ) != 1 ) {
             // create deposit orders based on parent order
+            self::set_generation_lock( $order->get_id() );
             $this->generate_deposit_order( $order );
 			return 'wc-partial-paid';
         }
 		
 		return $status;
+    }
+
+    static function is_generation_locked( $order_id ){
+        $lock_key = 'dpmw_deposit_order_lock_' . $order_id;
+        if ( get_option( $lock_key ) === 'locked' ) {
+            return true;
+        }
+        return false;
+    }
+
+    static function set_generation_lock( $order_id ){
+        $lock_key = 'dpmw_deposit_order_lock_' . $order_id;
+        update_option( $lock_key , 'locked' );
     }
 
 	static function isDepositOrder( $order){
