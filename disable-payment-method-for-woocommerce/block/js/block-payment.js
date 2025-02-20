@@ -26,7 +26,14 @@ wp.hooks.addAction('experimental__woocommerce_blocks-checkout-render-checkout-fo
  * this reads the hook of set-active-payment-method and then update the payment method in the backend
  */
 wp.hooks.addAction('experimental__woocommerce_blocks-checkout-set-active-payment-method', 'woocommerce-block-checkout', (data) => {
-    pisol_set_payment_method(data.value);
+    let payment_method = '';
+    if(data.value){
+       payment_method = data.value;
+    }else{
+       payment_method = data.paymentMethodSlug;
+    }
+
+    pisol_set_payment_method(payment_method);
 }); 
 
 wp.hooks.addAction('pisol_initial_checkout_load', 'woocommerce-block-checkout', (data) => {

@@ -32,6 +32,8 @@ class pisol_dpmw_options{
             array('field'=>'pi_dpmw_partial_payment_fee_pro', 'label'=>__('Partial payment fee'), 'desc'=>__('Charge extra fee when customer select partial payment option'), 'type'=>'text', 'default'=>"0", 'pro' => true),
 
 
+            array('field'=>'pi_dpmw_charge_partial_fee_upfront','label'=>__('Charge partial fee upfront'), 'desc'=>__('When you enable this option, the Partial Payment Fee will be added to the initial partial payment that the customer makes. For example, if you set the Partial Payment amount to $100 and the Partial Payment Fee to $60, then with this option enabled, the customer will need to pay $160 at checkout. However, if this option is disabled, the customer will only pay $100 upfront, and the $60 fee will be included in the remaining balance.'),'type'=>'switch','default'=> '0', 'pro' => true),
+
             array('field'=>'pi_dpmw_remove_payment_methods','label'=>__('Remove payment method when partial payment enabled'), 'desc'=>__('Remove Payment methods for when partial payment option is enabled'),'type'=>'multiselect','default'=>array('cod'), 'value'=>$this->paymentMethods()),
 
             array('field'=>'pi_dpmw_remove_payment_methods_selected','label'=>__('Remove payment method when partial payment selected'), 'desc'=>__('Remove Payment methods for when partial payment option is selected by the customer during checkout'),'type'=>'multiselect','default'=>array('cod'), 'value'=>$this->paymentMethods()),
