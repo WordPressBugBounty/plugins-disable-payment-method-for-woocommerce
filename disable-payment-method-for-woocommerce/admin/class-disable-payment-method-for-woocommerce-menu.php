@@ -107,6 +107,48 @@ class Pi_dpmw_Menu{
     }
 
     function promotion(){
+        ?>
+        <div class="col-12 col-sm-4 mt-3" id="promotion-sidebar">
+        <div class="pisol-new-promotion-box-promotion-container">
+            
+            <div class="pisol-new-promotion-box-promotion">
+            <div class="pisol-new-promotion-box-icon-container">
+                <img class="pisol-new-promotion-box-icon" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/pi-web-solution-icon.svg">
+            </div>
+                <h4 class="mt-3">Get Premium <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/?filter=5" target="_blank" class="pisol-new-promotion-box-promotion-footer-link">Trusted by <b>3000+</b> websites</a></h4>
+                <ul>
+                    <li class="border-bottom py-2"><span>Unlimited disable</span>  payment method rules</li>
+                    <li class="border-bottom py-2"><span>Unlimited payment</span>  method fees rules</li> 
+                    <li class="border-bottom py-2"><span>Unlimited Partial payment OR Advance Fee for Cash on Delivery </span> rules</li>
+                    <li class="border-bottom py-2"><span>Partial payment</span> rules with conditions</li>
+                    <li class="border-bottom py-2">Different <span>partial payment</span> amount <span>based on country / state / zone / postcode </span></li>
+                    <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>Order subtotal</span></li>
+                    <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>User role</span></li>   
+                    <li class="border-bottom py-2">All rules support <span>Multi-currency</span></li>                           
+                </ul>
+                <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="pisol-new-promotion-box-buy my-4"><span>GET PRO FOR <?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> ONLY</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="yst-w-4 yst-h-4 yst-icon-rtl"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
+                
+                <div class="pisol-new-promotion-box-promotion-footer">
+                    <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/?filter=5" target="_blank">
+                        <div class="pisol-new-promotion-box-review-stars">
+                            <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/wordpress_logo.svg"" alt="wordpress logo" class="pisol-new-promotion-box-review-wp-logo">
+                            <span>&#9733;</span>
+                            <span>&#9733;</span>
+                            <span>&#9733;</span>
+                            <span>&#9733;</span>
+                            <span>&#9733;</span>
+                            <p class="pisol-new-promotion-box-read-reviews">(Read reviews)</p>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+        <?php
+    }
+
+    function promotion2(){
        ?>
         <div class="col-12 col-sm-4 mt-3" id="promotion-sidebar">
             <a href="javascript:void()" onClick="jQuery(this).parent().remove()" class="text-right">Hide Banner</a>

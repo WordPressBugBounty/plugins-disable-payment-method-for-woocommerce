@@ -68,7 +68,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="col-4">
         <select class="form-control" name="pi_fees_type" id="pi_fees_type">
             <option value="fixed" <?php selected( $data['pi_fees_type'], "fixed" ); ?>><?php _e('Fixed fees','disable-payment-method-for-woocommerce'); ?></option>
-            <option value="percentage" <?php selected( $data['pi_fees_type'], "percentage" ); ?>><?php _e('Cart Subtotal Percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="percentage" <?php selected( $data['pi_fees_type'], "percentage" ); ?> title="This include subtotal and subtotal tax"><?php _e('Cart subtotal percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="subtotal_discount" <?php selected( $data['pi_fees_type'], "subtotal_discount" ); ?>  title="This include subtotal, subtotal tax minus coupon discount"><?php _e('Cart (subtotal  - discount) percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="subtotal_shipping" <?php selected( $data['pi_fees_type'], "subtotal_shipping" ); ?> title="This include subtotal, shipping total and shipping tax"><?php _e('Cart (subtotal  + shipping) percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option disabled value="subtotal_shipping_discount" <?php selected( $data['pi_fees_type'], "subtotal_shipping_discount" ); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php _e('Cart (subtotal + shipping - discount) percentage (PRO)','disable-payment-method-for-woocommerce'); ?></option>
         </select>
     </div>
     <div class="col-3 col-sm">

@@ -15,14 +15,15 @@ class Pi_dpmw_Apply_fees{
             $fees_type = get_post_meta( $fees_id, 'pi_fees_type', true);
             $fees = get_post_meta( $fees_id, 'pi_fees', true);
            
-            $total = pisol_dpmw_revertToBaseCurrency($cart->get_displayed_subtotal());
+            //$total = pisol_dpmw_revertToBaseCurrency($cart->get_displayed_subtotal());
+            $total = pisol_dpmw_revertToBaseCurrency($this->get_total($cart, $fees_type));
             $taxable_val = get_post_meta( $fees_id, 'pi_fees_taxable', true);
             $tax_class = get_post_meta( $fees_id, 'pi_fees_tax_class', true);
 
             $taxable = $taxable_val === 'yes' ? true : false;
 
            
-                if($fees_type == 'percentage'){
+                if($fees_type == 'percentage' || $fees_type == 'subtotal_discount' || $fees_type == 'subtotal_shipping'){
                     
                     $fees_value = $this->evaluate_cost($fees, $fees_id, $cart);
 
@@ -201,8 +202,38 @@ class Pi_dpmw_Apply_fees{
             ];
             $wpdb->insert($table, $data2);
         }
+    }
 
-       
+    function get_total($cart, $subtotal_type = 'percentage') {
+        // Get the subtotal and its tax
+        $subtotal_ex_tax = $cart->get_subtotal();
+        $subtotal_tax   = $cart->get_subtotal_tax();
+    
+        // Get shipping total and its tax
+        $shipping_ex_tax = $cart->get_shipping_total();
+        $shipping_tax    = $cart->get_shipping_tax();
+    
+        // Get any cart discount (usually excludes tax)
+        $discount = $cart->get_cart_discount_total();
+    
+        // Calculate totals including tax
+        $subtotal_including_tax = $subtotal_ex_tax + $subtotal_tax;
+        $shipping_including_tax = $shipping_ex_tax + $shipping_tax;
+    
+        // Adjust final total based on the subtotal type
+        switch ($subtotal_type) {
+            case 'subtotal_shipping':
+                $final_total = $subtotal_including_tax + $shipping_including_tax;
+                break;
+            case 'subtotal_discount':
+                $final_total = $subtotal_including_tax - $discount;
+                break;
+            default: // For 'percentage' or any other types
+                $final_total = $subtotal_including_tax;
+                break;
+        }
+        
+        return apply_filters('pisol_dpsw_total_for_percentage_fee', $final_total, $cart, $subtotal_type);
     }
 }
 

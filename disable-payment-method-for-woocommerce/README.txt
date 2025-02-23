@@ -4,7 +4,7 @@ Donate link: piwebsolution.com
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.7.1
-Stable tag: 1.1.9.3
+Stable tag: 1.1.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,7 +130,8 @@ you can exclude product from partial payment, there are two way to exclude, firs
 * **Cash on delivery fee WooCommerce** : Add an extra fee for using the cash on delivery payment method.
 * **WooCommerce add fee to payment method** : Apply additional fees to specific payment methods.
 * **WooCommerce cash on delivery extra fee** : Charge an extra fee for cash on delivery orders.
-* **WooCommerce payment method fee** : Implement additional fees for different payment methods.
+* **WooCommerce payment processing fee** : Implement additional fees for different payment methods.
+* **Charge percentage payment processing fee** : Charge a percentage based payment processing fee.
 
 == Frequently Asked Questions ==
 
@@ -229,6 +230,9 @@ Yes the Free version and PRO version both are HPOS compatible
 No, it doesn't support WooCommerce checkout Block, your checkout page should be the made using classic short code [woocommerce_checkout]
 
 == Changelog ==
+
+= 1.1.9.4 =
+* now percentage fee can be based on subtotal + shipping and discount coupon
 
 = 1.1.9.3 =
 * block based checkout not triggering payment method based fee fixed
