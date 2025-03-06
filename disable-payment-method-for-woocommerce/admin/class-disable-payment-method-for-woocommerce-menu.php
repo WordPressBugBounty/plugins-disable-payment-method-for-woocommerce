@@ -93,7 +93,7 @@ class Pi_dpmw_Menu{
                 <div id="pisol-dpmw-notices"></div>
                 <div class="bg-light border pl-3 pr-3 pb-3 pt-0">
                     <div class="pisol-row">
-                        <div class="col">
+                        <div class="col border-right">
                         <?php do_action($this->plugin_name.'_tab_content'); ?>
                         </div>
                         <?php do_action($this->plugin_name.'_promotion'); ?>
@@ -137,7 +137,7 @@ class Pi_dpmw_Menu{
                             <span>&#9733;</span>
                             <span>&#9733;</span>
                             <span>&#9733;</span>
-                            <p class="pisol-new-promotion-box-read-reviews">(Read reviews)</p>
+                            <p class="pisol-new-promotion-box-read-reviews">( 5/5 Read reviews )</p>
                         </div>
                     </a>
                 </div>
