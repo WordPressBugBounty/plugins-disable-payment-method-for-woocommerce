@@ -41,7 +41,21 @@ class Pi_dpmw_selection_rule_product_tag{
        
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -63,7 +77,21 @@ class Pi_dpmw_selection_rule_product_tag{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect(array(),$count,$this->condition,  "multiple", null,'dynamic');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect(array(),$count,$this->condition,  "multiple", null,'dynamic'),
+            array(
+                'select' => array(
+                    'class' => array(),
+                    'name' => array(),
+                    'multiple' => array(),
+                    'data-condition' => array(),
+                    'placeholder' => array()
+                ),
+                'option' => array(
+                    'value' => array(),
+                    'selected' => array()
+                )
+            )
+        );
         die;
     }
 
@@ -96,7 +124,7 @@ class Pi_dpmw_selection_rule_product_tag{
         
         if(!isset($_GET['keyword'])) die;
 
-		$keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : "";
+		$keyword = isset($_GET['keyword']) ? sanitize_text_field(wp_unslash( $_GET['keyword'] )) : "";
 
 		if ( empty( $keyword ) ) {
 			die();

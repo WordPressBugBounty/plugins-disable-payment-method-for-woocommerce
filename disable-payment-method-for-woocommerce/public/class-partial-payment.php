@@ -282,6 +282,7 @@ class Pi_dpmw_partial_payment{
     
         if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
             global $wpdb;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $result = $wpdb->update(
                 "{$wpdb->prefix}wc_orders",
                 ['status' => $new_status],

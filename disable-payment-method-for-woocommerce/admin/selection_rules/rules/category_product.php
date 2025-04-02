@@ -80,7 +80,26 @@ class Pi_dpmw_selection_rule_category_product{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect($this->allCategories(), $count, $this->condition,  "multiple",null,'static');
+        echo wp_kses(
+            Pi_dpmw_selection_rule_main::createSelect($this->allCategories(), $count, $this->condition, "multiple", null, 'static'),
+            array(
+                'select' => array(
+                    'name' => array(),
+                    'id' => array(),
+                    'class' => array(),
+                    'multiple' => array(),
+                    'data-placeholder' => array(),
+                    'style' => array()
+                ),
+                'option' => array(
+                    'value' => array(),
+                    'selected' => array()
+                ),
+                'optgroup' => array(
+                    'label' => array()
+                )
+            )
+        );
         die;
     }
 

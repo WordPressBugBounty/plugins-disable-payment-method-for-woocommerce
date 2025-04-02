@@ -1,10 +1,9 @@
 === Disable payment method / COD fees / Advance COD or Partial payment for Order for WooCommerce ===
 Contributors: rajeshsingh520
-Donate link: piwebsolution.com
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.7.1
-Stable tag: 1.1.9.7
+Stable tag: 1.1.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -230,6 +229,9 @@ Yes the Free version and PRO version both are HPOS compatible
 No, it doesn't support WooCommerce checkout Block, your checkout page should be the made using classic short code [woocommerce_checkout]
 
 == Changelog ==
+
+= 1.1.9.9 =
+* code improvement 
 
 = 1.1.9.7 =
 * Tested for WC 9.7.2

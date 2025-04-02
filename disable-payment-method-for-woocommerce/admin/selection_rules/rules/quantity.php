@@ -26,7 +26,7 @@ class Pi_dpmw_selection_rule_quantity{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Quantity'),
+            'name'=>__('Quantity', 'disable-payment-method-for-woocommerce'),
             'group'=>'cart_related',
             'condition'=>$this->condition
         );
@@ -46,7 +46,21 @@ class Pi_dpmw_selection_rule_quantity{
             $html .= '<option value=\'multiple\'>Multiple off (*)</option>';
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -73,7 +87,23 @@ class Pi_dpmw_selection_rule_quantity{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createNumberField($count,$this->condition, null,1);
+        echo wp_kses( Pi_dpmw_selection_rule_main::createNumberField($count,$this->condition, null,1), array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
         die;
     }
 

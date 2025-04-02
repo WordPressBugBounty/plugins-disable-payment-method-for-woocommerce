@@ -77,7 +77,21 @@ class Pi_dpmw_selection_rule_product{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect(array(),  $count,$this->condition,  "multiple",null,'dynamic');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect(array(),  $count,$this->condition,  "multiple",null,'dynamic'),
+                array(
+                    'select' => array(
+                        'class' => array(),
+                        'name' => array(),
+                        'multiple' => array(),
+                        'data-condition' => array(),
+                        'placeholder' => array()
+                    ),
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    )
+                )
+            );
         die;
     }
 
@@ -87,7 +101,7 @@ class Pi_dpmw_selection_rule_product{
             foreach($values as $value){
                 $prod_obj = wc_get_product($value);
                 if(is_wp_error( $prod_obj ) || !is_object($prod_obj) ) continue;
-                $saved_products[$value] = strip_tags( $prod_obj->get_formatted_name());
+                $saved_products[$value] = wp_strip_all_tags( $prod_obj->get_formatted_name());
             }
         }
         
@@ -109,7 +123,7 @@ class Pi_dpmw_selection_rule_product{
         
         if(!isset($_GET['keyword'])) die;
 
-		$keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : "";
+		$keyword = isset($_GET['keyword']) ? sanitize_text_field(wp_unslash($_GET['keyword'])) : "";
 
 		if ( empty( $keyword ) ) {
 			die();
@@ -132,7 +146,7 @@ class Pi_dpmw_selection_rule_product{
                     /** This is for the variable product */
                     $found_products[] = array(
                         'id'   => get_the_ID(),
-                        'text' => strip_tags($prd->get_formatted_name())
+                        'text' => wp_strip_all_tags($prd->get_formatted_name())
                     );;
 					$product_children = $prd->get_children();
 					if ( count( $product_children ) ) {
@@ -141,7 +155,7 @@ class Pi_dpmw_selection_rule_product{
                             $child_wc  = wc_get_product( $product_child );
                             $product   = array(
                                 'id'   => $product_child,
-                                'text' => strip_tags($child_wc->get_formatted_name())
+                                'text' => wp_strip_all_tags($child_wc->get_formatted_name())
                             );
 
 							
@@ -154,7 +168,7 @@ class Pi_dpmw_selection_rule_product{
 				} else {
 					$product_id    = get_the_ID();
 					$the_product   = new WC_Product( $product_id );
-					$product_title = strip_tags($the_product->get_formatted_name());
+					$product_title = wp_strip_all_tags($the_product->get_formatted_name());
 					$product          = array( 'id' => $product_id, 'text' => $product_title );
 					$found_products[] = $product;
 				}

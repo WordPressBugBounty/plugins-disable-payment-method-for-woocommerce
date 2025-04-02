@@ -84,7 +84,20 @@ class Pi_dpmw_selection_rule_cart_subtotal_before_fees{
             die;
         }
         $count = filter_input(INPUT_POST,'count',FILTER_VALIDATE_INT);
-        echo Pi_dpmw_selection_rule_main::createNumberField($count, $this->condition, null);
+        echo wp_kses(
+            Pi_dpmw_selection_rule_main::createNumberField($count, $this->condition, null),
+            array(
+                'input' => array(
+                    'type' => array(),
+                    'class' => array(),
+                    'name' => array(),
+                    'value' => array(),
+                    'step' => array(),
+                    'min' => array(),
+                    'data-condition' => array()
+                )
+            )
+        );
         die;
     }
 

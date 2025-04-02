@@ -22,7 +22,7 @@ class pisol_dpmw_extra_settings{
 
         $this->settings = array(
            
-            array('field'=>'pisol_dpmw_show_system_name', 'label'=>__('Show System name of shipping method on checkout page'), 'desc'=>__('After enabling go to the checkout page and you will see the system name of the shipping method below the shipping method name, Only admin can see this shipping method name your customer will not see it'), 'type'=>'switch', 'default'=>"0"),
+            array('field'=>'pisol_dpmw_show_system_name', 'label'=>__('Show System name of shipping method on checkout page', 'disable-payment-method-for-woocommerce'), 'desc'=>__('After enabling go to the checkout page and you will see the system name of the shipping method below the shipping method name, Only admin can see this shipping method name your customer will not see it', 'disable-payment-method-for-woocommerce'), 'type'=>'switch', 'default'=>"0"),
         );
         
         $this->tab = sanitize_text_field(filter_input( INPUT_GET, 'tab'));
@@ -51,16 +51,26 @@ class pisol_dpmw_extra_settings{
     function register_settings(){   
 
         foreach($this->settings as $setting){
-            register_setting( $this->setting_key, $setting['field']);
+            register_setting( $this->setting_key, $setting['field'], array( $this, 'sanitize_setting' ) );
         }
     
+    }
+    
+    function sanitize_setting( $input ) {
+        if ( is_array( $input ) ) {
+            // Sanitize each element in the array
+            return array_map( 'sanitize_text_field', $input );
+        } else {
+            // Sanitize string
+            return sanitize_text_field( $input );
+        }
     }
 
     function tab(){
         $page = sanitize_text_field(filter_input( INPUT_GET, 'page'));
         ?>
-        <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab ); ?>">
-            <?php _e( $this->tab_name); ?> 
+        <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab )); ?>">
+            <?php echo esc_html($this->tab_name); ?> 
         </a>
         <?php
     }
@@ -84,7 +94,7 @@ class pisol_dpmw_extra_settings{
         $view_name = get_option('pisol_dpmw_show_system_name', 0);
         $require_capability = Pi_dpmw_Menu::getCapability();
         if(current_user_can( $require_capability ) && !empty($view_name)){
-            echo '<small>System name: <strong>'.$method->get_id().'</strong></small>';
+            echo '<small>System name: <strong>'.esc_html($method->get_id()).'</strong></small>';
         }
     }
 }

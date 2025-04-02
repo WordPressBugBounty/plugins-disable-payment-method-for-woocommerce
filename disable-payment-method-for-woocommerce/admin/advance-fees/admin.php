@@ -155,19 +155,19 @@ class Pi_dpmw_partial_payment_admin {
 
         case 'deposit':
 
-            echo '<a href="' . esc_url( $depositOrder->get_edit_order_url() ) . '" class="order-view"><strong>#' . $depositOrder->get_meta( '_deposit_id', true ) . '</strong></a>';
+            echo '<a href="' . esc_url( $depositOrder->get_edit_order_url() ) . '" class="order-view"><strong>#' . esc_html( $depositOrder->get_meta( '_deposit_id', true )) . '</strong></a>';
 
             break;
 
         case 'deposit_total':
-            echo wc_price( $depositOrder->get_total() );
+            echo wp_kses_post( wc_price( $depositOrder->get_total() ) );
 
             break;
 
         case 'deposit_status':
 
             $depositStatus = $depositOrder->get_status(); // order status
-            echo sprintf( '<mark class="22 order-status %s tips"><span>%s</span></mark>', esc_attr( sanitize_html_class( 'status-' . $depositStatus ) ), wc_get_order_status_name( $depositStatus ) );
+            echo sprintf( '<mark class="22 order-status %s tips"><span>%s</span></mark>', esc_attr( sanitize_html_class( 'status-' . $depositStatus ) ), esc_html( wc_get_order_status_name( $depositStatus ) ) );
 
             break;
 
@@ -186,7 +186,7 @@ class Pi_dpmw_partial_payment_admin {
 
             $parentId = $depositOrder->get_parent_id(); // order parent
 
-            echo '<a href="' . esc_url( admin_url( 'post.php?post=' . $parentId ) . '&action=edit' ) . '" class="order-view">#' . $parentId . '</a>';
+            echo '<a href="' . esc_url( admin_url( 'post.php?post=' . $parentId ) . '&action=edit' ) . '" class="order-view">#' . esc_html($parentId) . '</a>';
 
             break;
 
@@ -195,7 +195,7 @@ class Pi_dpmw_partial_payment_admin {
             $order_date = $depositOrder->get_date_created();
             $formatted_order_date = $order_date->format('Y-m-d H:i:s');
 
-            echo $formatted_order_date;
+            echo esc_html( $formatted_order_date );
            
             break;
 
@@ -243,11 +243,11 @@ class Pi_dpmw_partial_payment_admin {
                 $paymentStatus = __( 'Due Payment','disable-payment-method-for-woocommerce' );
             }?>
                     <tr>
-                    <td><?php echo '<a href="' . esc_url( $depositOrder->get_edit_order_url() ) . '" class="order-view"><strong>#' . $depositOrder->get_id() . '</strong></a>'; ?></td>
+                    <td><?php echo '<a href="' . esc_url( $depositOrder->get_edit_order_url() ) . '" class="order-view"><strong>#' . esc_html( $depositOrder->get_id()) . '</strong></a>'; ?></td>
 
                     <td><?php $depositDate = human_time_diff( get_the_date( 'U' ), current_time( 'U' ) );
             if ( get_the_date( 'U' ) > current_time( 'U' ) - 86400 ) {
-                echo $depositDate;
+                echo esc_html( $depositDate );
             } else {
                 echo get_the_date( 'F j Y' );
             }?></td>
@@ -256,17 +256,17 @@ class Pi_dpmw_partial_payment_admin {
 
                     <td>
                     <?php $depositStatus = $depositOrder->get_status(); // order status ?>
-                    <?php echo sprintf( '<mark class="order-status %s tips"><span>%s</span></mark>', esc_attr( sanitize_html_class( 'status-' . $depositStatus ) ), wc_get_order_status_name( $depositStatus ) ); ?>
+                    <?php echo sprintf( '<mark class="order-status %s tips"><span>%s</span></mark>', esc_attr( sanitize_html_class( 'status-' . $depositStatus ) ), esc_html( wc_get_order_status_name( $depositStatus ) ) ); ?>
                     </td>
 
-                    <td><?php echo wc_price( $depositOrder->get_total() ) ?></td>
+                    <td><?php echo wp_kses_post( wc_price( $depositOrder->get_total() ) ); ?></td>
 
                     </tr>
 
         <?php 
         }
         }else{
-            echo '<tr><td colspan="5">'.__('Not a partially paid order','disable-payment-method-for-woocommerce').'</td></tr>';
+            echo '<tr><td colspan="5">'.esc_html__('Not a partially paid order','disable-payment-method-for-woocommerce').'</td></tr>';
         }
         
         ?>

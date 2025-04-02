@@ -29,7 +29,7 @@ class Pi_dpmw_selection_rule_day_of_week{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Day of week'),
+            'name'=>__('Day of week', 'disable-payment-method-for-woocommerce'),
             'group'=>'date_time',
             'condition'=>$this->condition
         );
@@ -77,7 +77,21 @@ class Pi_dpmw_selection_rule_day_of_week{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect($this->daysOfWeek(), $count, $this->condition,  "multiple",null,'static');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect($this->daysOfWeek(), $count, $this->condition,  "multiple",null,'static'),
+        array(
+            'select' => array(
+                'class' => array(),
+                'name' => array(),
+                'multiple' => array(),
+                'data-condition' => array(),
+                'placeholder' => array()
+            ),
+            'option' => array(
+                'value' => array(),
+                'selected' => array()
+            )
+        )
+    );
         die;
     }
 
@@ -88,13 +102,13 @@ class Pi_dpmw_selection_rule_day_of_week{
 
     function daysOfWeek(){
        $days = array(
-            0 => __('Sunday'),
-            1 => __('Monday'),
-            2 => __('Tuesday'),
-            3 => __('Wednesday'),
-            4 => __('Thursday'),
-            5 => __('Friday'),
-            6 => __('Saturday'),
+            0 => __('Sunday', 'disable-payment-method-for-woocommerce'),
+            1 => __('Monday', 'disable-payment-method-for-woocommerce'),
+            2 => __('Tuesday', 'disable-payment-method-for-woocommerce'),
+            3 => __('Wednesday', 'disable-payment-method-for-woocommerce'),
+            4 => __('Thursday', 'disable-payment-method-for-woocommerce'),
+            5 => __('Friday', 'disable-payment-method-for-woocommerce'),
+            6 => __('Saturday', 'disable-payment-method-for-woocommerce'),
        );
        return $days;
     }

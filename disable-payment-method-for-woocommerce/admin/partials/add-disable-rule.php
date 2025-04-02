@@ -53,8 +53,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         <select required class="form-control" name="disable_payment_methods[]" id="disable_payment_methods" multiple="multiple">
             <?php
                 foreach($data['all_payment_methods'] as $payment_method => $payment_method_name){
-                    $selected = is_array($data['disable_payment_methods']) && in_array($payment_method, $data['disable_payment_methods']) ? ' selected="selected" ' : '';
-                    echo '<option value="'.esc_attr($payment_method).'" '.$selected.'>'.esc_html($payment_method_name).'</option>';
+                    $selected = is_array($data['disable_payment_methods']) && in_array($payment_method, $data['disable_payment_methods']) ? ' selected ' : '';
+                    echo '<option value="'.esc_attr($payment_method).'" '.esc_attr($selected).'>'.esc_html($payment_method_name).'</option>';
                 }
             ?>
         </select>
@@ -63,15 +63,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="row py-3 border-bottom align-items-center pi-rule-type" data-type="fees">
     <div class="col-12 col-sm-5">
-        <label for="pi_cost" class="h6"><?php echo __('Extra Fees','disable-payment-method-for-woocommerce'); ?> <span class="text-primary">*</span></label>
+        <label for="pi_cost" class="h6"><?php esc_html_e('Extra Fees','disable-payment-method-for-woocommerce'); ?> <span class="text-primary">*</span></label>
     </div>
     <div class="col-4">
         <select class="form-control" name="pi_fees_type" id="pi_fees_type">
-            <option value="fixed" <?php selected( $data['pi_fees_type'], "fixed" ); ?>><?php _e('Fixed fees','disable-payment-method-for-woocommerce'); ?></option>
-            <option value="percentage" <?php selected( $data['pi_fees_type'], "percentage" ); ?> title="This include subtotal and subtotal tax"><?php _e('Cart subtotal percentage','disable-payment-method-for-woocommerce'); ?></option>
-            <option value="subtotal_discount" <?php selected( $data['pi_fees_type'], "subtotal_discount" ); ?>  title="This include subtotal, subtotal tax minus coupon discount"><?php _e('Cart (subtotal  - discount) percentage','disable-payment-method-for-woocommerce'); ?></option>
-            <option value="subtotal_shipping" <?php selected( $data['pi_fees_type'], "subtotal_shipping" ); ?> title="This include subtotal, shipping total and shipping tax"><?php _e('Cart (subtotal  + shipping) percentage','disable-payment-method-for-woocommerce'); ?></option>
-            <option disabled value="subtotal_shipping_discount" <?php selected( $data['pi_fees_type'], "subtotal_shipping_discount" ); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php _e('Cart (subtotal + shipping - discount) percentage (PRO)','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="fixed" <?php selected( $data['pi_fees_type'], "fixed" ); ?>><?php esc_html_e('Fixed fees','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="percentage" <?php selected( $data['pi_fees_type'], "percentage" ); ?> title="This include subtotal and subtotal tax"><?php esc_html_e('Cart subtotal percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="subtotal_discount" <?php selected( $data['pi_fees_type'], "subtotal_discount" ); ?>  title="This include subtotal, subtotal tax minus coupon discount"><?php esc_html_e('Cart (subtotal  - discount) percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="subtotal_shipping" <?php selected( $data['pi_fees_type'], "subtotal_shipping" ); ?> title="This include subtotal, shipping total and shipping tax"><?php esc_html_e('Cart (subtotal  + shipping) percentage','disable-payment-method-for-woocommerce'); ?></option>
+            <option disabled value="subtotal_shipping_discount" <?php selected( $data['pi_fees_type'], "subtotal_shipping_discount" ); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php esc_html_e('Cart (subtotal + shipping - discount) percentage (PRO)','disable-payment-method-for-woocommerce'); ?></option>
         </select>
     </div>
     <div class="col-3 col-sm">
@@ -81,12 +81,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="row py-3 border-bottom align-items-center pi-rule-type" data-type="fees">
     <div class="col-12 col-sm-5">
-        <label for="pi_fees_taxable" class="h6 pi-rule-type" data-type="fees"><?php echo __('Fee Taxable and its tax class','disable-payment-method-for-woocommerce'); ?></label>
+        <label for="pi_fees_taxable" class="h6 pi-rule-type" data-type="fees"><?php esc_html_e('Fee Taxable and its tax class','disable-payment-method-for-woocommerce'); ?></label>
     </div>
     <div class="col-4">
         <select class="form-control" name="pi_fees_taxable" id="pi_fees_taxable">
-            <option value="no" <?php selected( $data['pi_fees_taxable'], "no" ); ?>><?php _e('No','disable-payment-method-for-woocommerce'); ?></option>
-            <option value="yes" <?php selected( $data['pi_fees_taxable'], "yes" ); ?>><?php _e('Yes','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="no" <?php selected( $data['pi_fees_taxable'], "no" ); ?>><?php esc_html_e('No','disable-payment-method-for-woocommerce'); ?></option>
+            <option value="yes" <?php selected( $data['pi_fees_taxable'], "yes" ); ?>><?php esc_html_e('Yes','disable-payment-method-for-woocommerce'); ?></option>
         </select>
     </div>
     <div class="col-3 col-sm">
@@ -106,7 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="row py-4 border-bottom align-items-center">
     <div class="col-12 col-sm-5">
-        <label for="pi_currency" class="h6"><?php echo __('Apply for currency (useful for multi currency website only)','disable-payment-method-for-woocommerce'); ?></label><?php pisol_help::tooltip('Select the currency for which to apply the rule, if left blank it will apply for all the currency'); ?>
+        <label for="pi_currency" class="h6"><?php esc_html_e('Apply for currency (useful for multi currency website only)','disable-payment-method-for-woocommerce'); ?></label><?php pisol_help::tooltip('Select the currency for which to apply the rule, if left blank it will apply for all the currency'); ?>
     </div>
     <div class="col-12 col-sm">
         <select name="pi_currency[]" id="pi_currency" multiple="multiple">

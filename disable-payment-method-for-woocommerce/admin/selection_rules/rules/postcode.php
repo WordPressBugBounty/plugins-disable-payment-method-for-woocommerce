@@ -26,7 +26,7 @@ class Pi_dpmw_selection_rule_postcode{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Postcode'),
+            'name'=>__('Postcode', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );
@@ -74,8 +74,24 @@ class Pi_dpmw_selection_rule_postcode{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createTextField($count, $this->condition, null);
-        echo $this->description();
+        echo wp_kses( Pi_dpmw_selection_rule_main::createTextField($count, $this->condition, null), array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
+        echo wp_kses_post( $this->description() );
         die;
     }
 

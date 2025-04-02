@@ -26,7 +26,7 @@ class Pi_dpmw_selection_rule_city{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('City/Town'),
+            'name'=>__('City/Town', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );
@@ -41,7 +41,21 @@ class Pi_dpmw_selection_rule_city{
 			$html .= '<option value=\'not_equal_to\'>Not Equal to ( != )</option>';
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -57,14 +71,30 @@ class Pi_dpmw_selection_rule_city{
     }
 
     function ajaxCall(){
-        $cap = Pi_dpmw_Menu::getCapability();
+        $cap = class_exists('Pi_Dpmw_Menu') ? Pi_Dpmw_Menu::getCapability() : 'manage_options';
         if(!current_user_can( $cap )) {
-            return;
-            die;
+            die();
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createTextField($count, $this->condition, null);
-        die;
+
+        echo wp_kses(Pi_Dpmw_selection_rule_main::createTextField($count, $this->condition, null), array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
+        die();
     }
 
     function savedDropdown($html, $values, $count){

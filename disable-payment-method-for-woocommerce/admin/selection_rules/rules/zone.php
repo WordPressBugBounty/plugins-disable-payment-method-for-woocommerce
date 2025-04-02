@@ -29,7 +29,7 @@ class Pi_dpmw_selection_rule_zones{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Zones','disable-payment-method-for-woocommerce'),
+            'name'=>__('Zones', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );
@@ -80,7 +80,21 @@ class Pi_dpmw_selection_rule_zones{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect($this->allZones(), $count, $this->condition, "multiple", null,'static');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect($this->allZones(), $count, $this->condition, "multiple", null,'static'),
+            array(
+                'select' => array(
+                    'class' => array(),
+                    'name' => array(),
+                    'multiple' => array(),
+                    'data-condition' => array(),
+                    'placeholder' => array()
+                ),
+                'option' => array(
+                    'value' => array(),
+                    'selected' => array()
+                )
+            )
+        );
         die;
     }
 

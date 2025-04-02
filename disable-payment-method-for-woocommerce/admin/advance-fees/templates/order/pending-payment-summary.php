@@ -22,7 +22,7 @@ $depositList = wc_get_orders( $args );
 
 if(empty($depositList)) return;
 
-?> <h3> <?php _e( 'Pending payments summary', 'disable-payment-method-for-woocommerce' )?> </h3>
+?> <h3> <?php esc_html_e( 'Pending payments summary', 'disable-payment-method-for-woocommerce' )?> </h3>
 
 <table border="0" cellpadding="20" cellspacing="0" style="width:100%; margin-bottom:15px">
 
@@ -46,15 +46,15 @@ foreach ( $depositList as $key => $depositOrder ) {
         <tr class="order_item">
 
             <td class="td" style="color: #636363; border: 1px solid #e5e5e5; vertical-align: middle; padding: 12px;">
-              <?php echo '<strong>#' . $depositOrder->get_meta( '_deposit_id', true ) . '</strong>'; ?>
+              <?php echo '<strong>#' . esc_html( $depositOrder->get_meta( '_deposit_id', true ) ) . '</strong>'; ?>
 
             </td>
             <td class="td" style="color: #636363; border: 1px solid #e5e5e5; vertical-align: middle; padding: 12px;">
             <?php $depositStatus = $depositOrder->get_status(); // order status ?>
-            <?php echo wc_get_order_status_name( $depositStatus ); ?>
+            <?php echo esc_html( wc_get_order_status_name( $depositStatus ) ); ?>
             </td>
             <td class="td" style="color: #636363; border: 1px solid #e5e5e5; vertical-align: middle; padding: 12px;">
-            <?php echo wc_price( $depositOrder->get_total() ); ?>
+            <?php echo wp_kses_post( wc_price( $depositOrder->get_total() ) ); ?>
             </td>
 
 
@@ -64,9 +64,9 @@ if ( $depositStatus == 'completed' ) {
     echo 'Completed';
     } elseif($depositStatus == 'pending') {
         /* translators: %s: Customer first name */
-        printf( '<a href="%s" class="woocommerce-button button deposit-pay-button">%s</a>', esc_url( $depositOrder->get_checkout_payment_url() ),__( 'Make Payment ', 'disable-payment-method-for-woocommerce' ));
+        printf( '<a href="%s" class="woocommerce-button button deposit-pay-button">%s</a>', esc_url( $depositOrder->get_checkout_payment_url() ), esc_html__( 'Make Payment ', 'disable-payment-method-for-woocommerce' ));
     }else{
-        echo wc_get_order_status_name( $depositStatus );
+        echo esc_html( wc_get_order_status_name( $depositStatus ) );
     }
     ?>
             </td>

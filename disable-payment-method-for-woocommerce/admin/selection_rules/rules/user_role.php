@@ -29,7 +29,7 @@ class Pi_dpmw_selection_rule_user_role{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('User Role'),
+            'name'=>__('User Role', 'disable-payment-method-for-woocommerce'),
             'group'=>'user_related',
             'condition'=>$this->condition
         );
@@ -45,7 +45,21 @@ class Pi_dpmw_selection_rule_user_role{
            
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -67,7 +81,20 @@ class Pi_dpmw_selection_rule_user_role{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect($this->allUserRoles(), $count, $this->condition,  "multiple",null,'static');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect($this->allUserRoles(), $count, $this->condition,  "multiple",null,'static'), array(
+            'select' => array(
+                'class' => array(),
+                'name' => array(),
+                'multiple' => array(),
+                'data-condition' => array(),
+                'placeholder' => array()
+            ),
+            'option' => array(
+                'value' => array(),
+                'selected' => array()
+            )
+        )
+    );
         die;
     }
 

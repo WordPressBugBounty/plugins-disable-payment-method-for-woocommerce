@@ -23,7 +23,7 @@ class Pi_dpmw_phone_pay_support{
         if(isset($_GET['merchant_transaction_id'])){
             $transaction_id = $order->get_transaction_id();
             $payment_method = strtolower($order->get_payment_method());
-            $merchant_transaction_id = $_GET['merchant_transaction_id'];
+            $merchant_transaction_id = sanitize_text_field( wp_unslash( $_GET['merchant_transaction_id'] ) );
             if($transaction_id == $merchant_transaction_id && strpos($payment_method, 'phonepe') !== false){
                 $deposit_order_id = $order->get_meta('_generated_deposit_amt_order', true);
                 if($deposit_order_id){
@@ -38,6 +38,7 @@ class Pi_dpmw_phone_pay_support{
 
     function is_phone_pay_request() {
         // Get the current request URI
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
         $request_uri = $_SERVER['REQUEST_URI'] ?? '';
     
         // Check if the request URI contains your custom route

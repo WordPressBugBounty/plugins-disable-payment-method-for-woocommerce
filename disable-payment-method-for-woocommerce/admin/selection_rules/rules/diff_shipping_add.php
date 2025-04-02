@@ -35,7 +35,7 @@ class Pi_dpmw_selection_rule_diff_shipping_add{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Different shipping address', 'conditional-fees-rule-woocommerce'),
+            'name'=>__('Different shipping address', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );
@@ -51,7 +51,21 @@ class Pi_dpmw_selection_rule_diff_shipping_add{
            
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -72,7 +86,23 @@ class Pi_dpmw_selection_rule_diff_shipping_add{
             die;
         }
         $count = filter_input(INPUT_POST,'count',FILTER_VALIDATE_INT);
-        echo Pi_dpmw_selection_rule_main::createHiddenField($count, $this->condition, 1);
+        echo wp_kses( Pi_dpmw_selection_rule_main::createHiddenField($count, $this->condition, 1), array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
         
         die;
     }
@@ -88,8 +118,9 @@ class Pi_dpmw_selection_rule_diff_shipping_add{
             if(!isset($_POST['post_data']) && !isset($_POST['ship_to_different_address'])) return 0;
 
             if(isset($_POST['ship_to_different_address'])){
-                $values['ship_to_different_address'] = $_POST['ship_to_different_address'];
+                $values['ship_to_different_address'] = sanitize_text_field( wp_unslash($_POST['ship_to_different_address']) );
             }else{
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
                 parse_str($_POST['post_data'], $values);
             }
 

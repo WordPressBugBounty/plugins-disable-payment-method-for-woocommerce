@@ -41,7 +41,21 @@ class Pi_dpmw_selection_rule_dates{
 			$html .= '<option value=\'not_equal_to\'>Not Equal to ( != )</option>';
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -63,7 +77,24 @@ class Pi_dpmw_selection_rule_dates{
             die;
         }
         $count = filter_input(INPUT_POST,'count',FILTER_VALIDATE_INT);
-        echo self::createTextField($count, null,'dates', $this->condition);
+        echo wp_kses( self::createTextField($count, null,'dates', $this->condition),
+        array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
         die;
     }
 

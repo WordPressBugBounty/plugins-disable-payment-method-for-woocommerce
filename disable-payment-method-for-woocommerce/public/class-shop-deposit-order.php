@@ -496,7 +496,7 @@ class PIShopDeposit extends WC_Order {
         }
 
         /* translators: 1: first name 2: last name */
-        return sprintf( _x( '%1$s %2$s', 'full name', 'deposits-for-woocommerce' ), $this->get_billing_first_name(), $this->get_billing_last_name() );
+        return sprintf( _x( '%1$s %2$s', 'full name', 'disable-payment-method-for-woocommerce' ), $this->get_billing_first_name(), $this->get_billing_last_name() );
     }
 
     /**
@@ -511,7 +511,7 @@ class PIShopDeposit extends WC_Order {
         }
 
         /* translators: 1: first name 2: last name */
-        return sprintf( _x( '%1$s %2$s', 'full name', 'deposits-for-woocommerce' ), $this->get_shipping_first_name(), $this->get_shipping_last_name() );
+        return sprintf( _x( '%1$s %2$s', 'full name', 'disable-payment-method-for-woocommerce' ), $this->get_shipping_first_name(), $this->get_shipping_last_name() );
     }
 
     /**
@@ -596,7 +596,7 @@ class PIShopDeposit extends WC_Order {
     public function get_order_item_totals( $tax_display = '' ) {
         if ( did_action( 'woocommerce_order_details_after_order_table_items' ) ) {
             return array( $total_rows['order_total'] = array(
-                'label' => __( 'Partial Payment amount:', 'woocommerce-deposits' ),
+                'label' => __( 'Partial Payment amount:', 'disable-payment-method-for-woocommerce' ),
                 'value' => $this->get_formatted_order_total( $tax_display ),
             ) );
         }

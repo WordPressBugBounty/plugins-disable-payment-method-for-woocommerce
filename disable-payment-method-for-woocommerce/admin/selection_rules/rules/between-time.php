@@ -44,7 +44,18 @@ class Pi_dpmw_selection_rule_between_time{
             $html .= '<option value=\'outside\'>Outside the range</option>';
 			
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses( $html, 
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -66,7 +77,23 @@ class Pi_dpmw_selection_rule_between_time{
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
         $html_start = self::createTextField($count, null,'start_time', $this->condition);
         $html_end =  self::createTextField($count, null, 'end_time', $this->condition);
-        echo self::bootstrapRow($html_start, $html_end);
+        echo wp_kses( self::bootstrapRow($html_start, $html_end), [
+            'div' => array(
+                'class' => array()
+            ),
+            'input' => array(
+                'type' => array(),
+                'class' => array(),
+                'name' => array(),
+                'value' => array(),
+                'readonly' => array(),
+                'data-condition' => array()
+            ),
+            'a' => array(
+                'href' => array(),
+                'class' => array()
+            )
+        ] );
         die;
 
     }

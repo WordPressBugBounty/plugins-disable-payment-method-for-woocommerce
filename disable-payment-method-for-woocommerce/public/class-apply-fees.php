@@ -167,8 +167,9 @@ class Pi_dpmw_Apply_fees{
         if(!isset($_POST['post_data']) && !isset($_POST['payment_method'])) return false;
         
         if(isset($_POST['payment_method'])){
-            $values['payment_method'] = $_POST['payment_method'];
+            $values['payment_method'] = sanitize_text_field( wp_unslash( $_POST['payment_method'] ) );
         }else{
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
             parse_str($_POST['post_data'], $values);
         }
         
@@ -192,6 +193,7 @@ class Pi_dpmw_Apply_fees{
                     'meta_key' => '_legacy_fee_key',
                     'meta_value' => $item->legacy_fee_key
                 ];
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
                 $wpdb->insert($table, $data);
             }
 
@@ -200,6 +202,7 @@ class Pi_dpmw_Apply_fees{
                 'meta_key' => '_fee_order_id',
                 'meta_value' => $order_id
             ];
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $wpdb->insert($table, $data2);
         }
     }

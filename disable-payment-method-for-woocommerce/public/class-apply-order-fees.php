@@ -126,7 +126,7 @@ class Pi_dpmw_Apply_order_fees{
             array(
                 'order'              => $order,
                 'available_gateways' => $available_gateways,
-                'order_button_text'  => apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', 'woocommerce' ) ),
+                'order_button_text'  => apply_filters( 'woocommerce_pay_order_button_text', __( 'Pay for order', 'disable-payment-method-for-woocommerce' ) ),
             )
         );
     }
@@ -341,7 +341,7 @@ class Pi_dpmw_Apply_order_fees{
     }
 
     function getUserSelectedPaymentMethod(){
-        return $_POST['payment_method'] ?? false;
+        return sanitize_text_field( wp_unslash( $_POST['payment_method'] ?? '' ) );
     }
 }
 Pi_dpmw_Apply_order_fees::get_instance();

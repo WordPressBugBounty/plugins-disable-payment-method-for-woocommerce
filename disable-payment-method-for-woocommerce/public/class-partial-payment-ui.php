@@ -130,12 +130,12 @@ class Pi_dpmw_partial_payment_ui{
         $checked = '';
 
         if($fees_selected){
-            $checked = ' checked="checked" ';
+            $checked = ' checked ';
         }
 
         $title = get_option('pi_dpmw_partial_payment_title_checkout', 'Partial payment for the order');
 
-        echo '<label class="pi-cod-deposit-container"><input type="checkbox" name="pi-cod-deposit" class="pi-cod-deposit" value="'.esc_attr($rule).'" '.$checked.'> <span class="pi-checkmark"></span>'.esc_html($title).'</label>';
+        echo '<label class="pi-cod-deposit-container"><input type="checkbox" name="pi-cod-deposit" class="pi-cod-deposit" value="'.esc_attr($rule).'" '.esc_attr( $checked ).'> <span class="pi-checkmark"></span>'.esc_html($title).'</label>';
     }
 
     /**
@@ -184,12 +184,12 @@ class Pi_dpmw_partial_payment_ui{
         ?>
         <tr class="amount-to-pay">
             <th> <?php echo esc_html( get_option( 'pi_dpmw_txt_to_pay', 'To Pay' ) ); ?></th>
-            <td data-title="<?php echo esc_attr( get_option( 'pi_dpmw_txt_to_pay', 'To Pay' ) ); ?>"><?php echo wc_price($amt_to_pay); ?></td>
+            <td data-title="<?php echo esc_attr( get_option( 'pi_dpmw_txt_to_pay', 'To Pay' ) ); ?>"><?php echo wp_kses_post( wc_price($amt_to_pay) ); ?></td>
         </tr>
         <tr class="order-due-payment">
             <th><?php echo esc_html( get_option( 'pi_dpmw_balance_to_pay', 'Due Payment' ) ); ?></th>
             <td data-title="<?php echo esc_attr( get_option( 'pi_dpmw_balance_to_pay', 'Due Payment' ) ); ?>">
-                <?php echo wc_price($amt_balance);?>
+                <?php echo wp_kses_post( wc_price($amt_balance) );?>
             </td>
         </tr>
         <?php
@@ -316,14 +316,14 @@ class Pi_dpmw_partial_payment_ui{
 
 			<td width="1%"></td>
 			<td class="total"  style="color:#2f982f;">
-				<?php echo $formatted_advance_amount; ?>
+				<?php echo wp_kses_post( $formatted_advance_amount ); ?>
 			</td>
         </tr>
         <tr>
 			<td class="label"  style="color:#f00;"><?php esc_html_e( 'Due Amount', 'disable-payment-method-for-woocommerce' );?>:</td>
 			<td width="1%"></td>
 			<td class="total" style="color:#f00;">
-				<?php echo $formatted_balance; ?>
+				<?php echo wp_kses_post( $formatted_balance ); ?>
 			</td>
 		</tr>
         <?php

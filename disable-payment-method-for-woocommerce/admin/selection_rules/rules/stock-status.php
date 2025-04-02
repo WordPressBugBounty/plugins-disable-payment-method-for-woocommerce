@@ -26,7 +26,7 @@ class Pi_dpmw_selection_rule_stock_status{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Stock status of product in cart'),
+            'name'=>__('Stock status of product in cart', 'disable-payment-method-for-woocommerce'),
             'group'=>'cart_related',
             'condition'=>$this->condition
         );
@@ -41,7 +41,21 @@ class Pi_dpmw_selection_rule_stock_status{
 			$html .= '<option value=\'back-order-present\'>There is at least one product on back order</option>';
         
         $html .= '</select>";';
-        echo $html;
+        echo wp_kses($html,
+                array( 'select'=> array(
+                        'name'=>array(), 
+                        'class' => array()
+                    )
+                    ,
+                    'option' => array(
+                        'value' => array(),
+                        'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
+                    )
+                )
+            );
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -63,14 +77,30 @@ class Pi_dpmw_selection_rule_stock_status{
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
         echo '<span style="display:none !important">';
-        echo Pi_dpmw_selection_rule_main::createNumberField($count,$this->condition, null,'any');
+        echo wp_kses( Pi_dpmw_selection_rule_main::createHiddenField($count,$this->condition, 1), array(
+            'input' => array(
+                'type' => array(),
+                'name' => array(),
+                'value' => array(),
+                'id' => array(),
+                'class' => array(),
+                'step' => array(),
+                'min' => array(),
+                'max' => array(),
+                'placeholder' => array(),
+                'data-condition' => array(),
+                'data-step' => array(),
+                'data-logic' => array(),
+                'required' => array(),
+            )
+        ));
         echo '</span>';
         die;
     }
 
     function savedDropdown($html, $values, $count){
         $html = '<span style="display:none !important">';
-        $html .= Pi_dpmw_selection_rule_main::createNumberField($count, $this->condition, $values,'any');
+        $html .= Pi_dpmw_selection_rule_main::createHiddenField($count, $this->condition, 1,'any');
         $html .= '</span>';
         return $html;
     }

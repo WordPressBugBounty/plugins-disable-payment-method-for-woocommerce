@@ -38,7 +38,7 @@ class Class_Pi_Dpmw_Add_Edit{
     function tab(){
         $page =  sanitize_text_field(filter_input( INPUT_GET, 'page'));
         ?>
-        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo esc_attr(($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary')); ?>" href="<?php echo admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab ); ?>">
+        <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo esc_attr(($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary')); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab )); ?>">
             <?php esc_html( $this->tab_name); ?> 
         </a>
         <?php
@@ -52,7 +52,7 @@ class Class_Pi_Dpmw_Add_Edit{
         $data = $this->formDate();
 
         if($data === false){
-            echo '<div class="alert alert-danger mt-2">'.__('Rule you are trying to edit does not exist','disable-payment-method-for-woocommerce').'</div>';
+            echo '<div class="alert alert-danger mt-2">'.esc_html(__('Rule you are trying to edit does not exist','disable-payment-method-for-woocommerce')).'</div>';
             return;
         }
         
@@ -177,7 +177,7 @@ class Class_Pi_Dpmw_Add_Edit{
             $error->add( 'access', 'You are not authorized to make this changes ' );
         } 
 
-        if ( ! isset( $_POST['pisol_dpmw_nonce'] ) || ! wp_verify_nonce( $_POST['pisol_dpmw_nonce'], 'add_disable_payment_method_rule' ) 
+        if ( ! isset( $_POST['pisol_dpmw_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['pisol_dpmw_nonce'] ) ), 'add_disable_payment_method_rule' ) 
         ) {
             $error->add( 'invalid-nonce', 'Form has expired Reload the form and try again ' );
         } 
@@ -218,111 +218,110 @@ class Class_Pi_Dpmw_Add_Edit{
 
         $redirect_url = "";
 
-        if ( ! isset( $_POST['pisol_dpmw_nonce'] ) || ! wp_verify_nonce( $_POST['pisol_dpmw_nonce'], 'add_disable_payment_method_rule' ) 
+        if ( ! isset( $_POST['pisol_dpmw_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['pisol_dpmw_nonce'] ) ), 'add_disable_payment_method_rule' ) 
         ) {
-
-        return false;
+            return false;
         } 
 
         if ( empty( $_POST ) || !current_user_can( 'manage_options' )) {
-			return false;
+            return false;
         }
         
         $post_type = sanitize_text_field(filter_input( INPUT_POST, 'post_type'));
-		if ( isset( $post_type ) && 'pi_dpmw_rules' === $post_type ) {
-            if ($_POST['post_id'] === '' || empty($_POST['post_id'])) {
-				$shipping_method_post = array(
-					'post_title'  => sanitize_text_field($_POST['pi_title']),
-					'post_status' => 'publish',
-					'post_type'   => 'pi_dpmw_rules',
-				);
-				$post_id  = wp_insert_post( $shipping_method_post );
+        if ( isset( $post_type ) && 'pi_dpmw_rules' === $post_type ) {
+            if ( isset( $_POST['post_id'] ) && ( $_POST['post_id'] === '' || empty($_POST['post_id']) ) ) {
+                $shipping_method_post = array(
+                    'post_title'  => sanitize_text_field( wp_unslash( isset( $_POST['pi_title'] ) ? $_POST['pi_title'] : '' ) ),
+                    'post_status' => 'publish',
+                    'post_type'   => 'pi_dpmw_rules',
+                );
+                $post_id  = wp_insert_post( $shipping_method_post );
                 $redirect_url = admin_url( '/admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule&action=edit&id='.$post_id);
-			} else {
-				$shipping_method_post = array(
-					'ID'          => (int)sanitize_text_field($_POST['post_id']),
-					'post_title'  => sanitize_text_field($_POST['pi_title']),
-					'post_status' => 'publish',
-				);
-				$post_id  = wp_update_post( $shipping_method_post );
+            } else {
+                $shipping_method_post = array(
+                    'ID'          => (int)sanitize_text_field( wp_unslash( isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0 ) ),
+                    'post_title'  => sanitize_text_field( wp_unslash( isset( $_POST['pi_title'] ) ? $_POST['pi_title'] : '' ) ),
+                    'post_status' => 'publish',
+                );
+                $post_id  = wp_update_post( $shipping_method_post );
             }
             
             if ( isset( $_POST['pi_status'] ) ) {
-				update_post_meta( $post_id, 'pi_status', "on" );
-			} else {
-				update_post_meta( $post_id, 'pi_status', "off");
-			}
+                update_post_meta( $post_id, 'pi_status', "on" );
+            } else {
+                update_post_meta( $post_id, 'pi_status', "off");
+            }
 
             if ( isset( $_POST['pi_rule_type'] ) ) {
-				update_post_meta( $post_id, 'pi_rule_type', sanitize_text_field( $_POST['pi_rule_type'] ));
-			} else {
-				update_post_meta( $post_id, 'pi_rule_type', 'disable');
-			}
-			
-			if ( isset( $_POST['pi_fees_type'] ) ) {
-				update_post_meta( $post_id, 'pi_fees_type', sanitize_text_field( $_POST['pi_fees_type'] ) );
-			}
+                update_post_meta( $post_id, 'pi_rule_type', sanitize_text_field( wp_unslash( $_POST['pi_rule_type'] ) ) );
+            } else {
+                update_post_meta( $post_id, 'pi_rule_type', 'disable');
+            }
+            
+            if ( isset( $_POST['pi_fees_type'] ) ) {
+                update_post_meta( $post_id, 'pi_fees_type', sanitize_text_field( wp_unslash( $_POST['pi_fees_type'] ) ) );
+            }
 
             if ( isset( $_POST['pi_fees'] ) ) {
-                if(!empty($_POST['pi_fees'])){
-                    update_post_meta( $post_id, 'pi_fees', sanitize_textarea_field( $_POST['pi_fees'] ) );
-                }else{
+                if( !empty( $_POST['pi_fees'] ) ) {
+                    update_post_meta( $post_id, 'pi_fees', sanitize_textarea_field( wp_unslash( $_POST['pi_fees'] ) ) );
+                } else {
                     update_post_meta( $post_id, 'pi_fees', 0 );
                 }
-			}
+            }
 
             if ( isset( $_POST['pi_condition_logic'] ) ) {
-				update_post_meta( $post_id, 'pi_condition_logic', sanitize_text_field( $_POST['pi_condition_logic'] ) );
-            }else{
+                update_post_meta( $post_id, 'pi_condition_logic', sanitize_text_field( wp_unslash( $_POST['pi_condition_logic'] ) ) );
+            } else {
                 update_post_meta( $post_id, 'pi_condition_logic', 'and' );
             }
 
-
             $pi_selection  = array();
-            $conditions = isset($_POST['pi_selection']) ? $_POST['pi_selection'] : array();
-            if(is_array($conditions)){
-            foreach($conditions as $key => $condition){
-                $pi_selection[] = array(
-                    'pi_condition'=> isset($condition['pi_dpmw_condition']) ?sanitize_text_field($condition['pi_dpmw_condition']) : '',
-                    'pi_logic'=>isset($condition['pi_dpmw_logic']) ? sanitize_text_field($condition['pi_dpmw_logic']) : "",
-                    'pi_value'=> isset($condition['pi_dpmw_condition_value']) ? self::sanitizeArray($condition['pi_dpmw_condition_value']) : ""
-                );
-            }
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $conditions = isset( $_POST['pi_selection'] ) ? wp_unslash( $_POST['pi_selection'] ) : array();
+            if( is_array( $conditions ) ) {
+                foreach( $conditions as $key => $condition ) {
+                    $pi_selection[] = array(
+                        'pi_condition' => isset( $condition['pi_dpmw_condition'] ) ? sanitize_text_field( $condition['pi_dpmw_condition'] ) : '',
+                        'pi_logic' => isset( $condition['pi_dpmw_logic'] ) ? sanitize_text_field( $condition['pi_dpmw_logic'] ) : "",
+                        'pi_value' => isset( $condition['pi_dpmw_condition_value'] ) ? self::sanitizeArray( $condition['pi_dpmw_condition_value'] ) : ""
+                    );
+                }
             }
 
-            if(is_array($pi_selection)){
+            if( is_array( $pi_selection ) ) {
                 update_post_meta( $post_id, 'pi_metabox', $pi_selection );
             }
 
-            if(isset($_POST['disable_payment_methods']) && is_array($_POST['disable_payment_methods'])){
-                update_post_meta( $post_id, 'disable_payment_methods', self::sanitizeArray($_POST['disable_payment_methods']) );
-            }else{
-                update_post_meta( $post_id, 'disable_payment_methods',array());
+            if( isset( $_POST['disable_payment_methods'] ) && is_array( $_POST['disable_payment_methods'] ) ) {
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                update_post_meta( $post_id, 'disable_payment_methods', self::sanitizeArray( wp_unslash( $_POST['disable_payment_methods'] ) ) );
+            } else {
+                update_post_meta( $post_id, 'disable_payment_methods', array() );
             }
 
-            if(isset($_POST['pi_currency']) && is_array($_POST['pi_currency'])){
-                update_post_meta( $post_id, 'pi_currency', self::sanitizeArray($_POST['pi_currency']) );
-            }else{
-                update_post_meta( $post_id, 'pi_currency', []);
+            if( isset( $_POST['pi_currency'] ) && is_array( $_POST['pi_currency'] ) ) {
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                update_post_meta( $post_id, 'pi_currency', self::sanitizeArray( wp_unslash( $_POST['pi_currency'] ) ) );
+            } else {
+                update_post_meta( $post_id, 'pi_currency', [] );
             }
 
             if ( isset( $_POST['pi_fees_taxable'] ) ) {
-				update_post_meta( $post_id, 'pi_fees_taxable', sanitize_text_field( $_POST['pi_fees_taxable'] ) );
-			}else{
+                update_post_meta( $post_id, 'pi_fees_taxable', sanitize_text_field( wp_unslash( $_POST['pi_fees_taxable'] ) ) );
+            } else {
                 update_post_meta( $post_id, 'pi_fees_taxable', 'no' );
             }
 
             if ( isset( $_POST['pi_fees_tax_class'] ) ) {
-				update_post_meta( $post_id, 'pi_fees_tax_class', sanitize_textarea_field( $_POST['pi_fees_tax_class'] ) );
-			}
+                update_post_meta( $post_id, 'pi_fees_tax_class', sanitize_textarea_field( wp_unslash( $_POST['pi_fees_tax_class'] ) ) );
+            }
 
-            
-            if(!empty($redirect_url)){
+            if( !empty( $redirect_url ) ) {
                 return $redirect_url;
             }
 
             return true;
-
         }
     }
 
@@ -357,7 +356,7 @@ class Class_Pi_Dpmw_Add_Edit{
         $all_currencies = get_woocommerce_currencies();
         foreach($all_currencies as $currency => $name){
             $selected = in_array($currency, $saved_currency) ? 'selected' : '';
-            echo '<option value="'.$currency.'" '.$selected.'>'.$name.'</option>';
+            echo '<option value="'.esc_attr($currency).'" '.esc_attr($selected).'>'.esc_html($name).'</option>';
         }
     }
     

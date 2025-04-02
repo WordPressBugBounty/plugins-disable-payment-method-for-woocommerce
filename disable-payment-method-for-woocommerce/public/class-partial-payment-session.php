@@ -24,10 +24,11 @@ class Session{
 
         $name = 'pi-cod-deposit';
         if(isset($_POST[$name])){
-            $fees_id = $_POST[$name];
+            $fees_id = sanitize_text_field( wp_unslash( $_POST[$name] ));
             self::saveFeesInSession($fees_id);
             return true;
         }elseif(isset($_POST['post_data'])){
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
             parse_str($_POST['post_data'], $values);
             
             if(isset($values[$name])){ 

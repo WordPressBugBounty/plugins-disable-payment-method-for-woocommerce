@@ -81,7 +81,21 @@ class Pi_dpmw_selection_rule_country{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple",null,'static');
+        echo wp_kses(Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple",null,'static'),
+            array(
+                'select' => array(
+                    'class' => array(),
+                    'name' => array(),
+                    'multiple' => array(),
+                    'data-condition' => array(),
+                    'placeholder' => array()
+                ),
+                'option' => array(
+                    'value' => array(),
+                    'selected' => array()
+                )
+            )
+        );
         die;
     }
 
