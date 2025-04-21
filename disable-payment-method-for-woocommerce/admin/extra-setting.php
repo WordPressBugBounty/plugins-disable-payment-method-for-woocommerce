@@ -99,4 +99,6 @@ class pisol_dpmw_extra_settings{
     }
 }
 
-new pisol_dpmw_extra_settings($this->plugin_name);
+add_action('init', function(){
+    new pisol_dpmw_extra_settings($this->plugin_name);
+});
