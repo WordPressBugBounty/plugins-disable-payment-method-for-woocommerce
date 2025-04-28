@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8.0
-Stable tag: 1.1.9.10
+Stable tag: 1.1.9.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -229,6 +229,9 @@ Yes the Free version and PRO version both are HPOS compatible
 No, it doesn't support WooCommerce checkout Block, your checkout page should be the made using classic short code [woocommerce_checkout]
 
 == Changelog ==
+
+= 1.1.9.11 =
+* For woocommerce 9.8 we wont make custom request when payment method is changed in the block checkout page, as that is now part of woocommerce core
 
 = 1.1.9.10 =
 * Translation warning bug fixed
