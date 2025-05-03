@@ -166,6 +166,11 @@ class Pi_dpmw_selection_rule_quantity{
     }
 
     function getProductQuantity( $package ){
+        
+        if ( ! did_action( 'wp_loaded' ) ) {
+            return 0;
+        }
+
         if(is_a($package, 'WC_Cart')){
             return WC()->cart->get_cart_contents_count();
         }elseif(is_a($package, 'WC_Order')){

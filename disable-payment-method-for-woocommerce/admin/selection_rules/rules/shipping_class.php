@@ -147,6 +147,11 @@ class Pi_dpmw_selection_rule_shipping_class{
     }
 
     function getUserAddedClasses( $package ){
+
+        if ( ! did_action( 'wp_loaded' ) ) {
+            return [];
+        }
+        
         if(is_a($package, 'WC_Cart')){
             $products = WC()->cart->get_cart();
             $user_classes = array();

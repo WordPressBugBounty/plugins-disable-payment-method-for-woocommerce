@@ -212,6 +212,11 @@ class Pi_dpmw_selection_rule_product{
     }
 
     function getProductsFromOrder($package){
+
+        if ( ! did_action( 'wp_loaded' ) ) {
+            return [];
+        }
+        
         if(is_a($package, 'WC_Cart')){
 
             $products = WC()->cart->get_cart();

@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8.0
-Stable tag: 1.1.9.11
+Stable tag: 1.1.9.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,8 @@ E.g. Suppose the customer order total is $1000 and you have configured plugin to
 You can restrict what payment option to be available when Partial payment for the order is selected.
 
 you can exclude product from partial payment, there are two way to exclude, first way is by adding a condition so it wont give partial payment option when specific product is in the cart. Second way is to exclude the product such that partial payment option will be given but user will have to pay full amount for those excluded product in the cart and he can pay partial payment for other products.
+
+You can collect Shipping charge as a partial payment amount, so if you have a shipping charge of $10 and customer is ordering product worth $1000 then he can pay $10 as partial payment and remaining amount of $1000 can be paid on delivery. So you can base the partial payment amount to be percentage of the Shipping charge or the subtotal of the order or a Fixed amount.
 
 	
 == PRO version features ==
@@ -228,7 +230,13 @@ Yes the Free version and PRO version both are HPOS compatible
 = Partial payment support WooCommerce checkout Block =
 No, it doesn't support WooCommerce checkout Block, your checkout page should be the made using classic short code [woocommerce_checkout]
 
+= I want to allow partial payment, but I want to charge shipping fees as partial payment amount =
+Yes you can do that in the pro version, you can set the partial payment amount to be a percentage of the shipping fees.
+
 == Changelog ==
+
+= 1.1.9.13 =
+* warning message when get payment method was called before wp_loaded so we adjusted the rules to not respond before wp_loaded event
 
 = 1.1.9.11 =
 * For woocommerce 9.8 we wont make custom request when payment method is changed in the block checkout page, as that is now part of woocommerce core

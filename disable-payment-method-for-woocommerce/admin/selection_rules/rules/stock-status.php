@@ -107,6 +107,11 @@ class Pi_dpmw_selection_rule_stock_status{
 
     function backOrderProductPresent($package){
         $back_order_present = false;
+
+        if ( ! did_action( 'wp_loaded' ) ) {
+            return $back_order_present;
+        }
+        
         if(is_a($package, 'WC_Cart')){
             if(function_exists('WC') && is_object(WC()->cart)){
                 $products = WC()->cart->get_cart();

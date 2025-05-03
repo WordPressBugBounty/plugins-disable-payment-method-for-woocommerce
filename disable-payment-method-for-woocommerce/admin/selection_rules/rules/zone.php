@@ -118,6 +118,10 @@ class Pi_dpmw_selection_rule_zones{
 
     public static function getUserSelectedZone($package){
 
+        if ( ! did_action( 'wp_loaded' ) ) {
+            return 0;
+        }
+
         if(is_a($package, 'WC_Cart')){
             $shipping_packages =  $package->get_shipping_packages();
         
