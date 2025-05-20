@@ -26,7 +26,7 @@ class Pi_dpmw_selection_rule_city{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('City/Town', 'disable-payment-method-for-woocommerce'),
+            'name'=>__('Shipping City/Town', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );

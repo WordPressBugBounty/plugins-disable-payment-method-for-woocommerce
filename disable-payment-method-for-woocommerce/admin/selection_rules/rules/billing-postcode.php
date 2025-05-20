@@ -1,13 +1,13 @@
 <?php
 
-class Pi_dpmw_selection_rule_postcode{
+class Pi_dpmw_selection_rule_billing_postcode{
 
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'postcode';
+        $this->condition = 'billing_postcode';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -26,8 +26,8 @@ class Pi_dpmw_selection_rule_postcode{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Shipping Postcode', 'disable-payment-method-for-woocommerce'),
-            'group'=>'location_related',
+            'name'=>__('Billing Postcode', 'disable-payment-method-for-woocommerce'),
+            'group'=>'billing_location_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -166,18 +166,12 @@ class Pi_dpmw_selection_rule_postcode{
         
         $postcode = '';
         if(is_a($package, 'WC_Cart')){
-            $postcode = WC()->customer->get_shipping_postcode();
+            $postcode = WC()->customer->get_billing_postcode();
         }elseif(is_a($package, 'WC_Order')){
-            $billing_postcode = $package->get_billing_postcode();
-            $shipping_postcode = $package->get_shipping_postcode();
-            if(empty($shipping_postcode)){
-                $postcode = $billing_postcode;
-            }else{
-                $postcode = $shipping_postcode;
-            }
+            $postcode = $package->get_billing_postcode();
         }
         return $postcode;
     }
 }
 
-new Pi_dpmw_selection_rule_postcode(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_billing_postcode(PI_DPMW_SELECTION_RULE_SLUG);

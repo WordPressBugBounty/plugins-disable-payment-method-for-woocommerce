@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8.0
-Stable tag: 1.1.9.13
+Stable tag: 1.1.9.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,10 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 &#9989; Disable COD when user select Different shipping address option during checkout
 
 &#9989; In a multi currency site you can disable payment method based on the currency selected by the customer
+
+&#9989; Disable PayPal payment method for the customer whose billing country is not USA
+
+&#9989; Disable Stripe payment method for the customer whose billing state is not New York
 
 = Charge extra fees on use of any payment Gateway =
 
@@ -233,7 +237,29 @@ No, it doesn't support WooCommerce checkout Block, your checkout page should be 
 = I want to allow partial payment, but I want to charge shipping fees as partial payment amount =
 Yes you can do that in the pro version, you can set the partial payment amount to be a percentage of the shipping fees.
 
+= Can Change the text "Sorry, it seems that there are no available payment methods..." =
+Yes you can change the text "Sorry, it seems that there are no available payment methods..." to any text you want from the Extra setting tab of the plugin setting.
+
+= Disable payment method based on customer billing country =
+Yes you can do that using our plugin, you can disable a payment method based on the customer billing country
+
+= Disable payment method based on customer billing state =
+Yes you can do that using our plugin, you can disable a payment method based on the customer billing state
+
+= Disable payment method based on customer billing city =
+Yes you can do that using our plugin, you can disable a payment method based on the customer billing city
+
+= Disable payment method based on customer billing postcode =
+Yes you can do that using our plugin, you can disable a payment method based on the customer billing postcode
+
+= Disable payment method based on customer shipping country, state, city and postcode =
+Yes you can do that using our plugin, you can disable a payment method based on the customer shipping country, state, city and postcode
+
 == Changelog ==
+
+= 1.1.9.14 =
+* New rule for billing country, state, city and postcode added
+* Modify the message that is shown to the user when no payment method is available
 
 = 1.1.9.13 =
 * warning message when get payment method was called before wp_loaded so we adjusted the rules to not respond before wp_loaded event

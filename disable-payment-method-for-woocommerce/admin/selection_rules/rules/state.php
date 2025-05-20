@@ -29,7 +29,7 @@ class Pi_dpmw_selection_rule_state{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('State', 'disable-payment-method-for-woocommerce'),
+            'name'=>__('Shipping State', 'disable-payment-method-for-woocommerce'),
             'group'=>'location_related',
             'condition'=>$this->condition
         );

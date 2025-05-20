@@ -1,13 +1,13 @@
 <?php
 
-class Pi_dpmw_selection_rule_postcode{
+class Pi_dpmw_selection_rule_billing_city{
 
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'postcode';
+        $this->condition = 'billing_city';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -26,8 +26,8 @@ class Pi_dpmw_selection_rule_postcode{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Shipping Postcode', 'disable-payment-method-for-woocommerce'),
-            'group'=>'location_related',
+            'name'=>__('Billing City/Town', 'disable-payment-method-for-woocommerce'),
+            'group'=>'billing_location_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -50,6 +50,9 @@ class Pi_dpmw_selection_rule_postcode{
                     'option' => array(
                         'value' => array(),
                         'selected' => array()
+                    ),
+                    'optgroup' => array(
+                        'label' => array()
                     )
                 )
             );
@@ -68,13 +71,13 @@ class Pi_dpmw_selection_rule_postcode{
     }
 
     function ajaxCall(){
-        $cap = Pi_dpmw_Menu::getCapability();
+        $cap = class_exists('Pi_Dpmw_Menu') ? Pi_Dpmw_Menu::getCapability() : 'manage_options';
         if(!current_user_can( $cap )) {
-            return;
-            die;
+            die();
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo wp_kses( Pi_dpmw_selection_rule_main::createTextField($count, $this->condition, null), array(
+
+        echo wp_kses(Pi_Dpmw_selection_rule_main::createTextField($count, $this->condition, null), array(
             'input' => array(
                 'type' => array(),
                 'name' => array(),
@@ -91,38 +94,32 @@ class Pi_dpmw_selection_rule_postcode{
                 'required' => array(),
             )
         ));
-        echo wp_kses_post( $this->description() );
-        die;
+        die();
     }
 
     function savedDropdown($html, $values, $count){
         $html = Pi_dpmw_selection_rule_main::createTextField($count, $this->condition,  $values);
-        $html .= $this->description();
         return $html;
     }
-
-    function description(){
-        $html = '';
-        return $html;
-    }
-
 
     function conditionCheck($result, $package, $logic, $values){
         
                     $or_result = false;
-                    $cart_postcode = $this->getUserPostCode( $package );
-                    $rules = $this->getPostCodes( $values[0] );
-                    $post_code_matched = $this->postCodeMatched( $cart_postcode, $rules);
-                    $rule_cart_postcode = $values[0];
+                    $cart_city = $this->get_user_city($package);
+                    $rules = isset($values[0]) && !empty($values[0]) ? $values[0] : "";
+                    if(empty($rules)) return $or_result;
+
+                    $city_matched = $this->cityMatched( $cart_city, $rules);
+                    
                     switch ($logic){
                         case 'equal_to':
-                            if($post_code_matched){
+                            if($city_matched){
                                 $or_result = true;
                             }
                         break;
 
                         case 'not_equal_to':
-                            if($post_code_matched){
+                            if($city_matched){
                                 $or_result = false;
                             }else{
                                 $or_result = true;
@@ -133,51 +130,32 @@ class Pi_dpmw_selection_rule_postcode{
         return  $or_result;
     }
 
-    function getPostCodes( $text_value ){
-        $post_codes = array();
-        $values = explode(',', $text_value);
-        $post_codes = array_map( 'trim', $values );
-        return $post_codes;
+    function get_user_city($package){
+        $state = '';
+        if(is_a($package, 'WC_Cart')){
+            $state = function_exists('WC') && is_object(WC()->customer) ? WC()->customer->get_billing_city() : '';
+        }elseif(is_a($package, 'WC_Order')){
+            $state = $package->get_billing_city();
+        }
+        return $state;
     }
 
-    function postCodeMatched( $post_code, $rules){
-        
-        foreach($rules as $rule){
+    function cityMatched( $cart_city, $rules_city){
+        $cities_array = $this->getCities($rules_city);
 
-            $object[] = (object)array(
-                'zone_id'=> 1,
-                'location_code'=> $rule
-            );
-
-            $country = apply_filters('pisol_dpmw_postcode_country', ( function_exists('WC') && is_object(WC()->customer) ? WC()->customer->get_shipping_country() : ''));
-            /**
-             * this is woocommerce location matcher function
-             */
-            $match = wc_postcode_location_matcher($post_code, $object, 'zone_id', 'location_code', $country);
-
-            if(count($match) > 0 ) return true;
-           
-        }
+        if(in_array(strtolower($cart_city), $cities_array)) return true;
 
         return false;
+        
     }
 
-    function getUserPostCode( $package ){
-        
-        $postcode = '';
-        if(is_a($package, 'WC_Cart')){
-            $postcode = WC()->customer->get_shipping_postcode();
-        }elseif(is_a($package, 'WC_Order')){
-            $billing_postcode = $package->get_billing_postcode();
-            $shipping_postcode = $package->get_shipping_postcode();
-            if(empty($shipping_postcode)){
-                $postcode = $billing_postcode;
-            }else{
-                $postcode = $shipping_postcode;
-            }
-        }
-        return $postcode;
+    function getCities( $text_value ){
+        $cities = array();
+        $values = explode(',', $text_value);
+        $cities = array_map( 'trim', $values );
+        $cities = array_map( 'strtolower', $cities );
+        return $cities;
     }
 }
 
-new Pi_dpmw_selection_rule_postcode(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_billing_city(PI_DPMW_SELECTION_RULE_SLUG);

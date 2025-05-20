@@ -42,7 +42,8 @@ class Pi_dpmw_selection_rule_main{
             return $html;
         }
         $group_names = array(
-            'location_related'=>"Location Related",
+            'location_related'=>"Shipping Location Related",
+            'billing_location_related'=>"Billing Location Related",
             'product_related'=>'Product Related',
             'cart_related'=>'Cart Related',
             'user_related'=>'User Related',

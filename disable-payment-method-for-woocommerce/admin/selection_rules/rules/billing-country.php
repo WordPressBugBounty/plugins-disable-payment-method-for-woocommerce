@@ -1,13 +1,13 @@
 <?php
 
-class Pi_dpmw_selection_rule_country{
+class Pi_dpmw_selection_rule_billing_country{
 
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'country';
+        $this->condition = 'billing_country';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -29,8 +29,8 @@ class Pi_dpmw_selection_rule_country{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Shipping Country','disable-payment-method-for-woocommerce'),
-            'group'=>'location_related',
+            'name'=>__('Billing Country','disable-payment-method-for-woocommerce'),
+            'group'=>'billing_location_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -135,18 +135,12 @@ class Pi_dpmw_selection_rule_country{
     function getCountry( $package ){
         $country = '';
         if(is_a($package, 'WC_Cart')){
-            $country = WC()->customer->get_shipping_country();
+            $country = WC()->customer->get_billing_country();
         }elseif(is_a($package, 'WC_Order')){
-            $billing_country = $package->get_billing_country();
-            $shipping_country = $package->get_shipping_country();
-            if(empty($shipping_country)){
-                $country = $billing_country;
-            }else{
-                $country = $shipping_country;
-            }
+            $country = $package->get_billing_country();
         }
         return $country;
     }
 }
 
-new Pi_dpmw_selection_rule_country(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_billing_country(PI_DPMW_SELECTION_RULE_SLUG);

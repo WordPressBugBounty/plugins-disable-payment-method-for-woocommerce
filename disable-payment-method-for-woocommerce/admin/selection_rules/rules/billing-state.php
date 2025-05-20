@@ -1,13 +1,13 @@
 <?php
 
-class Pi_dpmw_selection_rule_country{
+class Pi_dpmw_selection_rule_billing_state{
 
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'country';
+        $this->condition = 'billing_state';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -29,8 +29,8 @@ class Pi_dpmw_selection_rule_country{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Shipping Country','disable-payment-method-for-woocommerce'),
-            'group'=>'location_related',
+            'name'=>__('Billing State', 'disable-payment-method-for-woocommerce'),
+            'group'=>'billing_location_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -49,7 +49,7 @@ class Pi_dpmw_selection_rule_country{
                 array( 'select'=> array(
                         'name'=>array(), 
                         'class' => array()
-                        )
+                    )
                     ,
                     'option' => array(
                         'value' => array(),
@@ -81,7 +81,7 @@ class Pi_dpmw_selection_rule_country{
             die;
         }
         $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo wp_kses(Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple",null,'static'),
+        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple",null,'static'),
             array(
                 'select' => array(
                     'class' => array(),
@@ -106,23 +106,35 @@ class Pi_dpmw_selection_rule_country{
 
     function allCountries(){
         $countries_obj = new WC_Countries();
-       $countries =  $countries_obj->get_countries();
-       return $countries;
+       $states_array =  $countries_obj->get_states();
+        $states = $this->getStates($states_array);
+       return $states;
+    }
+
+    function getStates($states_array){
+        $final = array();
+        foreach($states_array as $country_code => $states){
+            $country_name = WC()->countries->countries[$country_code];
+            foreach($states as $state_code => $state_name){
+                $final[$country_code.":".$state_code] = $country_name.' &gt; '.$state_name;
+            }
+        }
+        return $final;
     }
 
     function conditionCheck($result, $package, $logic, $values){
         
                     $or_result = false;
-                    $user_country = $this->getCountry( $package );
-                    $rule_countries = $values;
+                    $user_state = $this->getUserState( $package );
+                    $rule_states = $this->separateState($values);
                     if($logic == 'equal_to'){
-                        if(in_array($user_country, $rule_countries)){
+                        if(in_array($user_state, $rule_states)){
                             $or_result = true;
                         }else{
                             $or_result = false;
                         }
                     }else{
-                        if(in_array($user_country, $rule_countries)){
+                        if(in_array($user_state, $rule_states)){
                             $or_result = false;
                         }else{
                             $or_result = true;
@@ -132,21 +144,26 @@ class Pi_dpmw_selection_rule_country{
         return  $or_result;
     }
 
-    function getCountry( $package ){
-        $country = '';
+    function getUserState( $package ){
+        $state = '';
         if(is_a($package, 'WC_Cart')){
-            $country = WC()->customer->get_shipping_country();
+            $state = WC()->customer->get_billing_state();
         }elseif(is_a($package, 'WC_Order')){
-            $billing_country = $package->get_billing_country();
-            $shipping_country = $package->get_shipping_country();
-            if(empty($shipping_country)){
-                $country = $billing_country;
-            }else{
-                $country = $shipping_country;
-            }
+            $state = $package->get_billing_state();
         }
-        return $country;
+        return $state;
+    }
+
+    function separateState($countries_states){
+        $value = array();
+        if(is_array($countries_states)){
+        foreach($countries_states as $countries_state){
+            $array = explode(":",$countries_state);
+            $value[] = $array[1];
+        }
+        }
+        return $value;
     }
 }
 
-new Pi_dpmw_selection_rule_country(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_billing_state(PI_DPMW_SELECTION_RULE_SLUG);

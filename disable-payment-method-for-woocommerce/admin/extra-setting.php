@@ -23,6 +23,8 @@ class pisol_dpmw_extra_settings{
         $this->settings = array(
            
             array('field'=>'pisol_dpmw_show_system_name', 'label'=>__('Show System name of shipping method on checkout page', 'disable-payment-method-for-woocommerce'), 'desc'=>__('After enabling go to the checkout page and you will see the system name of the shipping method below the shipping method name, Only admin can see this shipping method name your customer will not see it', 'disable-payment-method-for-woocommerce'), 'type'=>'switch', 'default'=>"0"),
+
+            array('field'=>'pisol_dpmw_no_payment_method_warning', 'label'=>__('Warning message to show when no payment option available'), 'desc'=>__('This will show a warning message on the checkout page when no payment options are available for the customer.'), 'type'=>'textarea', 'default'=>""),
         );
         
         $this->tab = sanitize_text_field(filter_input( INPUT_GET, 'tab'));

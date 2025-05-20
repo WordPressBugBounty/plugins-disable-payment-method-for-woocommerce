@@ -3,6 +3,7 @@
 class pisol_dpmw_filter_payment_methods{
     function __construct(){
         add_filter('woocommerce_available_payment_gateways', [$this, 'filterPaymentMethods'], PHP_INT_MAX-20);
+        add_filter('woocommerce_no_available_payment_methods_message', [$this, 'noPaymentMethodsMessage'], PHP_INT_MAX - 20);
     }
 
     function filterPaymentMethods($gateways){
@@ -24,7 +25,22 @@ class pisol_dpmw_filter_payment_methods{
 
         $gateways = $this->removeGateways($gateways, $matched_removal_rules);
 
+        $warning_message = get_option('pisol_dpmw_no_payment_method_warning', '');
+        if (empty($gateways) && !empty($warning_message) && $this->is_block_checkout_page()) {
+            wc_add_notice(esc_html($warning_message), 'error');
+        }
+
         return $gateways;
+    }
+
+    function is_block_checkout_page() {
+        $checkout_page_id = wc_get_page_id('checkout');
+        if (!$checkout_page_id) {
+            return false;
+        }
+
+        $content = get_post_field('post_content', $checkout_page_id);
+        return has_block('woocommerce/checkout', $content);
     }
 
     function matchedDisablingRules($package){
@@ -81,6 +97,14 @@ class pisol_dpmw_filter_payment_methods{
             }
         }
         return $gateways;
+    }
+
+    static function noPaymentMethodsMessage($message){
+        $warning_message = get_option('pisol_dpmw_no_payment_method_warning', '');
+        if (!empty($warning_message)) {
+            return esc_html($warning_message);
+        }
+        return $message;
     }
 }
 
