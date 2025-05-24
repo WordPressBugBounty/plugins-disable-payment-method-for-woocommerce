@@ -113,7 +113,7 @@ class Class_Pi_Dpmw_Add_Edit{
             $data['pi_fees_taxable'] = empty(get_post_meta( $data['post_id'], 'pi_fees_taxable', true )) ? 'no' : get_post_meta( $data['post_id'], 'pi_fees_taxable', true );
 
             $data['pi_fees_tax_class'] = get_post_meta( $data['post_id'], 'pi_fees_tax_class', true );
-
+            $data['pi_payment_hiding_warning_message'] = get_post_meta( $data['post_id'], 'pi_payment_hiding_warning_message', true );
         } else {
             $data['post_id']                = '';
             $data['pi_status']               = '';
@@ -130,6 +130,7 @@ class Class_Pi_Dpmw_Add_Edit{
 
             $data['pi_fees_taxable'] = 'no';
             $data['pi_fees_tax_class'] = '';
+            $data['pi_payment_hiding_warning_message'] = '';
         }
         
         $data['pi_status']       = ( ( ! empty( $data['pi_status'] ) && 'on' === $data['pi_status'] ) || empty( $data['pi_status'] ) ) ? 'checked' : '';
@@ -274,6 +275,10 @@ class Class_Pi_Dpmw_Add_Edit{
                 update_post_meta( $post_id, 'pi_condition_logic', sanitize_text_field( wp_unslash( $_POST['pi_condition_logic'] ) ) );
             } else {
                 update_post_meta( $post_id, 'pi_condition_logic', 'and' );
+            }
+
+            if ( isset( $_POST['pi_payment_hiding_warning_message'] ) ) {
+                update_post_meta( $post_id, 'pi_payment_hiding_warning_message', sanitize_text_field( wp_unslash($_POST['pi_payment_hiding_warning_message']) ) );
             }
 
             $pi_selection  = array();

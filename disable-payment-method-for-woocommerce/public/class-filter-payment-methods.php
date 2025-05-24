@@ -1,6 +1,9 @@
 <?php
 
 class pisol_dpmw_filter_payment_methods{
+
+    public $warning_messages = [];
+
     function __construct(){
         add_filter('woocommerce_available_payment_gateways', [$this, 'filterPaymentMethods'], PHP_INT_MAX-20);
         add_filter('woocommerce_no_available_payment_methods_message', [$this, 'noPaymentMethodsMessage'], PHP_INT_MAX - 20);
@@ -25,9 +28,24 @@ class pisol_dpmw_filter_payment_methods{
 
         $gateways = $this->removeGateways($gateways, $matched_removal_rules);
 
-        $warning_message = get_option('pisol_dpmw_no_payment_method_warning', '');
-        if (empty($gateways) && !empty($warning_message) && $this->is_block_checkout_page()) {
-            wc_add_notice(esc_html($warning_message), 'error');
+        $this->warning_messages = self::getWarningMessage($matched_removal_rules);
+        if (!empty($this->warning_messages) ) {
+            foreach ($this->warning_messages as $warning_message) {
+                if(empty($gateways)){
+                    $type = 'error';
+                }else{
+                    $type = 'notice';
+                }
+                
+                $this->add_unique_wc_notice(esc_html($warning_message), $type);
+            }
+
+            if(empty($gateways) && $this->is_block_checkout_page()){
+                $no_payment_method_message = get_option('pisol_dpmw_no_payment_method_warning', '');
+                if (!empty($no_payment_method_message)) {
+                    $this->add_unique_wc_notice(esc_html($no_payment_method_message), 'error');
+                }
+            }
         }
 
         return $gateways;
@@ -41,6 +59,21 @@ class pisol_dpmw_filter_payment_methods{
 
         $content = get_post_field('post_content', $checkout_page_id);
         return has_block('woocommerce/checkout', $content);
+    }
+
+    function add_unique_wc_notice($message, $type = 'error') {
+        $notices = wc()->session->get('wc_notices', []);
+
+        // Prevent duplicate notices by checking if message already exists
+        if (!empty($notices[$type])) {
+            foreach ($notices[$type] as $notice) {
+                if (trim($notice['notice']) === trim($message)) {
+                    return; // Duplicate found, skip adding
+                }
+            }
+        }
+
+        wc_add_notice($message, $type);
     }
 
     function matchedDisablingRules($package){
@@ -99,12 +132,23 @@ class pisol_dpmw_filter_payment_methods{
         return $gateways;
     }
 
-    static function noPaymentMethodsMessage($message){
+    function noPaymentMethodsMessage($message){
         $warning_message = get_option('pisol_dpmw_no_payment_method_warning', '');
         if (!empty($warning_message)) {
             return esc_html($warning_message);
         }
         return $message;
+    }
+
+    static function getWarningMessage($matched_removal_rules){
+        $warning_messages = [];
+        foreach ($matched_removal_rules as $rule) {
+            $warning_message = get_post_meta($rule->ID, 'pi_payment_hiding_warning_message', true);
+            if (!empty($warning_message)) {
+                $warning_messages[] = $warning_message;
+            }
+        }
+        return array_unique($warning_messages);
     }
 }
 

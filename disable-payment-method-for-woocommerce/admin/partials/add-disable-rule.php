@@ -61,6 +61,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </div>
 
+<div class="row py-4 border-bottom align-items-center pi-rule-type" data-type="disable">
+    <div class="col-12 col-sm-5">
+        <label for="disable_payment_methods" class="h6  pi-rule-type"  data-type="disable"><?php echo esc_html__('Warning notification','disable-payment-method-for-woocommerce'); ?></label>
+        <p><?php echo esc_html__('This message will be shown to the customer when this rule is triggered and it has removed the payment method','disable-payment-method-for-woocommerce'); ?></p>
+        <p><?php echo esc_html__('Note: This message won\'t show on the checkout page made using Blocks, as Block based checkout page does not support custom notifications as of now','disable-payment-method-for-woocommerce'); ?></p>
+    </div>
+    <div class="col-12 col-sm">
+        <textarea class="form-control" name="pi_payment_hiding_warning_message" id="pi_payment_hiding_warning_message"><?php echo esc_html($data['pi_payment_hiding_warning_message']); ?></textarea>
+    </div>
+</div>
+
 <div class="row py-3 border-bottom align-items-center pi-rule-type" data-type="fees">
     <div class="col-12 col-sm-5">
         <label for="pi_cost" class="h6"><?php esc_html_e('Extra Fees','disable-payment-method-for-woocommerce'); ?> <span class="text-primary">*</span></label>

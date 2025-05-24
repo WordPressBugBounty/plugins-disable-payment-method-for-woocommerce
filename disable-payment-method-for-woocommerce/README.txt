@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8.0
-Stable tag: 1.1.9.14
+Stable tag: 1.1.9.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,8 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 &#9989; Disable PayPal payment method for the customer whose billing country is not USA
 
 &#9989; Disable Stripe payment method for the customer whose billing state is not New York
+
+&#9989; You can give reason to customer why certain payment method is not available for them, so they can understand why that payment method is not available for them
 
 = Charge extra fees on use of any payment Gateway =
 
@@ -256,6 +258,10 @@ Yes you can do that using our plugin, you can disable a payment method based on 
 Yes you can do that using our plugin, you can disable a payment method based on the customer shipping country, state, city and postcode
 
 == Changelog ==
+
+= 1.1.9.16 =
+* Tested for WC 9.8.5
+* add custom hiding payment method message inside each rule
 
 = 1.1.9.14 =
 * New rule for billing country, state, city and postcode added
