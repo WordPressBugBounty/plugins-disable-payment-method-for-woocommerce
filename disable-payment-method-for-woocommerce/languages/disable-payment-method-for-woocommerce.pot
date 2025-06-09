@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Disable payment method for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-02 03:53+0000\n"
+"POT-Creation-Date: 2025-06-09 11:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -54,19 +54,19 @@ msgstr ""
 msgid "Apply fees on this payment methods"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:109
+#: admin/partials/add-disable-rule.php:120
 msgid "Apply for currency (useful for multi currency website only)"
 msgstr ""
 
-#: admin/cod-deposit.php:59
+#: admin/cod-deposit.php:58
 msgid "Background color"
 msgstr ""
 
-#: admin/cod-deposit.php:55
+#: admin/cod-deposit.php:54
 msgid "Balance amount"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:121
+#: admin/partials/add-disable-rule.php:132
 msgid "Below conditions determine when to disable payment methods"
 msgstr ""
 
@@ -78,7 +78,23 @@ msgstr ""
 msgid "Between time range"
 msgstr ""
 
-#: admin/cod-deposit.php:61
+#: admin/selection_rules/rules/billing-city.php:29
+msgid "Billing City/Town"
+msgstr ""
+
+#: admin/selection_rules/rules/billing-country.php:32
+msgid "Billing Country"
+msgstr ""
+
+#: admin/selection_rules/rules/billing-postcode.php:29
+msgid "Billing Postcode"
+msgstr ""
+
+#: admin/selection_rules/rules/billing-state.php:32
+msgid "Billing State"
+msgstr ""
+
+#: admin/cod-deposit.php:60
 msgid "Border color"
 msgstr ""
 
@@ -88,15 +104,15 @@ msgstr ""
 msgid "BUY PRO FOR %s"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:73
+#: admin/partials/add-disable-rule.php:84
 msgid "Cart (subtotal  + shipping) percentage"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:72
+#: admin/partials/add-disable-rule.php:83
 msgid "Cart (subtotal  - discount) percentage"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:74
+#: admin/partials/add-disable-rule.php:85
 msgid "Cart (subtotal + shipping - discount) percentage (PRO)"
 msgstr ""
 
@@ -112,55 +128,43 @@ msgstr ""
 msgid "Cart Subtotal (Before discount)"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:71
+#: admin/partials/add-disable-rule.php:82
 msgid "Cart subtotal percentage"
 msgstr ""
 
-#: admin/cod-deposit.php:32
-msgid "Charge extra fee when customer select partial payment option"
-msgstr ""
-
-#: admin/cod-deposit.php:35
+#: admin/cod-deposit.php:34
 msgid "Charge partial fee upfront"
 msgstr ""
 
-#: admin/cod-deposit.php:65
+#: admin/cod-deposit.php:64
 msgid "Checkbox background color"
 msgstr ""
 
-#: admin/cod-deposit.php:67
+#: admin/cod-deposit.php:66
 msgid "Checkbox border color"
 msgstr ""
 
-#: admin/cod-deposit.php:71
+#: admin/cod-deposit.php:70
 msgid "Checkbox checked background color"
 msgstr ""
 
-#: admin/cod-deposit.php:73
+#: admin/cod-deposit.php:72
 msgid "Checkbox checkmark color "
 msgstr ""
 
-#: admin/cod-deposit.php:69
+#: admin/cod-deposit.php:68
 msgid "Checkbox mouse over background color"
 msgstr ""
 
-#: admin/cod-deposit.php:75
+#: admin/cod-deposit.php:74
 msgid "Checkbox style"
-msgstr ""
-
-#: admin/selection_rules/rules/city.php:29
-msgid "City/Town"
-msgstr ""
-
-#: admin/selection_rules/rules/country.php:32
-msgid "Country"
 msgstr ""
 
 #: admin/selection_rules/rules/coupon.php:32
 msgid "Coupon"
 msgstr ""
 
-#: admin/cod-deposit.php:127
+#: admin/cod-deposit.php:126
 msgid ""
 "Create conditional Partial payment option in PRO version, just like how you "
 "crate rules to disable payment method or apply fee to payment method in free "
@@ -175,7 +179,7 @@ msgstr ""
 msgid "Day of week"
 msgstr ""
 
-#: admin/cod-deposit.php:41
+#: admin/cod-deposit.php:40
 msgid "Default order status of partially paid order"
 msgstr ""
 
@@ -191,7 +195,7 @@ msgstr ""
 msgid "Deposit paid"
 msgstr ""
 
-#: admin/cod-deposit.php:57
+#: admin/cod-deposit.php:56
 msgid "Designing option for partial payment option"
 msgstr ""
 
@@ -228,7 +232,7 @@ msgstr ""
 msgid "Due Amount"
 msgstr ""
 
-#: admin/cod-deposit.php:51 admin/advance-fees/admin.php:243
+#: admin/cod-deposit.php:50 admin/advance-fees/admin.php:243
 msgid "Due Payment"
 msgstr ""
 
@@ -248,19 +252,19 @@ msgstr ""
 msgid "Enable partial payment for order"
 msgstr ""
 
-#: admin/cod-deposit.php:43
+#: admin/cod-deposit.php:42
 msgid "Exclude product from partial payment"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:66
+#: admin/partials/add-disable-rule.php:77
 msgid "Extra Fees"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:84
+#: admin/partials/add-disable-rule.php:95
 msgid "Fee Taxable and its tax class"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:70
+#: admin/partials/add-disable-rule.php:81
 msgid "Fixed fees"
 msgstr ""
 
@@ -300,7 +304,7 @@ msgstr ""
 msgid "I would not"
 msgstr ""
 
-#: admin/cod-deposit.php:45
+#: admin/cod-deposit.php:44
 msgid "Labels"
 msgstr ""
 
@@ -321,7 +325,7 @@ msgstr ""
 msgid "Name the payment method fees"
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:88
+#: admin/partials/add-disable-rule.php:99
 msgid "No"
 msgstr ""
 
@@ -329,8 +333,14 @@ msgstr ""
 msgid "Not a partially paid order"
 msgstr ""
 
-#: admin/cod-deposit.php:127
+#: admin/cod-deposit.php:126
 msgid "Note:"
+msgstr ""
+
+#: admin/partials/add-disable-rule.php:68
+msgid ""
+"Note: This message won't show on the checkout page made using Blocks, as "
+"Block based checkout page does not support custom notifications as of now"
 msgstr ""
 
 #: admin/selection_rules/rules/dates.php:29
@@ -350,7 +360,7 @@ msgstr ""
 msgid "Order type"
 msgstr ""
 
-#: admin/cod-deposit.php:53
+#: admin/cod-deposit.php:52
 msgid "Paid amount"
 msgstr ""
 
@@ -375,22 +385,20 @@ msgid "Partial Payment amount:"
 msgstr ""
 
 #: admin/cod-deposit.php:30
-msgid "partial payment amt will be flat amount or percent of the total"
+msgid ""
+"partial payment amt will be flat amount or percent of the total or (in pro "
+"it can be Shipping amount)"
 msgstr ""
 
 #: admin/cod-deposit.php:28
 msgid "Partial payment based on"
 msgstr ""
 
-#: admin/cod-deposit.php:32
-msgid "Partial payment fee"
-msgstr ""
-
 #: public/class-partial-payment.php:229
 msgid "Partial payment for order #"
 msgstr ""
 
-#: admin/cod-deposit.php:47
+#: admin/cod-deposit.php:46
 msgid "Partial payment for the order"
 msgstr ""
 
@@ -441,10 +449,6 @@ msgid ""
 "WooCommerce</strong> as you have the PRO version"
 msgstr ""
 
-#: admin/selection_rules/rules/postcode.php:29
-msgid "Postcode"
-msgstr ""
-
 #: admin/selection_rules/rules/product_tag.php:28
 msgid "Product tag"
 msgstr ""
@@ -457,19 +461,19 @@ msgstr ""
 msgid "Remind me later"
 msgstr ""
 
-#: admin/cod-deposit.php:37
+#: admin/cod-deposit.php:36
 msgid "Remove payment method when partial payment enabled"
 msgstr ""
 
-#: admin/cod-deposit.php:39
+#: admin/cod-deposit.php:38
 msgid "Remove payment method when partial payment selected"
 msgstr ""
 
-#: admin/cod-deposit.php:37
+#: admin/cod-deposit.php:36
 msgid "Remove Payment methods for when partial payment option is enabled"
 msgstr ""
 
-#: admin/cod-deposit.php:39
+#: admin/cod-deposit.php:38
 msgid ""
 "Remove Payment methods for when partial payment option is selected by the "
 "customer during checkout"
@@ -499,20 +503,32 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: admin/selection_rules/rules/city.php:29
+msgid "Shipping City/Town"
+msgstr ""
+
 #: admin/selection_rules/rules/shipping_class.php:32
 msgid "Shipping Class"
+msgstr ""
+
+#: admin/selection_rules/rules/country.php:32
+msgid "Shipping Country"
 msgstr ""
 
 #: admin/selection_rules/rules/shipping_method.php:29
 msgid "Shipping method"
 msgstr ""
 
-#: admin/extra-setting.php:25
-msgid "Show System name of shipping method on checkout page"
+#: admin/selection_rules/rules/postcode.php:29
+msgid "Shipping Postcode"
 msgstr ""
 
 #: admin/selection_rules/rules/state.php:32
-msgid "State"
+msgid "Shipping State"
+msgstr ""
+
+#: admin/extra-setting.php:25
+msgid "Show System name of shipping method on checkout page"
 msgstr ""
 
 #: admin/advance-fees/admin.php:136 admin/advance-fees/admin.php:232
@@ -529,7 +545,7 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: admin/cod-deposit.php:63
+#: admin/cod-deposit.php:62
 msgid "Text color"
 msgstr ""
 
@@ -541,36 +557,42 @@ msgstr ""
 msgid "This is where store pending Payments are stored."
 msgstr ""
 
-#: admin/cod-deposit.php:51
+#: admin/cod-deposit.php:50
 msgid ""
 "This label is shown on the checkout page next to the amount that has to be "
 "paid afterwords"
 msgstr ""
 
-#: admin/cod-deposit.php:49
+#: admin/cod-deposit.php:48
 msgid ""
 "This label is shown on the checkout page next to the amount that has to be "
 "paid now"
 msgstr ""
 
-#: admin/cod-deposit.php:47
+#: admin/cod-deposit.php:46
 msgid ""
 "This label is shown on the checkout page next to the partial payment checkbox"
 msgstr ""
 
-#: admin/cod-deposit.php:53
+#: admin/cod-deposit.php:52
 msgid ""
 "This label is shown on the thank your page and order email next to the "
 "amount paid"
 msgstr ""
 
-#: admin/cod-deposit.php:55
+#: admin/cod-deposit.php:54
 msgid ""
 "This label is shown on the thank your page and order email next to the "
 "amount remaining to be paid"
 msgstr ""
 
-#: admin/cod-deposit.php:41
+#: admin/partials/add-disable-rule.php:67
+msgid ""
+"This message will be shown to the customer when this rule is triggered and "
+"it has removed the payment method"
+msgstr ""
+
+#: admin/cod-deposit.php:40
 msgid ""
 "This will be the order status of the main order once it is partially paid "
 msgstr ""
@@ -579,7 +601,7 @@ msgstr ""
 msgid "Thursday"
 msgstr ""
 
-#: admin/cod-deposit.php:49
+#: admin/cod-deposit.php:48
 msgid "To Pay"
 msgstr ""
 
@@ -611,7 +633,7 @@ msgstr ""
 msgid "User Role"
 msgstr ""
 
-#: admin/cod-deposit.php:43
+#: admin/cod-deposit.php:42
 msgid ""
 "User will have to pay this product total amount even when they select for "
 "partial payment, It is just like you are excluding this product to be part "
@@ -620,6 +642,10 @@ msgid ""
 "there is some excluded product and non excluded product in the cart excluded "
 "product is of 20, so now user will pay 10+20 = 30 and then checkout, so he "
 "will be paying in full for the excluded product"
+msgstr ""
+
+#: admin/partials/add-disable-rule.php:66
+msgid "Warning notification"
 msgstr ""
 
 #: admin/selection_rules/rules/day_of_week.php:108
@@ -632,7 +658,7 @@ msgid ""
 "payment for order"
 msgstr ""
 
-#: admin/cod-deposit.php:35
+#: admin/cod-deposit.php:34
 msgid ""
 "When you enable this option, the Partial Payment Fee will be added to the "
 "initial partial payment that the customer makes. For example, if you set the "
@@ -642,7 +668,7 @@ msgid ""
 "the $60 fee will be included in the remaining balance."
 msgstr ""
 
-#: admin/partials/add-disable-rule.php:89
+#: admin/partials/add-disable-rule.php:100
 msgid "Yes"
 msgstr ""
 

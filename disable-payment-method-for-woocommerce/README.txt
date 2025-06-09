@@ -1,13 +1,13 @@
 === Disable payment method / COD fees / Advance COD or Partial payment for Order for WooCommerce ===
 Contributors: rajeshsingh520
-Tags: payment gateway, cash on delivery, cod, smart cod, fee, cod fees 
+Tags: payment processing fees, cash on delivery, cod, smart cod, fee, cod fees 
 Requires at least: 4.0.1
-Tested up to: 6.8.0
-Stable tag: 1.1.9.16
+Tested up to: 6.8.1
+Stable tag: 1.1.9.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Disable payment method for WooCommerce based on different conditions, Disable cash on delivery for specific product or Disable Cash on delivery for specific shipping method
+Disable payment method for WooCommerce, Charge Payment processing FEES, Take Partial payment for Order, Advance COD or Partial payment for Order for WooCommerce
 
 == Description ==
 
@@ -55,7 +55,11 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 
 &#9989; Restrict payment method by customer email
 
+&#9989; Disable Woocommerce payment processing fee for specific country
+
 &#9989; Restrict payment method by customer role
+
+&#9989; Restrict WooCommerce credit card processing fee if the order total is less than a specific amount
 
 &#9989; Restrict payment method by coupon code applied by customer
 
@@ -87,6 +91,8 @@ you can charge conditional extra fees on the use of a specific payment gateway, 
 
 &#9989; Apply extra fees on COD order for some specific user only
 
+&#9989; Charge a percentage based WooCommerce credit card processing fee
+
 &#9989; Payment Gateway Based Fees 
 
 &#9989; Product specific payment gateway fees
@@ -95,9 +101,11 @@ you can charge conditional extra fees on the use of a specific payment gateway, 
 
 &#9989; In Multi Currency site you can apply extra fees and payment method selected by the customer
 
+&#9989; WooCommerce credit card processing fee based on the order total
+
 == Advance Fee for Cash on Delivery(COD) OR Partial payment for Order ==
 
-This feature allows you to take small amount in advance and then take the remaining amount afterwords during the delivery (if customer want they can pay remaining amount before delivery as well). so using this you can avoid fake cash on delivery order.
+This feature allows you to take small amount in advance and then take the remaining amount afterwards during the delivery (if customer want they can pay remaining amount before delivery as well). so using this you can avoid fake cash on delivery order.
 
 E.g. Suppose the customer order total is $1000 and you have configured plugin to take min $10 as advance payment then customer can place that order by making a $10 payment and remaining payment he can do when the product is delivered to him. this way you can avoid fake cash on delivery orders.
 
@@ -139,6 +147,7 @@ You can collect Shipping charge as a partial payment amount, so if you have a sh
 * **WooCommerce cash on delivery extra fee** : Charge an extra fee for cash on delivery orders.
 * **WooCommerce payment processing fee** : Implement additional fees for different payment methods.
 * **Charge percentage payment processing fee** : Charge a percentage based payment processing fee.
+* **WooCommerce credit card processing fee**: Charge credit card processing fee based on the country, state, city, postcode, or shipping zone.
 
 == Frequently Asked Questions ==
 
@@ -151,6 +160,9 @@ Yes you can do that using our Disable payment method plugin, You can set a condi
 
 = I want to offer credit cart processing only when the order total is more then $1000 =
 you can do that using our plugin, E.g: say you are using Stripe for card processing then you can set a rule do disable Stripe card processing for order below $1000
+
+= WooCommerce credit card processing fee ? =
+Yes, you can charge a credit card processing fee for orders that are processed through credit card payment gateways. This fee can be a fixed amount or a percentage of the order total.
 
 = I want to disable Stripe for smaller order total =
 you can set a rule to disable Stripe for orders whose subtotal is say less then $30
@@ -200,11 +212,11 @@ Yes you can do this using our plugin
 = I want to charge extra fees on Cash on delivery order =
 Yes you can do this using our plugin
 
-= I want to charge extra fees on COD for some country =
+= I want to charge payment processing fees on COD for some country =
 Yes you can do that you can control which country will be charged this extra fees on COD order
 
 = My gateway charge extra fees for specific country =
-You can use our plugin to collect this extra fees from the customer from that country when they select that particular payment gateway.
+You can use our woocommerce payment processing fees plugin to collect this extra fees from the customer from that country when they select that particular payment gateway.
 
 = I want to take partial payment for the order =
 Yes you can do that with this plugin, you can take a small fixed amount as partial payment amount and then you can take remaining amount on final product delivery.
@@ -257,7 +269,15 @@ Yes you can do that using our plugin, you can disable a payment method based on 
 = Disable payment method based on customer shipping country, state, city and postcode =
 Yes you can do that using our plugin, you can disable a payment method based on the customer shipping country, state, city and postcode
 
+= I want to charge payment processing fees based on the order total =
+Yes you can charge Woocommerce payment processing fees based on the order total.
+
+
+
 == Changelog ==
+
+= 1.1.9.17 =
+* Translation added for woocommerce payment processing fees module
 
 = 1.1.9.16 =
 * Tested for WC 9.8.5
