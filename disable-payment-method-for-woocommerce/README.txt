@@ -1,13 +1,13 @@
 === Disable payment method / COD fees / Advance COD or Partial payment for Order for WooCommerce ===
 Contributors: rajeshsingh520
-Tags: payment processing fees, cash on delivery, cod, smart cod, fee, cod fees 
+Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
-Tested up to: 6.8.1
-Stable tag: 1.1.9.17
+Tested up to: 6.8
+Stable tag: 1.1.9.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Disable payment method for WooCommerce, Charge Payment processing FEES, Take Partial payment for Order, Advance COD or Partial payment for Order for WooCommerce
+Disable payment method for WooCommerce, Charge WooCommerce Payment processing FEES, Take Partial payment for Order, Advance COD or Partial payment for Order for WooCommerce
 
 == Description ==
 
@@ -149,6 +149,15 @@ You can collect Shipping charge as a partial payment amount, so if you have a sh
 * **Charge percentage payment processing fee** : Charge a percentage based payment processing fee.
 * **WooCommerce credit card processing fee**: Charge credit card processing fee based on the country, state, city, postcode, or shipping zone.
 
+== Screenshots ==
+1. List of rules to Disable payment method, Charge fee for Payment method, and Partial payment for Order
+2. Rule consist of 2 section, Basic info and Conditions
+3. Basic info showing how to configure the rule to charge payment processing fees
+4. How user will decide if they want to make partial payment for the order or not
+5. woocommerce partial payment setting to configure the partial payment amount
+6. How user will see the Partial payment details on the order completion page
+7. Design option for woocommerce partial payment
+
 == Frequently Asked Questions ==
 
 = How can I save money on Payment Gateway? =
@@ -276,6 +285,9 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 == Changelog ==
 
+= 1.1.9.19 =
+* woocommerce partial payment plugin tested for WC 9.9.3
+
 = 1.1.9.17 =
 * Translation added for woocommerce payment processing fees module
 
@@ -312,7 +324,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * block based checkout not triggering payment method based fee fixed
 
 = 1.1.9.2 =
-* Charge partial payment fee upfront in pro version
+* Charge WooCommerce partial payment fee upfront in pro version
 
 = 1.1.9.1 =
 * Tested for WC 9.6.0
@@ -343,13 +355,13 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * Increased the execution priority of gateway filter so it can remove any payment gateway (as Satispay was not been removed)
 
 = 1.1.7.70 =
-* Payment method fee (applied to cash on delivery payment method) was not removed when the payment method itself was been removed because of the selection of Partial payment option
+* Payment method fee (applied to cash on delivery payment method) was not removed when the payment method itself was been removed because of the selection of WooCommerce Partial payment option
 
 = 1.1.7.69 =
-* option to set default order status after partial payment done
+* option to set default order status after WooCommerce partial payment done
 
 = 1.1.7.67 =
-* show tax information next to the total even when the Partial payment is selected
+* show tax information next to the total even when the WooCommerce partial payment is selected
 
 = 1.1.7.66 =
 * Tested for WP 6.7.0
@@ -380,8 +392,8 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * Tested for WP 6.6.1
 
 = 1.1.7.42 =
-* Designing option given for the partial payment checkbox 
-* Default design of the partial payment option changed
+* Designing option given for the WooCommerce partial payment checkbox
+* Default design of the WooCommerce partial payment option changed
 
 = 1.1.7.40 =
 * change in the way we where detecting the initial payment method in the block checkout as earlier method had issue with Firefox with caching turned on
@@ -483,7 +495,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * Tested for WC 7.8.0
 
 = 1.0.77 =
-* cart hash modified to indicate change in partial payment selection
+* cart hash modified to indicate change in WooCommerce partial payment selection
 
 = 1.0.76 =
 * Tested for WP 6.2.2
@@ -495,7 +507,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * Tested for WC 7.6.1
 
 = 1.0.71 =
-* Exclude product from partial payment added in the pro version
+* Exclude product from WooCommerce partial payment added in the pro version
 
 = 1.0.70 =
 * Option to find the system name of the shipping method
@@ -521,7 +533,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 = v1.0.61 =
 * Conflict with wallet fixed
-* changed the partial payment order creation to handle the online payment gateways
+* changed the WooCommerce partial payment order creation to handle the online payment gateways
 
 = v1.0.60 =
 * Now you can make 3 rules in free version as well
@@ -531,3 +543,15 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 = v1.0.49 =
 * New rule to disable COD when user opt for different shipping address
+
+== Privacy ==
+
+If you choose to opt in from the plugin settings, or submit optional feedback during deactivation, this plugin may collect basic technical information, including:
+
+- Plugin version  
+- WordPress version  
+- WooCommerce version  
+- Site url
+- Deactivation reason (if submitted)
+
+This data is used solely to improve plugin quality, compatibility, and features. No personal or user-specific data is collected without consent.

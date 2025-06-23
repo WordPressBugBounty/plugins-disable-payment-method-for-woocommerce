@@ -15,6 +15,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-third-party-s
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/advance-fees/admin.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/extra-setting.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-custom-field.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-analytics.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-filter-payment-methods.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-apply-fees.php';

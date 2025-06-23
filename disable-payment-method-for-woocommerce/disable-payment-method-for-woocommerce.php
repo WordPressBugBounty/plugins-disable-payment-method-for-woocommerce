@@ -9,21 +9,21 @@
  * that starts the plugin.
  *
  * @link              piwebsolution.com
- * @since             1.1.9.17
+ * @since             1.1.9.19
  * @package           Disable_Payment_Method_For_Woocommerce
  *
  * @wordpress-plugin
  * Plugin Name:       Disable payment method / COD fees / Advance COD or Partial payment for Order for WooCommerce
  * Plugin URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * Description:       Disable any payment method based on various conditions 
- * Version:           1.1.9.17
+ * Version:           1.1.9.19
  * Author:            PI Websolution
  * Author URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       disable-payment-method-for-woocommerce
  * Domain Path:       /languages
- * WC tested up to: 9.8.5
+ * WC tested up to: 9.9.3
  * Requires plugins: woocommerce
  */
 
@@ -61,10 +61,10 @@ if(is_plugin_active( 'disable-payment-method-for-woocommerce-pro/disable-payment
 
 /**
  * Currently plugin version.
- * Start at version 1.1.9.17 and use SemVer - https://semver.org
+ * Start at version 1.1.9.19 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.9.17' );
+define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.9.19' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_URL', 'https://www.piwebsolution.com' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/admin/advance-fees/templates/' );
 
@@ -87,6 +87,7 @@ add_action( 'before_woocommerce_init', function() {
 function activate_disable_payment_method_for_woocommerce() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-disable-payment-method-for-woocommerce-activator.php';
 	Disable_Payment_Method_For_Woocommerce_Activator::activate();
+    add_option('pi_dpmw_do_activation_redirect', true);
 }
 
 /**
@@ -100,6 +101,16 @@ function deactivate_disable_payment_method_for_woocommerce() {
 
 register_activation_hook( __FILE__, 'activate_disable_payment_method_for_woocommerce' );
 register_deactivation_hook( __FILE__, 'deactivate_disable_payment_method_for_woocommerce' );
+
+add_action('admin_init', function (){
+    if (get_option('pi_dpmw_do_activation_redirect', false)) {
+        delete_option('pi_dpmw_do_activation_redirect');
+        if(!isset($_GET['activate-multi']))
+        {
+            wp_redirect("admin.php?page=pisol-dpmw-settings");
+        }
+    }
+});
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -122,7 +133,7 @@ add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'pisol_dpmw_li
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.1.9.17
+ * @since    1.1.9.19
  */
 function run_disable_payment_method_for_woocommerce() {
 
