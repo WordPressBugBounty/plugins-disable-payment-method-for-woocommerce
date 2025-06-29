@@ -37,8 +37,17 @@ class ConditionalJS{
 
         $js = '
             jQuery(function($){
-                $(document).on("blur", "#billing_email", function(){
-                    jQuery("body").trigger("update_checkout");
+                let isUpdatingCheckout = false;          
+
+                $(document).on("blur", "#billing_email", function () {
+                    if (!isUpdatingCheckout) {
+                        isUpdatingCheckout = true;
+                        $("body").trigger("update_checkout");
+                    }
+                });
+
+                $(document.body).on("updated_checkout", function(){
+                    isUpdatingCheckout = false;
                 });
             });
         ';
