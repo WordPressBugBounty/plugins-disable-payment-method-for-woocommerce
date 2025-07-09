@@ -205,4 +205,23 @@
 
 	});
 
+	jQuery(document).ready(function($) {
+		$('.pi-dpmw-arrow-circle').on('click', function() {
+			$('#promotion-sidebar').fadeToggle(); // Add CSS to handle visibility
+			$(this).toggleClass('open closed');
+		});
+
+		$(".pi-step-header").on('click', function() {
+			$(this).closest('.pi-step-container').toggleClass('pi-closed');
+		});
+
+		$("#open-all").on('click', function() {
+			$('.pi-step-container').removeClass('pi-closed');
+		});
+
+		$("#close-all").on('click', function() {
+			$('.pi-step-container').addClass('pi-closed');
+		});
+	});
+
 })(jQuery);

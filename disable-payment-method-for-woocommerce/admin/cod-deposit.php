@@ -41,7 +41,7 @@ class pisol_dpmw_options{
 
             array('field'=>'pi_dpmw_excluded_products','label'=>__('Exclude product from partial payment', 'disable-payment-method-for-woocommerce'), 'desc'=>__('User will have to pay this product total amount even when they select for partial payment, It is just like you are excluding this product to be part of partial payment option E.g: if you set 10 as partial payment amount and there is no excluded product then user will pay 10 and checkout, but if there is some excluded product and non excluded product in the cart excluded product is of 20, so now user will pay 10+20 = 30 and then checkout, so he will be paying in full for the excluded product', 'disable-payment-method-for-woocommerce'),'type'=>'multiselect','default'=>array(), 'value'=>[], 'pro'=>true),
 
-            array('field'=>'title', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Labels", 'disable-payment-method-for-woocommerce'), 'type'=>"setting_category"),
+            array('field'=>'title', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Labels", 'disable-payment-method-for-woocommerce'), 'type'=>"setting_category"),
 
             array('field'=>'pi_dpmw_partial_payment_title_checkout', 'label'=>__('Partial payment for the order', 'disable-payment-method-for-woocommerce'),'type'=>'text', 'default'=>'Partial payment for the order',  'desc'=>__('This label is shown on the checkout page next to the partial payment checkbox', 'disable-payment-method-for-woocommerce')),
 
@@ -53,7 +53,7 @@ class pisol_dpmw_options{
 
             array('field'=>'pi_dpmw_balance_amt', 'label'=>__('Balance amount', 'disable-payment-method-for-woocommerce'),'type'=>'text', 'default'=>'Balance amount',  'desc'=>__('This label is shown on the thank your page and order email next to the amount remaining to be paid', 'disable-payment-method-for-woocommerce')),
 
-            array('field'=>'title', 'class'=> 'bg-primary text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Designing option for partial payment option", 'disable-payment-method-for-woocommerce'), 'type'=>"setting_category"),
+            array('field'=>'title', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Designing option for partial payment option", 'disable-payment-method-for-woocommerce'), 'type'=>"setting_category"),
 
             array('field'=>'pi_dpmw_pp_bg_color', 'label'=>__('Background color', 'disable-payment-method-for-woocommerce'),'type'=>'color', 'default'=>'#ffffff',  'desc'=>''),
 
@@ -115,13 +115,18 @@ class pisol_dpmw_options{
         $page = sanitize_text_field(filter_input( INPUT_GET, 'page'));
         ?>
         <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab )); ?>">
-            <?php echo esc_html( $this->tab_name ); ?> 
+           <span class="dashicons dashicons-chart-line"></span> <?php echo esc_html( $this->tab_name ); ?> 
         </a>
         <?php
     }
 
     function tab_content(){
        ?>
+       <div id="row_title" class="row py-4 border-bottom align-items-center bg-dark2 text-light">
+            <div class="col-12">
+            <h2 class="mt-0 mb-0 text-light font-weight-light h4">Partial payment setting</h2>
+            </div>
+        </div>
         <div class="alert alert-info mt-3 mb-3" role="alert">
             <strong><?php _e('Note:', 'disable-payment-method-for-woocommerce'); ?></strong> <?php _e('Create conditional Partial payment option in PRO version, just like how you crate rules to disable payment method or apply fee to payment method in free version', 'disable-payment-method-for-woocommerce'); ?>
         </div>
@@ -132,7 +137,7 @@ class pisol_dpmw_options{
                 new pisol_class_form_dpmw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="mt-3 btn btn-primary btn-sm" value="Save Option" id="pi-dpmw-new-rule"/>
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="Save Option" id="pi-dpmw-new-rule"/>
         </form>
        <?php
     }

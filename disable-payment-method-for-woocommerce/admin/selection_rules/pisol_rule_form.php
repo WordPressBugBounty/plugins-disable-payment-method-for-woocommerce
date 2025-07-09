@@ -1,4 +1,4 @@
-<div class="row py-3 border-bottom align-items-center bg-primary">
+<div class="row py-3 border-bottom align-items-center bg-dark2">
     <div class="col-12 col-md-4">
         <strong class="h6 text-light pi-rule-type"  data-type="disable"><?php echo esc_html($this->title); ?> <span class="text-primary">*</span></strong>
         <strong class="h6 text-light pi-rule-type"  data-type="fees">Apply fees when the below conditions are satisfied <span class="text-primary">*</span></strong><?php pisol_help::tooltip('When a customer satisfies this set of conditions, then only this rule will be applied'); ?>
@@ -10,7 +10,7 @@
         </select>
     </div>
     <div class="col-12 col-md-2 text-right">
-        <a href="javascript:void(0);" class="btn btn-secondary btn-sm" id="pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
+        <a href="javascript:void(0);" class="btn btn-primary btn-sm" id="pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
     </div>
 </div>
 <?php 
@@ -106,8 +106,8 @@ echo wp_kses($this->savedRows(),
     )
 ); ?>
 </div>
-<div class="row bg-primary">
+<div class="row ">
     <div class="col-12 text-right py-3">
-    <a href="javascript:void(0);" class="btn btn-secondary btn-sm pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
+    <a href="javascript:void(0);" class="btn btn-primary btn-sm pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
     </div>
 </div>

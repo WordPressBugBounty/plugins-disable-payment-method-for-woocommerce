@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 py-3 text-right">
         <?php if(Class_Pi_Dpmw_Add_Edit::ruleCount() < 3){ ?>
-        <a class="btn btn-primary btn-sm mr-3" href="<?php echo esc_url(admin_url( 'admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule' )); ?>"><span class="dashicons dashicons-plus"></span> <?php echo esc_html__('Add disable payment method rule', 'disable-payment-method-for-woocommerce'); ?></a>
+        <a class="btn btn-primary btn-sm " href="<?php echo esc_url(admin_url( 'admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule' )); ?>"><span class="dashicons dashicons-plus" style="margin-top:3px;"></span> <?php echo esc_html__('Add payment method rule', 'disable-payment-method-for-woocommerce'); ?></a>
         <?php }else{ ?>
             <div class="alert alert-warning text-center">
             You can only create 3 payment method rules in FREE version
@@ -39,9 +39,9 @@ foreach($disable_rules as $disable_rule){
     $type = get_post_meta( $disable_rule->ID, 'pi_rule_type', true );
     $type_html = '';
     if($type == 'disable' || empty($type)){
-        $type_html = '<span class="badge badge-primary">Disable payment method</span>';
+        $type_html = '<span class="badge badge-dark">Disable payment method</span>';
     }elseif($type== 'fees'){
-        $type_html = '<span class="badge badge-danger">Payment method fees</span>';
+        $type_html = '<span class="badge badge-dark">Payment method fees</span>';
     }
     echo '<tr id="pisol_tr_container_'.esc_attr($disable_rule->ID).'">';
     echo '<td class="pisol-scod-td-name"><a href="'.esc_url(admin_url( '/admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule&action=edit&id='.$disable_rule->ID )).'" target="_blank">'.esc_html($disable_rule_title).'</a></td>';
@@ -54,7 +54,7 @@ foreach($disable_rules as $disable_rule){
     echo '</td>';
     echo '<td>';
     echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule&action=edit&id='.$disable_rule->ID ), 'dpmw-edit')).'" class="btn btn-primary btn-sm m-2" title="'.esc_attr__('Edit disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-admin-customizer"></span></a>';
-    echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&action=dpmw_disable_rule_delete&id='.$disable_rule->ID ), 'dpmw-delete')).'" class="btn btn-warning btn-sm m-2 pi-dpmw-delete"  title="'.esc_attr__('Delete disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-trash "></span></a>';
+    echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&action=dpmw_disable_rule_delete&id='.$disable_rule->ID ), 'dpmw-delete')).'" class="btn btn-primary btn-sm m-2 pi-dpmw-delete"  title="'.esc_attr__('Delete disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-trash "></span></a>';
     echo '</td>';
     echo '</tr>';
 }

@@ -45,7 +45,7 @@ class Class_Pisol_Dpmw_Disable_Rules_list{
     function tab(){
         ?>
         <a class=" px-3 text-light d-flex align-items-center  border-left border-right  <?php echo esc_attr(($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary')); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.sanitize_text_field(wp_unslash($_GET['page'] ?? '')).'&tab='.$this->this_tab )); ?>">
-            <?php echo esc_html( $this->tab_name); ?> 
+           <span class="dashicons dashicons-admin-settings"></span> <?php echo esc_html( $this->tab_name); ?> 
         </a>
         <?php
     }

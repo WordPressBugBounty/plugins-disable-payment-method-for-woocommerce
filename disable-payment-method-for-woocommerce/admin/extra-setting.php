@@ -21,7 +21,8 @@ class pisol_dpmw_extra_settings{
 
 
         $this->settings = array(
-           
+           array('field'=>'title', 'class'=> 'bg-dark2 text-light', 'class_title'=>'text-light font-weight-light h4', 'label'=>__("Extra settings", 'disable-payment-method-for-woocommerce'), 'type'=>"setting_category"),
+
             array('field'=>'pisol_dpmw_show_system_name', 'label'=>__('Show System name of shipping method on checkout page', 'disable-payment-method-for-woocommerce'), 'desc'=>__('After enabling go to the checkout page and you will see the system name of the shipping method below the shipping method name, Only admin can see this shipping method name your customer will not see it', 'disable-payment-method-for-woocommerce'), 'type'=>'switch', 'default'=>"0"),
 
             array('field'=>'pisol_dpmw_no_payment_method_warning', 'label'=>__('Warning message to show when no payment option available'), 'desc'=>__('This will show a warning message on the checkout page when no payment options are available for the customer.'), 'type'=>'textarea', 'default'=>""),
@@ -72,7 +73,7 @@ class pisol_dpmw_extra_settings{
         $page = sanitize_text_field(filter_input( INPUT_GET, 'page'));
         ?>
         <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url( 'admin.php?page='.$page.'&tab='.$this->this_tab )); ?>">
-            <?php echo esc_html($this->tab_name); ?> 
+           <span class="dashicons dashicons-admin-generic"></span> <?php echo esc_html($this->tab_name); ?> 
         </a>
         <?php
     }
@@ -87,7 +88,7 @@ class pisol_dpmw_extra_settings{
                 new pisol_class_form_dpmw($setting, $this->setting_key);
             }
         ?>
-        <input type="submit" class="mt-3 btn btn-primary btn-sm" value="Save Option" />
+        <input type="submit" class="my-3 btn btn-primary btn-md" value="Save Option" />
         </form>
        <?php
     }

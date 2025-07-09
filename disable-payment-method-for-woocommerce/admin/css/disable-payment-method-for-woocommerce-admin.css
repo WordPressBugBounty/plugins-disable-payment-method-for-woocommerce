@@ -182,7 +182,7 @@
 
 .pisol-new-promotion-box-promotion{
 	/* background-color: rgb(194 98 151 / 1) !important; */
-	background-color: rgb(166 30 105/ 1 ) !important;
+	background: linear-gradient(135deg, #1a4562 0%, #2c6a89 50%, #163f59 100%);
 	border-radius: .5rem !important;
 	padding: 1.5rem !important;
 	box-shadow: 0px 4px 10px rgba(166, 30, 105, 0.3);
@@ -242,7 +242,7 @@
 	height:70px;
 	border-radius:35px;
 	box-shadow: 0px 4px 10px rgba(166, 30, 105, 0.3);
-	background:#eee;
+	background:#ffffff;
 	display:flex;
 	justify-content: center;
 	align-items: center;
@@ -279,3 +279,115 @@
     align-self: baseline;
 }
 /* end banner */
+
+/* NEW NAVIGATION BAR */
+#bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar .navbar-nav{
+    background:transparent !important;
+    display:flex;
+    gap:10px;
+}
+
+#bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a{
+    background:#fff !important;
+    color:var(--dark) !important;
+    border-radius:60px !important;
+    font-weight:600;
+    letter-spacing:1px;
+    transition: all 0.3s ease;
+}
+
+#bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a .dashicons{
+    margin-right:4px;
+    color:var(--dark) !important;
+}
+
+#bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a.bg-primary .dashicons{
+    color:var(--primary) !important;
+}
+
+#bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a.bg-primary, #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a:hover{
+    background:#fff !important;
+    color:var(--primary) !important;
+    text-decoration:none;
+}
+
+@media(max-width:1400px){
+    #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar a{
+        letter-spacing:inherit;
+        padding:7px 7px !important;
+    }
+}
+
+@media(max-width:1200px){
+    #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar .navbar-nav{
+        display:grid;
+        grid-template-columns:1fr 1fr 1fr;
+        grid-gap:10px;
+        & a{
+            width:100%;
+        }
+    }
+}
+
+@media(max-width:576px){
+    #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar{
+        margin-left:auto !important;
+        margin-right:auto !important;
+    }
+
+    #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper #pisol-navbar .container-fluid{
+        width:100% !important;
+    }
+
+    #pi-logo{
+        width:90%;
+    }
+}
+
+
+.afrsm-head{
+    background-color: var(--dark) !important;
+    color:#FFF;
+    position:sticky;
+    top:32px;
+    z-index:10000
+}
+
+.pisol-form-element-row small{
+	color:var(--dark2);
+	margin-top:10px;
+	display:block;
+    font-style:italic;
+    font-size:0.8rem !important;
+}
+
+/* close side bar */
+.pi-dpmw-arrow-circle {
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  border:2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index:1000;
+  position:absolute;
+  top: -16px;
+  right: -15px;
+  transform: rotate(180deg);
+}
+
+.pi-dpmw-arrow-icon {
+  width: 20px !important;
+  height: 20px !important;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Flip the arrow horizontally for "open" state (→) */
+.pi-dpmw-arrow-circle.open .pi-dpmw-arrow-icon {
+  transform: rotate(180deg);
+}

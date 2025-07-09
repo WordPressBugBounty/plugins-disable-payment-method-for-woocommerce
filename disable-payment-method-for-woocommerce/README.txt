@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8
-Stable tag: 1.1.9.20
+Stable tag: 1.1.9.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,6 +284,9 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 
 == Changelog ==
+
+= 1.1.9.21 =
+* UI improvement for Smart Cod and Partial payment for Order rules
 
 = 1.1.9.20 =
 * woocommerce partial payment plugin tested for WC 9.9.5

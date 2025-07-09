@@ -78,11 +78,17 @@ class Pi_dpmw_Menu{
                     <div class="col-12">
                         <div class='bg-dark'>
                         <div class="pisol-row">
-                            <div class="col-12 col-sm-2 py-2">
-                                    <a href="https://www.piwebsolution.com/" target="_blank"><img class="img-fluid ml-2" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/pi-web-solution.svg"></a>
+                            <div class="col-12 col-sm-2 py-3 d-flex align-items-center justify-content-center">
+                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/pi-web-solution.svg"></a>
                             </div>
                             <div class="col-12 col-sm-10 d-flex text-center small">
-                                <?php do_action($this->plugin_name.'_tab'); ?>
+                                <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
+                                    <div>
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                            <?php do_action($this->plugin_name.'_tab'); ?>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                         </div>
@@ -91,10 +97,18 @@ class Pi_dpmw_Menu{
             <div class="pisol-row">
                 <div class="col-12">
                 <div id="pisol-dpmw-notices"></div>
-                <div class="bg-light border pl-3 pr-3 pb-3 pt-0">
+                <div class="bg-light border pl-3 pr-3 pt-0">
                     <div class="pisol-row">
                         <div class="col border-right">
-                        <?php do_action($this->plugin_name.'_tab_content'); ?>
+                            <div class="pi-dpmw-arrow-circle closed" title="Open / Close sidebar">
+                                <svg class="pi-dpmw-arrow-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- First arrow -->
+                                    <path d="M13 6l-6 6 6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <!-- Second arrow (slightly right-shifted) -->
+                                    <path d="M17 6l-6 6 6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <?php do_action($this->plugin_name.'_tab_content'); ?>
                         </div>
                         <?php do_action($this->plugin_name.'_promotion'); ?>
                     </div>
@@ -108,7 +122,7 @@ class Pi_dpmw_Menu{
 
     function promotion(){
         ?>
-        <div class="col-12 col-sm-4 mt-3" id="promotion-sidebar">
+        <div class="col-12 col-sm-4" id="promotion-sidebar">
         <div class="pisol-new-promotion-box-promotion-container">
             
             <div class="pisol-new-promotion-box-promotion">
@@ -126,7 +140,11 @@ class Pi_dpmw_Menu{
                     <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>User role</span></li>   
                     <li class="border-bottom py-2">All rules support <span>Multi-currency</span></li>                           
                 </ul>
-                <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="pisol-new-promotion-box-buy my-4"><span>GET PRO FOR <?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> ONLY</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="yst-w-4 yst-h-4 yst-icon-rtl"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
+                <h4 class="pi-bottom-banner">💰 Just <?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?></h4>
+                <h4 class="pi-bottom-banner">🔥 Unlock all features and grow your sales!</h4>
+                <div class="text-center my-2">
+                    <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="btn btn-primary btn-md my-4">🔓 Unlock Pro Now – Limited Time Price!</a>
+                </div>
                 
                 <div class="pisol-new-promotion-box-promotion-footer">
                     <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/?filter=5" target="_blank">

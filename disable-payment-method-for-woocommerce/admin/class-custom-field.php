@@ -85,7 +85,7 @@ class pisol_dpmw_CustomFields{
      */
     function dpmw_partial_payment_fee_pro($setting, $saved_value){
         ?>
-        <div id="row_pi_dpmw_partial_payment_fee_pro" class="row py-4 border-bottom align-items-center ">
+        <div id="row_pi_dpmw_partial_payment_fee_pro" class="pisol-form-element-row row py-4 border-bottom align-items-center ">
             <div class="col-12 col-md-5">
                 <label class="h6 mb-0" for="pi_dpmw_partial_payment_fee_pro_text">Partial payment fee</label>
                 <br>

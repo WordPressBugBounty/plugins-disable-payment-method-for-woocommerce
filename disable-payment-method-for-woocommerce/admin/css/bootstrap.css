@@ -7,7 +7,7 @@
   /*# sourceMappingURL=bootstrap.min.css.map */
 
 
-  #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper :root {
+:root {
   	--blue: #007bff;
   	--indigo: #6610f2;
   	--purple: #6f42c1;
@@ -29,6 +29,7 @@
   	--danger: #dc3545;
   	--light: #ffffff;
   	--dark: #1a4562;
+	--dark2: rgba(26, 69, 98, 0.75);
   	--breakpoint-xs: 0;
   	--breakpoint-sm: 576px;
   	--breakpoint-md: 768px;
@@ -7112,6 +7113,10 @@
 
   #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper .bg-dark {
   	background-color: #1a4562 !important;
+  }
+
+  #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper .bg-dark2 {
+  	background-color: var(--dark2) !important;
   }
 
   #bootstrap-wrapper.pisol-setting-wrapper.pisol-container-wrapper a.bg-dark:focus,

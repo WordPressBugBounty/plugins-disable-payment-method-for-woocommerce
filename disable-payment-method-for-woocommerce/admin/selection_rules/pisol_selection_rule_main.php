@@ -144,7 +144,7 @@ class Pi_dpmw_selection_rule_main{
     }
 
     function savedRows(){
-        $html = '<div class="my-2 pisol-no-cond-msg alert alert-danger text-center" style="display:none">You have not added any condition, you need to add condition to disable payment method. <br>Add condition by clicking "Add Condition" button</div>';
+        $html = '<div class="my-2 pisol-no-cond-msg alert alert-danger text-center" style="display:none">You have not added any condition, Condition decide when to apply the rule. <br>Add condition by clicking "Add Condition" button</div>';
         if(count($this->saved_conditions) > 0 && is_array($this->saved_conditions)){
             $count = 0;
             foreach($this->saved_conditions as $condition){
