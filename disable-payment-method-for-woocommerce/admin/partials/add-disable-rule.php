@@ -12,7 +12,7 @@ if (! defined('ABSPATH')) {
 <form method="post" id="pisol-dpmw-new-method">
     <div class="pi-step-container">
         <div class="pi-step-content">
-            <div class="pi-step-header bg-dark2 text-light">
+            <div class="pi-step-header bg-primary text-light">
                 <div>
                     <strong class="pi-step-title"><?php echo __('Step 1: Basic Settings', 'conditional-extra-fees-woocommerce'); ?><small>(Required)</small></strong>
                     <p>Basic setting of the rule</p>
@@ -148,7 +148,7 @@ if (! defined('ABSPATH')) {
 
     <div class="pi-step-container">
         <div class="pi-step-content">
-            <div class="pi-step-header bg-dark2 text-light">
+            <div class="pi-step-header bg-primary text-light">
                 <div class="pi-rule-type" data-type="fees">
                     <strong class="pi-step-title"><?php echo __('Step 2: When to apply this payment method fee', 'extended-flat-rate-shipping-woocommerce'); ?><small>(Required)</small></strong>
                     <p class="font-italic">Condition that will decide when to apply this fee</p>
