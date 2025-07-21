@@ -5,8 +5,22 @@ class pisol_dpmw_filter_payment_methods{
     public $warning_messages = [];
 
     function __construct(){
+        add_filter( 'woocommerce_available_payment_gateways', [$this, 'log_available_gateways' ], -100 );
         add_filter('woocommerce_available_payment_gateways', [$this, 'filterPaymentMethods'], PHP_INT_MAX-20);
         add_filter('woocommerce_no_available_payment_methods_message', [$this, 'noPaymentMethodsMessage'], PHP_INT_MAX - 20);
+    }
+
+    function log_available_gateways( $gateways ) {
+        $logged_gateways = [];
+
+        foreach ( $gateways as $gateway_id => $gateway ) {
+            $logged_gateways[ $gateway_id ] = $gateway->get_title();
+        }
+
+        // Save it for later use (e.g., print_r in debug bar or log)
+        update_option( 'pisol_logged_gateways', $logged_gateways );
+
+        return $gateways;
     }
 
     function filterPaymentMethods($gateways){

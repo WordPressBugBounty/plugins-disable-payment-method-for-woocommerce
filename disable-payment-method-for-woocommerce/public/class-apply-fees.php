@@ -1,5 +1,8 @@
 <?php
 class Pi_dpmw_Apply_fees{
+    public $short_code_fees_id;
+    public $short_code_cart;
+
     function __construct(){
         add_action('woocommerce_cart_calculate_fees' , array($this,'addfees'));
 
@@ -23,7 +26,7 @@ class Pi_dpmw_Apply_fees{
             $taxable = $taxable_val === 'yes' ? true : false;
 
            
-                if($fees_type == 'percentage' || $fees_type == 'subtotal_discount' || $fees_type == 'subtotal_shipping'){
+                if($fees_type == 'percentage' || $fees_type == 'subtotal_discount' || $fees_type == 'subtotal_shipping' || $fees_type == 'subtotal_shipping_discount' || $fees_type == 'shipping_percentage'){
                     
                     $fees_value = $this->evaluate_cost($fees, $fees_id, $cart);
 
@@ -218,18 +221,31 @@ class Pi_dpmw_Apply_fees{
     
         // Get any cart discount (usually excludes tax)
         $discount = $cart->get_cart_discount_total();
+        $discount_tax = $cart->get_discount_tax();
+        $discount = $discount + $discount_tax;
     
         // Calculate totals including tax
         $subtotal_including_tax = $subtotal_ex_tax + $subtotal_tax;
         $shipping_including_tax = $shipping_ex_tax + $shipping_tax;
+
+        $other_fees_total = 0;
+        foreach ($cart->get_fees() as $cart_fee) {
+           $other_fees_total += $cart_fee->amount;
+        }
     
         // Adjust final total based on the subtotal type
         switch ($subtotal_type) {
             case 'subtotal_shipping':
                 $final_total = $subtotal_including_tax + $shipping_including_tax;
                 break;
+            case 'subtotal_shipping_discount':
+                $final_total = $subtotal_including_tax + $shipping_including_tax + $other_fees_total - $discount;
+                break;
             case 'subtotal_discount':
                 $final_total = $subtotal_including_tax - $discount;
+                break;
+            case 'shipping_percentage':
+                $final_total = $shipping_including_tax;
                 break;
             default: // For 'percentage' or any other types
                 $final_total = $subtotal_including_tax;

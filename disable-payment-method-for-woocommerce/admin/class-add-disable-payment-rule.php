@@ -153,6 +153,16 @@ class Class_Pi_Dpmw_Add_Edit{
                    $all_payment_methods[$key] = $title;
             }
             $all_payment_methods['cod'] = 'Cash on Delivery';
+
+            $logged_gateways = get_option('pisol_logged_gateways', array());
+
+            if(is_array($logged_gateways) && !empty($logged_gateways)){
+                foreach($logged_gateways as $gateway_id => $gateway_title){
+                    if(!isset($all_payment_methods[$gateway_id])){
+                        $all_payment_methods[$gateway_id] = $gateway_title.' ('.$gateway_id.')';
+                    }
+                }
+            }
         }
        return apply_filters('pi_dpmw_available_payment_methods', $all_payment_methods);
     }

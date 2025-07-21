@@ -73,6 +73,7 @@ if (! defined('ABSPATH')) {
                             }
                             ?>
                         </select>
+                        <p class="font-italic my-1 mb-0">If your desired payment method is not listed, please visit your checkout page so the plugin can record it, then refresh this page and your payment method will be in the list.</p>
                     </div>
                 </div>
 
@@ -97,7 +98,8 @@ if (! defined('ABSPATH')) {
                             <option value="percentage" <?php selected($data['pi_fees_type'], "percentage"); ?> title="This include subtotal and subtotal tax"><?php esc_html_e('Cart subtotal percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                             <option value="subtotal_discount" <?php selected($data['pi_fees_type'], "subtotal_discount"); ?> title="This include subtotal, subtotal tax minus coupon discount"><?php esc_html_e('Cart (subtotal  - discount) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                             <option value="subtotal_shipping" <?php selected($data['pi_fees_type'], "subtotal_shipping"); ?> title="This include subtotal, shipping total and shipping tax"><?php esc_html_e('Cart (subtotal  + shipping) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
-                            <option disabled value="subtotal_shipping_discount" <?php selected($data['pi_fees_type'], "subtotal_shipping_discount"); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php esc_html_e('Cart (subtotal + shipping - discount) percentage (PRO)', 'disable-payment-method-for-woocommerce'); ?></option>
+                            <option value="subtotal_shipping_discount" <?php selected($data['pi_fees_type'], "subtotal_shipping_discount"); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php esc_html_e('Cart (subtotal + shipping - discount) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
+                            <option value="shipping_percentage" <?php selected($data['pi_fees_type'], "shipping_percentage"); ?>><?php _e('Shipping amount percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                         </select>
                     </div>
                     <div class="col-3 col-sm">
