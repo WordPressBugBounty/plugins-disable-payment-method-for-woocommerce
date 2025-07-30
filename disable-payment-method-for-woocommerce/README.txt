@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8
-Stable tag: 1.1.9.23
+Stable tag: 1.1.9.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,6 +114,9 @@ You can restrict what payment option to be available when Partial payment for th
 you can exclude product from partial payment, there are two way to exclude, first way is by adding a condition so it wont give partial payment option when specific product is in the cart. Second way is to exclude the product such that partial payment option will be given but user will have to pay full amount for those excluded product in the cart and he can pay partial payment for other products.
 
 You can collect Shipping charge as a partial payment amount, so if you have a shipping charge of $10 and customer is ordering product worth $1000 then he can pay $10 as partial payment and remaining amount of $1000 can be paid on delivery. So you can base the partial payment amount to be percentage of the Shipping charge or the subtotal of the order or a Fixed amount.
+
+= Blacklist email id or IP address =
+You can blacklist email id or IP address so that user with that email id or IP address will not be able to place an order on your website. This is useful when you want to block a specific user from placing an order on your website.
 
 	
 == PRO version features ==
@@ -284,6 +287,9 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 
 == Changelog ==
+
+= 1.1.9.24 =
+* Blacklist email id or IP address feature added
 
 = 1.1.9.23 =
 * Payment processing fees not can be based on the subtotal + shipping - discount coupon
