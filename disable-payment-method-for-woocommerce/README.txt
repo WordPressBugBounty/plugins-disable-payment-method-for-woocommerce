@@ -1,9 +1,9 @@
-=== Disable payment method / COD fees / Advance COD or Partial payment for Order for WooCommerce ===
+=== Disable payment method / Partial payment for WooCommerce ===
 Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.8
-Stable tag: 1.1.9.24
+Stable tag: 1.1.9.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -170,7 +170,7 @@ E.g: Say you have 2 different payment gateways, Gateway A charges 1% processing 
 = I want to offer PayPal gateway for order above $100 =
 Yes you can do that using our Disable payment method plugin, You can set a condition to disable Paypal until customer cart subtotal is more then $100.
 
-= I want to offer credit cart processing only when the order total is more then $1000 =
+= I want to offer credit card processing only when the order total is more then $1000 =
 you can do that using our plugin, E.g: say you are using Stripe for card processing then you can set a rule do disable Stripe card processing for order below $1000
 
 = WooCommerce credit card processing fee ? =
@@ -182,8 +182,8 @@ you can set a rule to disable Stripe for orders whose subtotal is say less then 
 = I want to offer Cash on Delivery for the order less then $10 as I don't want gateway processing fees for small order =
 You can disable COD for order below say $10 or amount set by you
 
-= We wan't to offer Direct bank transfer for order above $1000 =
-you can do that by disabling the Direct back transfer option for order below $1000
+= We want to offer Direct bank transfer for order above $1000 =
+you can do that by disabling the Direct bank transfer option for order below $1000
 
 = Will It allow me to select the cheapest payment processing for each customer =
 Yes, you can configure multiple rules so it enable the cheapest gateway for each customer. This way it will increase your profit
@@ -198,13 +198,13 @@ Yes this will work with all the payment gateways
 Yes using our Disable payment method plugin you can disable a Payment gateway for specific city or group of cities
 
 = Can I disable payment gateway based on customer state =
-Yes you can disable payment method based on user State, so you can disable PayPal option for customer ordering from New york.
+Yes you can disable payment method based on user State, so you can disable PayPal option for customer ordering from New York.
 
 = Can I disable payment gateway based on the postcode / zip code =
 Yes you can disable a payment gateway based on a post code or range of post code
 
 = I want to Disable Paypal for certain country where it is not available =
-Yes you can disable PayPay or other payment gateway based on the customer country
+Yes you can disable PayPal or other payment gateway based on the customer country
 
 = I want to enable Authorize payment gateway for Wholesale customer role =
 Yes you can disable payment gateway based on the user or customer role
@@ -215,7 +215,7 @@ Yes you can do that using our Product category rule.
 = I want to give option of the specific payment gateway when the user adds a specific coupon code =
 Yes you can do this using our coupon code rule
 
-= I want to give option of the payment gateway when specific shipping method is sued =
+= I want to give option of the payment gateway when specific shipping method is used =
 We have a shipping method rule you can use that to achieve this
 
 = I want to disable a payment method based on the day =
@@ -404,7 +404,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 * small content change
 
 = 1.1.7.46 =
-* ccavanue bug fixed
+* CCAvenue bug fixed
 
 = 1.1.7.44 =
 * PHP 8.2 compatible
@@ -473,7 +473,7 @@ Yes you can charge Woocommerce payment processing fees based on the order total.
 
 = 1.1.7.11 =
 * Phone pay payment solution related bug of "Amount Mismatch" fixed
-* $state undefiend error in the rule fixed
+* $state undefined error in the rule fixed
 
 = 1.1.7.10 =
 * Tested for WC 8.2.2
