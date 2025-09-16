@@ -42,3 +42,10 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/includes.php';
 add_action('wp_loaded', function(){
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shop-deposit-order.php';
 });
+
+/**
+ * some time woocommerce has not completed loading of file in wp_loadd so we are loading this on woocommerce_init again to avoid any issue and we have added a check in class file to avoid re-declaration issue
+ */
+add_action('woocommerce_init', function(){
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shop-deposit-order.php';
+});

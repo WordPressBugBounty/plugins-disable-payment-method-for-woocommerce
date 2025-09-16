@@ -118,6 +118,7 @@ class Pi_dpmw_Menu{
         </div>
         </div>
         <?php
+        $this->support();
     }
 
     function promotion(){
@@ -166,40 +167,18 @@ class Pi_dpmw_Menu{
         <?php
     }
 
-    function promotion2(){
-       ?>
-        <div class="col-12 col-sm-4 mt-3" id="promotion-sidebar">
-            <a href="javascript:void()" onClick="jQuery(this).parent().remove()" class="text-right">Hide Banner</a>
-            <div class="pi-shadow">
-                <div class="pisol-row justify-content-center">
-                    <div class="col-md-10 col-sm-12">
-                        <div class="p-2  text-center">
-                            <img class="img-fluid" src="<?php echo esc_url(plugin_dir_url( __FILE__ )); ?>img/bg.svg">
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center py-2">
-                    <a class="btn btn-success btn-sm text-uppercase mb-2 " href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>&utm_ref=top_link" target="_blank">Buy Now !!</a>
-                </div>
-                <h2 id="pi-banner-tagline" class="mb-0">Get Pro for <?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> Only</h2>
-                <div class="inside">
-                    <ul class="text-left  h6 pisol-pro-feature-list">
-                    <li class="border-top h6"><span>Unlimited disable</span>  payment method rules</li>
-                    <li class="border-top h6"><span>Unlimited payment</span>  method fees rules</li> 
-                    <li class="border-top h6"><span>Unlimited Partial payment OR Advance Fee for Cash on Delivery </span> rules</li>
-                    <li class="border-top h6"><span>Partial payment</span> rules with conditions</li>
-                    <li class="border-top h6">Different <span>partial payment</span> amount <span>based on country / state / zone / postcode </span></li>
-                    <li class="border-top h6">Offer <span>partial payment</span> based on the <span>Order subtotal</span></li>
-                    <li class="border-top h6">Offer <span>partial payment</span> based on the <span>User role</span></li>   
-                    <li class="border-top h6">All rules support <span>Multi-currency</span></li>                           
-                    </ul>
-                </div>
-                <div class="text-center pb-3 pt-2">
-                        <a class="btn btn-primary btn-md" href="<?php echo esc_url( DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL ); ?>&utm_ref=bottom_link" target="_blank">BUY PRO VERSION</a>
-                    </div>
-            </div>
-        </div>
-       <?php
+    function support(){
+        $website_url = home_url();
+        $plugin_name = $this->plugin_name;
+        ?>
+        <form action="https://www.piwebsolution.com/quick-support/" method="post" target="_blank" style="display:inline; position:fixed; bottom:30px; right:25px; z-index:9999;" >
+            <input type="hidden" name="website_url" value="<?php echo esc_attr( $website_url ); ?>">
+            <input type="hidden" name="plugin_name" value="<?php echo esc_attr( $plugin_name ); ?>">
+            <button type="submit" style="background:none;border:none;cursor:pointer;padding:0;">
+                <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/chat.png" 
+                    alt="Live Support" title="Quick Support" style="width:60px;height:60px;">
+            </button>
+        </form>
+        <?php
     }
-
 }

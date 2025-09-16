@@ -4,7 +4,7 @@ if ( !defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-if(class_exists('WC_Order')){
+if(class_exists('WC_Order') && ! class_exists( 'PIShopDeposit' )){
 class PIShopDeposit extends WC_Order {
 
     /**
