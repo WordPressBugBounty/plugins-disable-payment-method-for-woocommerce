@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Class_Pi_Dpmw_Add_Edit{
 
     public $plugin_name;

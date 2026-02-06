@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/review.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/help.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-common-cart.php';

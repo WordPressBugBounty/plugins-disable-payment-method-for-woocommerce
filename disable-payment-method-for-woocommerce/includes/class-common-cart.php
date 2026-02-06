@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 if(!function_exists('pisol_wpml_dpmw_object')){
 function pisol_wpml_dpmw_object( $object_id, $type, $lang = '' ) {
     if(empty($lang)){

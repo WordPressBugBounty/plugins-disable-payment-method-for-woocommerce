@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 $current = isset($_GET['list_type']) ? sanitize_text_field($_GET['list_type']) : 'email';
 
 $types = [
@@ -30,14 +35,14 @@ $total_pages = ceil($total_items / $items_per_page);
             </div>
 
             <div class="flex-grow-1 mr-1">
-                <input type="text" name="blacklist_note" id="blacklist_note" class="form-control" placeholder="<?php _e('Note (optional)', 'disable-payment-method-for-woocommerce'); ?>">
+                <input type="text" name="blacklist_note" id="blacklist_note" class="form-control" placeholder="<?php esc_html_e('Note (optional)', 'disable-payment-method-for-woocommerce'); ?>">
             </div>
 
             <input type="hidden" name="blacklist_type" value="<?php echo esc_attr($current); ?>">
 
             <div>
                 <button type="submit" class="btn btn-primary">
-                    <span class="dashicons dashicons-plus" style="margin-top: 4px;"></span> <?php _e('Add', 'disable-payment-method-for-woocommerce'); ?>
+                    <span class="dashicons dashicons-plus" style="margin-top: 4px;"></span> <?php esc_html_e('Add', 'disable-payment-method-for-woocommerce'); ?>
                 </button>
             </div>
         </form>
@@ -72,11 +77,11 @@ if (isset($_GET['message'])) {
             <table class="table table-striped">
                 <thead>
                     <tr class="afrsm-head">
-                        <th><?php _e('Type', 'disable-payment-method-for-woocommerce'); ?></th>
-                        <th><?php _e('Value', 'disable-payment-method-for-woocommerce'); ?></th>
-                        <th><?php _e('Note', 'disable-payment-method-for-woocommerce'); ?></th>
-                        <th><?php _e('Time', 'disable-payment-method-for-woocommerce'); ?></th>
-                        <th><?php _e('Actions', 'disable-payment-method-for-woocommerce'); ?></th>
+                        <th><?php esc_html_e('Type', 'disable-payment-method-for-woocommerce'); ?></th>
+                        <th><?php esc_html_e('Value', 'disable-payment-method-for-woocommerce'); ?></th>
+                        <th><?php esc_html_e('Note', 'disable-payment-method-for-woocommerce'); ?></th>
+                        <th><?php esc_html_e('Time', 'disable-payment-method-for-woocommerce'); ?></th>
+                        <th><?php esc_html_e('Actions', 'disable-payment-method-for-woocommerce'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +108,7 @@ if (isset($_GET['message'])) {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="text-center"><?php _e('No entries found.', 'disable-payment-method-for-woocommerce'); ?></td>
+                            <td colspan="6" class="text-center"><?php esc_html_e('No entries found.', 'disable-payment-method-for-woocommerce'); ?></td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -122,7 +127,7 @@ if (isset($_GET['message'])) {
                                                             'paged'     => $i
                                                         ]));
                                                         ?>">
-                                <?php echo $i; ?>
+                                <?php echo esc_html($i); ?>
                             </a>
                         </li>
                     <?php endfor; ?>

@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class pisol_dpmw_filter_payment_methods{
 
     public $warning_messages = [];
@@ -76,18 +80,25 @@ class pisol_dpmw_filter_payment_methods{
     }
 
     function add_unique_wc_notice($message, $type = 'error') {
-        $notices = wc()->session->get('wc_notices', []);
+        if ( isset( WC()->session ) && WC()->session ) {
+            $notices = WC()->session->get('wc_notices', []);
 
-        // Prevent duplicate notices by checking if message already exists
-        if (!empty($notices[$type])) {
-            foreach ($notices[$type] as $notice) {
-                if (trim($notice['notice']) === trim($message)) {
-                    return; // Duplicate found, skip adding
+            // Prevent duplicate notices by checking if message already exists
+            if (!empty($notices[$type])) {
+                foreach ($notices[$type] as $notice) {
+                    if (trim($notice['notice']) === trim($message)) {
+                        return; // Duplicate found, skip adding
+                    }
                 }
             }
         }
-
-        wc_add_notice($message, $type);
+        
+        /**
+         * this is needed else it will throw error when we are on block based checkout page editor in backend
+         */
+        if(function_exists('wc_add_notice')  && function_exists('WC') && WC()->session && WC()->session->has_session() && is_checkout()){
+            wc_add_notice($message, $type);
+        }
     }
 
     function matchedDisablingRules($package){

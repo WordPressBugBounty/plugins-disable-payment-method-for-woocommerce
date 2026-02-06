@@ -1,3 +1,10 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+?>
+
 <div class="row">
     <div class="col-12 py-3 text-right">
         <?php if(Class_Pi_Dpmw_Add_Edit::ruleCount() < 3){ ?>

@@ -5,6 +5,10 @@
 
 namespace PISOL\DPMW;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class PaymentSafety{
 
     static $instance = null;

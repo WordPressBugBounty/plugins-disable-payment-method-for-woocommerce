@@ -6,6 +6,10 @@
  * this recheck fails and it gives "Amount Mismatch!" error. to handle this we will modify the get_total() of an wc_order when the request is made by phone pay rest api for the amount matching check.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Pi_dpmw_phone_pay_support{
     public function __construct(){
         add_filter('woocommerce_order_get_total', array($this, 'phone_pay_support'), 100, 2);

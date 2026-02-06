@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Class_Pisol_Dpmw_Disable_Rules_list{
 
     public $plugin_name;

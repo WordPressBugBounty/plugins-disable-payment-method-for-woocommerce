@@ -1,3 +1,10 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+?>
+
 <div class="row py-3 border-bottom align-items-center bg-dark2">
     <div class="col-12 col-md-4">
         <strong class="h6 text-light pi-rule-type"  data-type="disable"><?php echo esc_html($this->title); ?> <span class="text-primary">*</span></strong>

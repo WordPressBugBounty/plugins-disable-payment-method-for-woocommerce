@@ -1,8 +1,14 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 define("PI_DPMW_SELECTION_RULE_SLUG", 'dpmw');
 require_once 'pisol_selection_rule_main.php';
 require_once 'pisol_method.php';
 require_once 'rules/country.php';
+require_once 'rules/ip-country.php';
 require_once 'rules/billing-country.php';
 require_once 'rules/product.php';
 require_once 'rules/product_tag.php';
@@ -20,6 +26,7 @@ require_once 'rules/billing-city.php';
 require_once 'rules/user.php';
 require_once 'rules/user_role.php';
 require_once 'rules/user_email.php';
+require_once 'rules/user_registration_days.php';
 require_once 'rules/coupon.php';
 require_once 'rules/shipping_class.php';
 require_once 'rules/stock-status.php';

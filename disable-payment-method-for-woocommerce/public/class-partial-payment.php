@@ -1,6 +1,11 @@
 <?php
 use PISOL\DPMW\Session;
 use Automattic\WooCommerce\Utilities\OrderUtil;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Pi_dpmw_partial_payment{
 
     protected static $instance = null;

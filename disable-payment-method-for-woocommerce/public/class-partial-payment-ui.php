@@ -1,5 +1,10 @@
 <?php
 use PISOL\DPMW\Session;
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Pi_dpmw_partial_payment_ui{
 
     protected static $instance = null;

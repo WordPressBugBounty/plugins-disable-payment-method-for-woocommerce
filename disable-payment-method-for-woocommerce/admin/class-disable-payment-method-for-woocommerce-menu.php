@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Pi_dpmw_Menu{
 
     public $plugin_name;
@@ -130,7 +134,7 @@ class Pi_dpmw_Menu{
             <div class="pisol-new-promotion-box-icon-container">
                 <img class="pisol-new-promotion-box-icon" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'img/pi-web-solution-icon.svg' ); ?>">
             </div>
-                <h4 class="mt-3">Get Premium <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/?filter=5" target="_blank" class="pisol-new-promotion-box-promotion-footer-link">Trusted by <b>3000+</b> websites</a></h4>
+                <h4 class="mt-3">Get Premium <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/" target="_blank" class="pisol-new-promotion-box-promotion-footer-link">Trusted by <b>3000+</b> websites</a></h4>
                 <ul>
                     <li class="border-bottom py-2"><span>Partial payment</span> rules with conditions</li>
                     <li class="border-bottom py-2"><span>Unlimited disable</span>  payment method rules</li>
@@ -148,7 +152,7 @@ class Pi_dpmw_Menu{
                 </div>
                 
                 <div class="pisol-new-promotion-box-promotion-footer">
-                    <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/?filter=5" target="_blank">
+                    <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/" target="_blank">
                         <div class="pisol-new-promotion-box-review-stars">
                             <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'img/wordpress_logo.svg' ); ?>" alt="wordpress logo" class="pisol-new-promotion-box-review-wp-logo">
                             <span>&#9733;</span>

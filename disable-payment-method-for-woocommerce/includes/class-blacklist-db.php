@@ -1,4 +1,9 @@
 <?php 
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Pi_dpmw_Blocklist_DB {
 
     const DB_VERSION = '1.0.0';

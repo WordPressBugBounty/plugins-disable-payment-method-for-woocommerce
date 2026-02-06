@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class pisol_dpmw_CustomFields{
 
     static $instance = null;
@@ -116,7 +120,7 @@ class pisol_dpmw_CustomFields{
             <?php echo wp_kses_post($desc != "" ? $desc.'<br>': "", $this->allowed_tags); ?>
             <?php if(!empty($shortcode_html)): ?>
                 <div class="mt-2">
-                    <small><?php esc_html_e('Short codes:','pi-edd'); ?><br> <?php echo wp_kses($shortcode_html, $this->allowed_tags); ?></small>
+                    <small><?php esc_html_e('Short codes:','disable-payment-method-for-woocommerce'); ?><br> <?php echo wp_kses($shortcode_html, $this->allowed_tags); ?></small>
                 </div>
             <?php endif; ?>
             </div>

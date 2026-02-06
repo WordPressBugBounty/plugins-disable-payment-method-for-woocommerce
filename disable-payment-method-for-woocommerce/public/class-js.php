@@ -2,6 +2,10 @@
 
 namespace PISOL\DPMW;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class ConditionalJS{
 
     static $instance = false;

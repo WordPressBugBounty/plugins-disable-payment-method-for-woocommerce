@@ -14,8 +14,8 @@ if (! defined('ABSPATH')) {
         <div class="pi-step-content">
             <div class="pi-step-header bg-primary text-light">
                 <div>
-                    <strong class="pi-step-title"><?php echo __('Step 1: Basic Settings', 'conditional-extra-fees-woocommerce'); ?><small>(Required)</small></strong>
-                    <p>Basic setting of the rule</p>
+                    <strong class="pi-step-title"><?php echo esc_html__('Step 1: Basic Settings', 'disable-payment-method-for-woocommerce'); ?><small>(Required)</small></strong>
+                    <p><?php echo esc_html__('Basic setting of the rule', 'disable-payment-method-for-woocommerce'); ?></p>
                 </div>
                 <div>
                     <span class="dashicons dashicons-plus-alt2 mr-4"></span>
@@ -99,7 +99,7 @@ if (! defined('ABSPATH')) {
                             <option value="subtotal_discount" <?php selected($data['pi_fees_type'], "subtotal_discount"); ?> title="This include subtotal, subtotal tax minus coupon discount"><?php esc_html_e('Cart (subtotal  - discount) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                             <option value="subtotal_shipping" <?php selected($data['pi_fees_type'], "subtotal_shipping"); ?> title="This include subtotal, shipping total and shipping tax"><?php esc_html_e('Cart (subtotal  + shipping) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                             <option value="subtotal_shipping_discount" <?php selected($data['pi_fees_type'], "subtotal_shipping_discount"); ?> title="This include subtotal, subtotal tax, shipping total, shipping tax minus coupon discount"><?php esc_html_e('Cart (subtotal + shipping - discount) percentage', 'disable-payment-method-for-woocommerce'); ?></option>
-                            <option value="shipping_percentage" <?php selected($data['pi_fees_type'], "shipping_percentage"); ?>><?php _e('Shipping amount percentage', 'disable-payment-method-for-woocommerce'); ?></option>
+                            <option value="shipping_percentage" <?php selected($data['pi_fees_type'], "shipping_percentage"); ?>><?php esc_html_e('Shipping amount percentage', 'disable-payment-method-for-woocommerce'); ?></option>
                         </select>
                     </div>
                     <div class="col-3 col-sm">
@@ -152,12 +152,12 @@ if (! defined('ABSPATH')) {
         <div class="pi-step-content">
             <div class="pi-step-header bg-primary text-light">
                 <div class="pi-rule-type" data-type="fees">
-                    <strong class="pi-step-title"><?php echo __('Step 2: When to apply this payment method fee', 'extended-flat-rate-shipping-woocommerce'); ?><small>(Required)</small></strong>
-                    <p class="font-italic">Condition that will decide when to apply this fee</p>
+                    <strong class="pi-step-title"><?php echo esc_html__('Step 2: When to apply this payment method fee', 'disable-payment-method-for-woocommerce'); ?><small>(Required)</small></strong>
+                    <p class="font-italic"><?php echo esc_html__('Condition that will decide when to apply this fee', 'disable-payment-method-for-woocommerce'); ?></p>
                 </div>
                 <div class="pi-rule-type" data-type="disable">
-                    <strong class="pi-step-title"><?php echo __('Step 2: When to disable the payment method', 'extended-flat-rate-shipping-woocommerce'); ?><small>(Required)</small></strong>
-                    <p class="font-italic">Condition that will decide when to disable the payment method</p>
+                    <strong class="pi-step-title"><?php echo esc_html__('Step 2: When to disable the payment method', 'disable-payment-method-for-woocommerce'); ?><small>(Required)</small></strong>
+                    <p class="font-italic"><?php echo esc_html__('Condition that will decide when to disable the payment method', 'disable-payment-method-for-woocommerce'); ?></p>
                 </div>
                 <div>
                     <span class="dashicons dashicons-plus-alt2 mr-4"></span>

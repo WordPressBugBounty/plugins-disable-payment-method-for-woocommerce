@@ -4,14 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-class Pi_dpmw_selection_rule_coupon{
+class Pi_dpmw_selection_rule_ip_country{
 
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'coupon';
+        $this->condition = 'ip_country';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -33,8 +33,8 @@ class Pi_dpmw_selection_rule_coupon{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Coupon', 'disable-payment-method-for-woocommerce'),
-            'group'=>'cart_related',
+            'name'=>__('Customer IP Country','disable-payment-method-for-woocommerce'),
+            'group'=>'billing_location_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -53,7 +53,7 @@ class Pi_dpmw_selection_rule_coupon{
                 array( 'select'=> array(
                         'name'=>array(), 
                         'class' => array()
-                    )
+                        )
                     ,
                     'option' => array(
                         'value' => array(),
@@ -84,99 +84,55 @@ class Pi_dpmw_selection_rule_coupon{
             return;
             die;
         }
-        $count = sanitize_text_field(filter_input(INPUT_POST,'count'));
-        echo wp_kses( Pi_dpmw_selection_rule_main::createSelect($this->allCoupons(),$count, $this->condition,  "multiple",null,'static'),
-            array(
-                'select' => array(
-                    'class' => array(),
-                    'name' => array(),
-                    'multiple' => array(),
-                    'data-condition' => array(),
-                    'placeholder' => array()
-                ),
-                'option' => array(
-                    'value' => array(),
-                    'selected' => array()
-                )
-            )
-        );
+        $count = filter_input(INPUT_POST,'count',FILTER_VALIDATE_INT);
+        echo Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple",null,'static');
         die;
     }
 
     function savedDropdown($html, $values, $count){
-        $html = Pi_dpmw_selection_rule_main::createSelect($this->allCoupons(), $count, $this->condition,  "multiple", $values,'static');
+        $html = Pi_dpmw_selection_rule_main::createSelect($this->allCountries(), $count, $this->condition,  "multiple", $values,'static');
         return $html;
     }
 
-    function allCoupons(){
-        $args = array(
-            'posts_per_page'   => -1,
-            'orderby'          => 'title',
-            'order'            => 'asc',
-            'post_type'        => 'shop_coupon',
-            'post_status'      => 'publish',
-        );
-            
-       $coupons = get_posts( $args );
-       $all_coupons = array();
-       foreach( $coupons as $coupon ){
-           $all_coupons[$coupon->ID] = $coupon->post_title;
-       }
-       return $all_coupons;
+    function allCountries(){
+        $countries_obj = new WC_Countries();
+       $countries =  $countries_obj->get_countries();
+       return $countries;
     }
 
     function conditionCheck($result, $package, $logic, $values){
         
                     $or_result = false;
-                    $user_coupons = $this->getUserAddedCouponsID( $package );
-                    $rule_coupons = $values;
-                    $intersect = array_intersect($rule_coupons, $user_coupons);
+                    $user_country = $this->getIPCountry( $package );
+                    $rule_countries = $values;
                     if($logic == 'equal_to'){
-                        if(count($intersect) > 0){
+                        if(in_array($user_country, $rule_countries)){
                             $or_result = true;
                         }else{
                             $or_result = false;
                         }
                     }else{
-                        if(count($intersect) == 0){
-                            $or_result = true;
-                        }else{
+                        if(in_array($user_country, $rule_countries)){
                             $or_result = false;
+                        }else{
+                            $or_result = true;
                         }
                     }
                
         return  $or_result;
     }
 
-    function getUserAddedCouponsID( $package ){
-        if(is_a($package, 'WC_Cart')){
-            $codes = WC()->cart->get_applied_coupons();
-            $user_coupons = array();
-            foreach( $codes as $code){
-                $coupon_obj = new WC_Coupon($code);
-                $user_coupons[] = $coupon_obj->get_id();
-            }
-            return $user_coupons;
-        }elseif(is_a($package, 'WC_Order')){
-            if(method_exists($package, 'get_coupon_codes')){
-                $codes = $package->get_coupon_codes();
-            }else{
-                /**
-                 * Get get_used_coupons() is deprecated since 3.7
-                 */
-                $codes = $package->get_used_coupons();
-            }
+    function getIPCountry( $package ) {
+        $geo = new WC_Geolocation();
+        $user_ip_data = $geo->geolocate_ip();
 
-            $user_coupons = array();
-            foreach( $codes as $code){
-                $coupon_obj = new WC_Coupon($code);
-                $user_coupons[] = $coupon_obj->get_id();
-            }
-            return $user_coupons;
+        if ( isset( $user_ip_data['country'] ) && ! empty( $user_ip_data['country'] ) ) {
+            return apply_filters('pi_dpmw_get_ip_country', $user_ip_data['country']); // e.g. "US", "IN"
         }
-        return [];
+
+        return apply_filters('pi_dpmw_get_ip_country', ''); // if no country found
     }
+
 }
 
-
-new Pi_dpmw_selection_rule_coupon(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_ip_country(PI_DPMW_SELECTION_RULE_SLUG);

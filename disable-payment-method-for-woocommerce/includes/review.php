@@ -2,6 +2,11 @@
 /*
 v1.0.3
 */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 if(!class_exists('pisol_dpmw_review')){
 class pisol_dpmw_review{
 

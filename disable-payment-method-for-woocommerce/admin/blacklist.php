@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class pisol_dpmw_blacklist_settings {
 
     public $plugin_name;
@@ -57,8 +61,8 @@ class pisol_dpmw_blacklist_settings {
     function tab() {
         $page = sanitize_text_field(filter_input(INPUT_GET, 'page'));
 ?>
-        <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo admin_url('admin.php?page=' . $page . '&tab=' . $this->this_tab); ?>">
-            <span class="dashicons dashicons-shield"></span> <?php _e($this->tab_name); ?>
+        <a class=" px-3 py-2 text-light d-flex align-items-center  border-left border-right  <?php echo ($this->active_tab == $this->this_tab ? 'bg-primary' : 'bg-secondary'); ?>" href="<?php echo esc_url(admin_url('admin.php?page=' . $page . '&tab=' . $this->this_tab)); ?>">
+            <span class="dashicons dashicons-shield"></span> <?php echo esc_html($this->tab_name); ?>
         </a>
 <?php
     }
@@ -72,7 +76,7 @@ class pisol_dpmw_blacklist_settings {
             !isset($_POST['blacklist_value'], $_POST['blacklist_type']) ||
             !wp_verify_nonce($_POST['piws_blacklist_nonce'], 'piws_blacklist_add_entry')
         ) {
-            wp_die(__('Invalid request', 'disable-payment-method-for-woocommerce'));
+            wp_die(esc_html__('Invalid request', 'disable-payment-method-for-woocommerce'));
         }
 
         $value = sanitize_text_field($_POST['blacklist_value']);
@@ -147,7 +151,7 @@ class pisol_dpmw_blacklist_settings {
             !isset($_POST['id'], $_POST['type'], $_POST['piws_blacklist_delete_nonce']) ||
             !wp_verify_nonce($_POST['piws_blacklist_delete_nonce'], 'piws_blacklist_delete_entry_' . $_POST['id'])
         ) {
-            wp_die(__('Invalid request.', 'disable-payment-method-for-woocommerce'));
+            wp_die(esc_html__('Invalid request.', 'disable-payment-method-for-woocommerce'));
         }
 
         $id   = absint($_POST['id']);

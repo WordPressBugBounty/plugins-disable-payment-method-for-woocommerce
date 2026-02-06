@@ -27,6 +27,11 @@
  * @subpackage Disable_Payment_Method_For_Woocommerce/includes
  * @author     PI Websolution <sales@piwebsolution.com>
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class Disable_Payment_Method_For_Woocommerce {
 
 	/**

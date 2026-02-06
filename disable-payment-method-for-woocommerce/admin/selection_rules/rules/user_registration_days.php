@@ -1,15 +1,16 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
-class Pi_dpmw_selection_rule_cart_subtotal_before_fees{
 
+class Pi_dpmw_selection_rule_user_registration_days{
     public $slug;
     public $condition;
     
     function __construct($slug){
         $this->slug = $slug;
-        $this->condition = 'cart_subtotal_before_fees';
+        $this->condition = 'user_registration_days';
         /* this adds the condition in set of rules dropdown */
         add_filter("pi_".$this->slug."_condition", array($this, 'addRule'));
         
@@ -28,8 +29,8 @@ class Pi_dpmw_selection_rule_cart_subtotal_before_fees{
 
     function addRule($rules){
         $rules[$this->condition] = array(
-            'name'=>__('Cart Subtotal (Before discount)', 'disable-payment-method-for-woocommerce'),
-            'group'=>'cart_related',
+            'name'=>__('Days Since Registration', 'disable-payment-method-for-woocommerce'),
+            'group'=>'user_related',
             'condition'=>$this->condition
         );
         return $rules;
@@ -47,21 +48,7 @@ class Pi_dpmw_selection_rule_cart_subtotal_before_fees{
 			$html .= '<option value=\'not_equal_to\'>Not Equal to ( != )</option>';
         
         $html .= '</select>";';
-        echo wp_kses($html,
-                array( 'select'=> array(
-                        'name'=>array(), 
-                        'class' => array()
-                    )
-                    ,
-                    'option' => array(
-                        'value' => array(),
-                        'selected' => array()
-                    ),
-                    'optgroup' => array(
-                        'label' => array()
-                    )
-                )
-            );
+        echo $html;
     }
 
     function savedLogic($html_in, $saved_logic, $count){
@@ -81,88 +68,93 @@ class Pi_dpmw_selection_rule_cart_subtotal_before_fees{
     }
 
     function ajaxCall(){
-        if(!current_user_can( 'manage_options' )) {
+        $cap = Pi_dpmw_Menu::getCapability();
+        if(!current_user_can( $cap )) {
             return;
             die;
         }
         $count = filter_input(INPUT_POST,'count',FILTER_VALIDATE_INT);
-        echo wp_kses(
-            Pi_dpmw_selection_rule_main::createNumberField($count, $this->condition, null),
-            array(
-                'input' => array(
-                    'type' => array(),
-                    'class' => array(),
-                    'name' => array(),
-                    'value' => array(),
-                    'step' => array(),
-                    'min' => array(),
-                    'data-condition' => array()
-                )
-            )
-        );
+        echo Pi_dpmw_selection_rule_main::createNumberField($count,$this->condition, null,1);
         die;
     }
 
     function savedDropdown($html, $values, $count){
-        $html = Pi_dpmw_selection_rule_main::createNumberField($count, $this->condition,  $values);
+        $html = Pi_dpmw_selection_rule_main::createNumberField($count,$this->condition,  $values,1);
         return $html;
     }
+
 
     function conditionCheck($result, $package, $logic, $values){
         
                     $or_result = false;
-                    $cart_subtotal =  $this->getSubTotalBeforeDiscount( $package );
-                    
-                    $rule_cart_subtotal = (float)$values[0];
+
+                    if(!is_user_logged_in()){
+                        return false;
+                    }
+
+                    $cart_quantity = $this->getUserRegistrationDaysFromToday( $package );
+                    $rule_cart_quantity = (float)$values[0];
                     switch ($logic){
                         case 'equal_to':
-                            if($cart_subtotal == $rule_cart_subtotal){
+                            if($cart_quantity == $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
 
                         case 'less_equal_to':
-                            if($cart_subtotal <= $rule_cart_subtotal){
+                            if($cart_quantity <= $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
 
                         case 'less_then':
-                            if($cart_subtotal < $rule_cart_subtotal){
+                            if($cart_quantity < $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
 
                         case 'greater_equal_to':
-                            if($cart_subtotal >= $rule_cart_subtotal){
+                            if($cart_quantity >= $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
 
                         case 'greater_then':
-                            if($cart_subtotal > $rule_cart_subtotal){
+                            if($cart_quantity > $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
 
                         case 'not_equal_to':
-                            if($cart_subtotal != $rule_cart_subtotal){
+                            if($cart_quantity != $rule_cart_quantity){
                                 $or_result = true;
                             }
                         break;
+
                     }
                
         return  $or_result;
     }
 
-    function getSubTotalBeforeDiscount( $package ){
-        if(is_a($package, 'WC_Cart')){
-            return (float) WC()->cart->get_displayed_subtotal();
-        }elseif(is_a($package, 'WC_Order')){
-            return (float) $package->get_subtotal();
+    function getUserRegistrationDaysFromToday( $package ){
+
+        $user_id = get_current_user_id();
+        if( $user_id ){
+            $user_info = get_userdata( $user_id );
+            $registered_date = $user_info->user_registered;
+            
+            try {
+                $registered = new DateTime( $registered_date, new DateTimeZone('UTC') );
+                $now = new DateTime( 'now', new DateTimeZone('UTC') );
+                $interval = $now->diff( $registered );
+                return $interval->days;
+            } catch ( Exception $e ) {
+                return 0;
+            }
+        }else{
+            return 0;
         }
-        return 0;
     }
 }
 
-new Pi_dpmw_selection_rule_cart_subtotal_before_fees(PI_DPMW_SELECTION_RULE_SLUG);
+new Pi_dpmw_selection_rule_user_registration_days(PI_DPMW_SELECTION_RULE_SLUG);

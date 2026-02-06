@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
 class pisol_dpmw_options{
 
     public $plugin_name;
@@ -128,7 +132,7 @@ class pisol_dpmw_options{
             </div>
         </div>
         <div class="alert alert-info mt-3 mb-3" role="alert">
-            <strong><?php _e('Note:', 'disable-payment-method-for-woocommerce'); ?></strong> <?php _e('Create conditional Partial payment option in PRO version, just like how you crate rules to disable payment method or apply fee to payment method in free version', 'disable-payment-method-for-woocommerce'); ?>
+            <strong><?php esc_html_e('Note:', 'disable-payment-method-for-woocommerce'); ?></strong> <?php esc_html_e('Create conditional Partial payment option in PRO version, just like how you crate rules to disable payment method or apply fee to payment method in free version', 'disable-payment-method-for-woocommerce'); ?>
         </div>
         <form method="post" action="options.php"  class="pisol-setting-form">
         <?php settings_fields( $this->setting_key ); ?>
