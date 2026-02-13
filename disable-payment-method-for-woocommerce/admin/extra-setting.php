@@ -30,6 +30,8 @@ class pisol_dpmw_extra_settings{
             array('field'=>'pisol_dpmw_show_system_name', 'label'=>__('Show System name of shipping method on checkout page', 'disable-payment-method-for-woocommerce'), 'desc'=>__('After enabling go to the checkout page and you will see the system name of the shipping method below the shipping method name, Only admin can see this shipping method name your customer will not see it', 'disable-payment-method-for-woocommerce'), 'type'=>'switch', 'default'=>"0"),
 
             array('field'=>'pisol_dpmw_no_payment_method_warning', 'label'=>__('Warning message to show when no payment option available','disable-payment-method-for-woocommerce'), 'desc'=>__('This will show a warning message on the checkout page when no payment options are available for the customer.', 'disable-payment-method-for-woocommerce'), 'type'=>'textarea', 'default'=>""),
+
+            array('field'=>'pi_dpmw_allow_shop_manager', 'label'=>__('Allow Shop Manager'), 'desc'=>__('Allow Shop Manager to access plugin settings'), 'type'=>'switch', 'default'=>"0"),
         );
         
         $this->tab = sanitize_text_field(filter_input( INPUT_GET, 'tab'));

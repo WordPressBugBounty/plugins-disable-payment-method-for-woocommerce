@@ -69,7 +69,8 @@ class Class_Pisol_Dpmw_Disable_Rules_list{
             wp_die( 'Your page has expired, refresh and try again' );
         }
 
-        if(!current_user_can( 'manage_options' )) {
+        $access = Pi_dpmw_Menu::getCapability();
+        if(!current_user_can( $access )) {
             wp_safe_redirect(  admin_url( '/admin.php?page=pisol-dpmw-settings' )  );
             exit();
         }

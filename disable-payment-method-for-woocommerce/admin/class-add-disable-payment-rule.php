@@ -187,7 +187,9 @@ class Class_Pi_Dpmw_Add_Edit{
     function validate(){
         $error = new WP_Error();
 
-        if ( !current_user_can('editor') && !current_user_can('administrator') 
+        $access = Pi_dpmw_Menu::getCapability();
+
+        if ( !current_user_can($access) 
         ) {
             $error->add( 'access', 'You are not authorized to make this changes ' );
         } 
@@ -238,7 +240,8 @@ class Class_Pi_Dpmw_Add_Edit{
             return false;
         } 
 
-        if ( empty( $_POST ) || !current_user_can( 'manage_options' )) {
+        $access = Pi_dpmw_Menu::getCapability();
+        if ( empty( $_POST ) || !current_user_can( $access )) {
             return false;
         }
         
@@ -359,7 +362,8 @@ class Class_Pi_Dpmw_Add_Edit{
         $post_id = sanitize_text_field(filter_input(INPUT_POST,'id'));
         $status = sanitize_text_field(filter_input(INPUT_POST,'status'));
 
-        if(!current_user_can('administrator') || empty($post_id)) return;
+        $access = Pi_dpmw_Menu::getCapability();
+        if(!current_user_can($access) || empty($post_id)) return;
         
         if ( !empty($status) ) {
             update_post_meta( $post_id, 'pi_status', "on" );

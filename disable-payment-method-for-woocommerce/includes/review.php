@@ -149,7 +149,7 @@ class pisol_dpmw_review{
         $notice .= '<img style="max-width:90px; height:auto;" src="'.plugin_dir_url( __FILE__ ).'review-icon.svg" alt="pi web solution">';
         $notice .= '<div style="margin-left:20px;">';
         /* translators: Plugin title */
-        $notice .= '<p>'.sprintf(__("Is the plugin helpfull in controlling the payment method and collecting partial payment ?", 'disable-payment-method-for-woocommerce'), $this->title).'</p>';
+        $notice .= '<p>'.sprintf(__("Is managing payment gateways easier with this plugin?", 'disable-payment-method-for-woocommerce'), $this->title).'</p>';
         $notice .= '<ul class="pi-flex" style="margin-top:15px;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 20px;

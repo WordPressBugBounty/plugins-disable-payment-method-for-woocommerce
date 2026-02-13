@@ -21,7 +21,7 @@ class Pi_dpmw_Menu{
         $this->menu = add_menu_page(
             __( 'Payment Method','disable-payment-method-for-woocommerce'),
             __( 'Payment Method','disable-payment-method-for-woocommerce'),
-            'manage_options',
+            self::getCapability(),
             'pisol-dpmw-settings',
             array($this, 'menu_option_page'),
             plugin_dir_url( __FILE__ ).'img/pi.svg',
@@ -34,7 +34,12 @@ class Pi_dpmw_Menu{
     }
 
     static function  getCapability(){
-        $capability = 'manage_options';
+        $access_control = get_option('pi_dpmw_allow_shop_manager', '0');
+        if(empty($access_control)){
+            $capability = 'manage_options';
+        }else{
+            $capability = 'manage_woocommerce';
+        }
 
         return (string)apply_filters('pisol_dpmw_settings_cap', $capability);
     }
