@@ -210,7 +210,7 @@ class pisol_dpmw_review{
         $get_install_date = get_option($this->activation_date);
         if(empty($get_install_date) || !$this->validateDate($get_install_date)){
             $now = current_time( "Y/m/d" );
-            add_option( $this->activation_date, $now );
+            update_option( $this->activation_date, $now );
             return $now;
         }
         return $get_install_date;

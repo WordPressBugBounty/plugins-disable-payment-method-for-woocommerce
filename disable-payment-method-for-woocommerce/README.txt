@@ -1,9 +1,9 @@
-=== Disable payment method / Partial payment for WooCommerce ===
+=== PiWeb Disable payment method / Partial payment for WooCommerce ===
 Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 6.9
-Stable tag: 1.1.9.40
+Stable tag: 1.1.9.41
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
