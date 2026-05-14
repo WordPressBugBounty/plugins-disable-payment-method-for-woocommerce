@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              piwebsolution.com
- * @since             1.1.9.44
+ * @since             1.1.9.46
  * @package           Disable_Payment_Method_For_Woocommerce
  *
  * @wordpress-plugin
  * Plugin Name:       PiWeb Disable payment method / Partial payment for WooCommerce
  * Plugin URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * Description:       Disable any payment method based on various conditions 
- * Version:           1.1.9.44
+ * Version:           1.1.9.46
  * Author:            PI Websolution
  * Author URI:        https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/
  * License:           GPL-2.0+
@@ -61,15 +61,15 @@ if(is_plugin_active( 'disable-payment-method-for-woocommerce-pro/disable-payment
 
 /**
  * Currently plugin version.
- * Start at version 1.1.9.44 and use SemVer - https://semver.org
+ * Start at version 1.1.9.46 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.9.44' );
+define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION', '1.1.9.46' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_URL', 'https://www.piwebsolution.com' );
 define( 'DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_DOCUMENTATION_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/admin/advance-fees/templates/' );
 
 define('DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE', '$1.6 / month');
-define('DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL', 'https://www.piwebsolution.com/cart/?add-to-cart=18737&variation_id=18738&utm_campaign=disable-payment&utm_source=website&utm_medium=direct-buy');
+define('DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL', 'https://www.piwebsolution.com/cart/?add-to-cart=18737&variation_id=18738&utm_campaign=disable-payment-free-plugin&utm_source=website&utm_medium=direct-buy');
 
 /**
  * Declare compatible with HPOS new order table 
@@ -136,7 +136,7 @@ add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'pisol_dpmw_li
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.1.9.44
+ * @since    1.1.9.46
  */
 function run_disable_payment_method_for_woocommerce() {
 

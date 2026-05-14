@@ -15,14 +15,32 @@ class pisol_dpmw_filter_payment_methods{
     }
 
     function log_available_gateways( $gateways ) {
-        $logged_gateways = [];
-
-        foreach ( $gateways as $gateway_id => $gateway ) {
-            $logged_gateways[ $gateway_id ] = $gateway->get_title();
+        static $called = false;
+        if ( $called ) {
+            return $gateways;
         }
 
-        // Save it for later use (e.g., print_r in debug bar or log)
-        update_option( 'pisol_logged_gateways', $logged_gateways );
+        $called = true;
+
+        $stored_gateways = get_option( 'pisol_logged_gateways', [] );
+
+        if( !is_array($stored_gateways) ) {
+            $stored_gateways = [];
+        }
+
+        $updated = false;
+
+        foreach ( $gateways as $gateway_id => $gateway ) {
+            if(!isset($stored_gateways[ $gateway_id ])) {
+                // Log the gateway ID and title
+                $stored_gateways[ $gateway_id ] = $gateway->get_title();
+                $updated = true;
+            }
+        }
+
+        if( $updated ) {
+            update_option( 'pisol_logged_gateways', $stored_gateways );
+        }
 
         return $gateways;
     }
