@@ -49,18 +49,7 @@ class Pi_dpmw_selection_rule_day_of_week{
            
         
         $html .= '</select>";';
-        echo wp_kses($html,
-                array( 'select'=> array(
-                        'name'=>array(), 
-                        'class' => array()
-                    )
-                    ,
-                    'option' => array(
-                        'value' => array(),
-                        'selected' => array()
-                    )
-                )
-            );
+        echo $html;
     }
 
     function savedLogic($html_in, $saved_logic, $count){

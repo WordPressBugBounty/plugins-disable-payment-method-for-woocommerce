@@ -45,21 +45,7 @@ class Pi_dpmw_selection_rule_stock_status{
 			$html .= '<option value=\'back-order-present\'>There is at least one product on back order</option>';
         
         $html .= '</select>";';
-        echo wp_kses($html,
-                array( 'select'=> array(
-                        'name'=>array(), 
-                        'class' => array()
-                    )
-                    ,
-                    'option' => array(
-                        'value' => array(),
-                        'selected' => array()
-                    ),
-                    'optgroup' => array(
-                        'label' => array()
-                    )
-                )
-            );
+        echo $html;
     }
 
     function savedLogic($html_in, $saved_logic, $count){

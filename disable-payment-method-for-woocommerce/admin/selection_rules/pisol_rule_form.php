@@ -39,23 +39,7 @@ echo wp_kses($this->conditionDropdownScript(),
         )
     )
 ); ?>
-<?php echo wp_kses($this->logicDropdownScript(), 
-    array(
-        'script' => array(),
-        'select' => array(
-            'class'=>array(),
-            'name'=>array(),
-            'id' => array(),
-            'multiple'=>array(),
-            'data-condition' => array(),
-            'placeholder'=>array()
-        ),
-        'option' => array(
-            'value'=>array(),
-            'selected'=>array(),
-        ),
-    )
-); ?>
+<?php echo $this->logicDropdownScript(); ?>
 <?php 
 echo wp_kses($this->savedConditions($this->saved_conditions), 
     array('script' => array())

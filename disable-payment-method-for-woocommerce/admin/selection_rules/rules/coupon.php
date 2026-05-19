@@ -49,21 +49,7 @@ class Pi_dpmw_selection_rule_coupon{
            
         
         $html .= '</select>";';
-        echo wp_kses($html,
-                array( 'select'=> array(
-                        'name'=>array(), 
-                        'class' => array()
-                    )
-                    ,
-                    'option' => array(
-                        'value' => array(),
-                        'selected' => array()
-                    ),
-                    'optgroup' => array(
-                        'label' => array()
-                    )
-                )
-            );
+        echo $html;
     }
 
     function savedLogic($html_in, $saved_logic, $count){

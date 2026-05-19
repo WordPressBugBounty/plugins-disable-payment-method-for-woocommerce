@@ -45,18 +45,7 @@ class Pi_dpmw_selection_rule_billing_postcode{
 			$html .= '<option value=\'not_equal_to\'>Not Equal to ( != )</option>';
         
         $html .= '</select>";';
-        echo wp_kses($html,
-                array( 'select'=> array(
-                        'name'=>array(), 
-                        'class' => array()
-                    )
-                    ,
-                    'option' => array(
-                        'value' => array(),
-                        'selected' => array()
-                    )
-                )
-            );
+        echo $html;
     }
 
     function savedLogic($html_in, $saved_logic, $count){
