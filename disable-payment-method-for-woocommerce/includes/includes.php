@@ -38,6 +38,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-js.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-safety.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-gateway-specific.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-blacklist.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-paypal-v4-fix.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/includes.php';
 
