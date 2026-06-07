@@ -34,26 +34,26 @@ class ConditionalJS{
     }
 
     static function email_change(){
-
         if(!self::is_condition_present('user_email')) return;
 
         if(! (function_exists('is_checkout') && is_checkout()) ) return;
 
         $js = '
             jQuery(function($){
-                let isUpdatingCheckout = false;          
 
-                $(document).on("blur", "#billing_email", function () {
-                    if (!isUpdatingCheckout) {
-                        isUpdatingCheckout = true;
-                        $("body").trigger("update_checkout");
-                    }
-                });
+            let lastEmail = $("#billing_email").val();
 
-                $(document.body).on("updated_checkout", function(){
-                    isUpdatingCheckout = false;
-                });
+            $(document).on("blur", "#billing_email", function() {
+
+                let currentEmail = $(this).val();
+
+                if (currentEmail !== lastEmail) {
+                    lastEmail = currentEmail;
+                    $("body").trigger("update_checkout");
+                }
             });
+
+        });
         ';
 
         wp_add_inline_script('jquery', $js, 'after');
