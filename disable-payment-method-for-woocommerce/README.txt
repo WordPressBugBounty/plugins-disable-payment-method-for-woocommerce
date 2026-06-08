@@ -3,7 +3,7 @@ Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 7.0
-Stable tag: 1.1.10.0
+Stable tag: 1.1.10.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -289,6 +289,9 @@ Yes, you can charge WooCommerce payment processing fees based on the order total
 
 
 == Changelog ==
+
+= 1.1.10.1 =
+* [added] new advance shipping plugin rule
 
 = 1.1.10.0 =
 * Tested for WC 10.8.0

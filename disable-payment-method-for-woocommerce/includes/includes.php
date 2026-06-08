@@ -10,6 +10,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-common-car
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/pisol.class.form.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-store-data-order.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-blacklist-db.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/dependency.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-disable-payment-method-for-woocommerce-menu.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-payment-method-disable-rules.php';

@@ -36,3 +36,4 @@ require_once 'rules/between-time.php';
 require_once 'rules/between-date.php';
 require_once 'rules/dates.php';
 require_once 'rules/pro_rules.php';
+require_once 'rules/advance-shipping.php';

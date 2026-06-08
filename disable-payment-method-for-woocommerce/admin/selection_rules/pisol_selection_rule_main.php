@@ -57,6 +57,7 @@ class Pi_dpmw_selection_rule_main{
             'virtual_category'=> 'Virtual Category',
             'delivery_method' => 'Delivery method',
             'date_time' => 'Date and time',
+            'advance_shipping' => 'Advance Shipping plugin',
         );
         $group_name = isset($group_names[$key]) ? $group_names[$key] : $key;
 

@@ -117,6 +117,7 @@ class Pi_dpmw_Menu{
                                     <path d="M17 6l-6 6 6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
+                            <?php do_action('pisol_dpmw_dependency_install'); ?>
                             <?php do_action($this->plugin_name.'_tab_content'); ?>
                         </div>
                         <?php do_action($this->plugin_name.'_promotion'); ?>
