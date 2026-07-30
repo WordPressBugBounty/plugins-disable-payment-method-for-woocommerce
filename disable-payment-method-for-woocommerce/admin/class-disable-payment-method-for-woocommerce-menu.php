@@ -151,7 +151,7 @@ class Pi_dpmw_Menu{
                     <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>User role</span></li>   
                     <li class="border-bottom py-2">All rules support <span>Multi-currency</span></li>                           
                 </ul>
-                <h4 class="pi-bottom-banner">💰 Only <?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> <small>Billed yearly</small></h4>
+                <h4 class="pi-bottom-banner"><?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> <small>only</small></h4>
                 <div class="text-center my-2">
                     <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="btn btn-primary btn-md my-4">🔓 Unlock Pro Now – Limited Time Price!</a>
                 </div>
