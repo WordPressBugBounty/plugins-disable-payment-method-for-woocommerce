@@ -49,6 +49,7 @@ class Pi_dpmw_Menu{
         add_thickbox();
 
         wp_enqueue_style( $this->plugin_name.'-bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name.'-promotion', plugin_dir_url( __FILE__ ) . 'css/promotion.css', array(), $this->version, 'all' );
         wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/disable-payment-method-for-woocommerce-admin.css', array(), $this->version, 'all' );
 
         wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/disable-payment-method-for-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
@@ -133,45 +134,33 @@ class Pi_dpmw_Menu{
 
     function promotion(){
         ?>
-        <div class="col-12 col-sm-4" id="promotion-sidebar">
-        <div class="pisol-new-promotion-box-promotion-container">
-            
-            <div class="pisol-new-promotion-box-promotion">
-            <div class="pisol-new-promotion-box-icon-container">
-                <img class="pisol-new-promotion-box-icon" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'img/pi-web-solution-icon.svg' ); ?>">
-            </div>
-                <h4 class="mt-3">Get Premium <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/" target="_blank" class="pisol-new-promotion-box-promotion-footer-link">Trusted by <b>3000+</b> websites</a></h4>
-                <ul>
-                    <li class="border-bottom py-2"><span>Partial payment</span> rules with conditions</li>
-                    <li class="border-bottom py-2"><span>Unlimited disable</span>  payment method rules</li>
-                    <li class="border-bottom py-2"><span>Unlimited payment</span>  method fees rules</li> 
-                    <li class="border-bottom py-2"><span>Unlimited Partial payment OR Advance Fee for Cash on Delivery </span> rules</li>
-                    <li class="border-bottom py-2">Different <span>partial payment</span> amount <span>based on country / state / zone / postcode </span></li>
-                    <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>Order subtotal</span></li>
-                    <li class="border-bottom py-2">Offer <span>partial payment</span> based on the <span>User role</span></li>   
-                    <li class="border-bottom py-2">All rules support <span>Multi-currency</span></li>                           
-                </ul>
-                <h4 class="pi-bottom-banner"><?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> <small>only</small></h4>
-                <div class="text-center my-2">
-                    <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="btn btn-primary btn-md my-4">🔓 Unlock Pro Now – Limited Time Price!</a>
+        <div class="col-12 col-xl-4 col-lg-4 col-md-4" id="promotion-sidebar">
+            <div class="pisol-pro-banner">
+            <div class="pisol-pro-header">
+                <div class="pisol-pro-logo">
+                    <img class="pisol-new-promotion-box-icon" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'img/pi-web-solution-icon.svg' ); ?>">
                 </div>
-                
-                <div class="pisol-new-promotion-box-promotion-footer">
-                    <a href="https://wordpress.org/support/plugin/disable-payment-method-for-woocommerce/reviews/" target="_blank">
-                        <div class="pisol-new-promotion-box-review-stars">
-                            <img src="<?php echo esc_url( plugin_dir_url( __FILE__ ) . 'img/wordpress_logo.svg' ); ?>" alt="wordpress logo" class="pisol-new-promotion-box-review-wp-logo">
-                            <span>&#9733;</span>
-                            <span>&#9733;</span>
-                            <span>&#9733;</span>
-                            <span>&#9733;</span>
-                            <span>&#9733;</span>
-                            <p class="pisol-new-promotion-box-read-reviews">( 5/5 Read reviews )</p>
-                        </div>
-                    </a>
-                </div>
-                
+                <h2>Get Premium</h2>
+                <p class="pisol-pro-trust">Trusted by 4000+ websites</p>
             </div>
-        </div>
+            <ul class="pisol-pro-features">
+                <li>Partial payment rules with conditions</li>
+                <li>Unlimited disable payment method rules</li>
+                <li>Unlimited payment method fees rules</li>
+                <li>Unlimited Partial payment OR Advance Fee for Cash on Delivery rules</li>
+                <li>Different partial payment amount based on country / state / zone / postcode</li>
+                <li>Offer partial payment based on the Order subtotal</li>
+                <li>Offer partial payment based on the User role</li>
+                <li>All rules support Multi-currency</li>
+            </ul>
+            <div class="pisol-pro-price"><?php echo esc_html(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_PRICE); ?> only</div>
+            <a href="<?php echo esc_url(DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_BUY_URL); ?>" target="_blank" class="pisol-pro-btn">Unlock Pro Now – Limited Time Price!</a>
+            <div class="pisol-pro-rating">
+                <span class="pisol-pro-wp">W</span>
+                <span class="pisol-pro-stars">★★★★★</span>
+                <span>(5/5 Read reviews)</span>
+            </div>
+            </div>
         </div>
         <?php
     }
