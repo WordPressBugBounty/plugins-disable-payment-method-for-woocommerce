@@ -24,6 +24,11 @@ $total_items = Pi_dpmw_Blocklist_DB::count_rows($current); // You’ll add this 
 $total_pages = ceil($total_items / $items_per_page);
 ?>
 
+<div id="row_title" class="pisol-form-element-row row py-4 border-bottom align-items-center  bg-dark2 text-light field-type-setting_category">
+    <div class="pisol-form-label-col col-md-12">
+        <h2 class="pisol-field-title mt-0 mb-0 text-light font-weight-light h4">Blacklister Email/IP cant place order</h2>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-7 my-3">

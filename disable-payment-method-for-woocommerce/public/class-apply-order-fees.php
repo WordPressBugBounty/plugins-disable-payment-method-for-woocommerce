@@ -51,6 +51,10 @@ class Pi_dpmw_Apply_order_fees{
 
             $order = wc_get_order( $order_id );
 
+            if ( ! $order instanceof WC_Order ) {
+                return; // invalid/deleted order — nothing to do
+            }
+
             $payment_method = $order->get_payment_method();
             
             wp_enqueue_script( 'dpmw-woocommerce-order-pay', plugin_dir_url( __FILE__ ) . 'js/order-pay-fees.js', array( 'jquery' ), '1.0.0', false );

@@ -126,12 +126,13 @@ class pisol_dpmw_options{
 
     function tab_content(){
        ?>
-       <div id="row_title" class="row py-4 border-bottom align-items-center bg-dark2 text-light">
-            <div class="col-12">
-            <h2 class="mt-0 mb-0 text-light font-weight-light h4">Partial payment setting</h2>
+       <div id="row_title" class="pisol-form-element-row row py-4 border-bottom align-items-center  bg-dark2 text-light field-type-setting_category">
+            <div class="pisol-form-label-col col-md-12">
+                <h2 class="pisol-field-title mt-0 mb-0 text-light font-weight-light h4">Partial payment setting</h2>
             </div>
         </div>
-        <div class="alert alert-info mt-3 mb-3" role="alert">
+
+        <div class="pisol-alert pisol-alert-info mt-3 mb-3" role="alert">
             <strong><?php esc_html_e('Note:', 'disable-payment-method-for-woocommerce'); ?></strong> <?php esc_html_e('Create conditional Partial payment option in PRO version, just like how you crate rules to disable payment method or apply fee to payment method in free version', 'disable-payment-method-for-woocommerce'); ?>
         </div>
         <form method="post" action="options.php"  class="pisol-setting-form">

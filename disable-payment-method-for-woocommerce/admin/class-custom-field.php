@@ -64,8 +64,8 @@ class pisol_dpmw_CustomFields{
 
     function custom_select($setting, $saved_value){
 
-        $label = '<label class="h6 mb-0" for="'.esc_attr($setting['field']).'">'.wp_kses_post($setting['label']).'</label>';
-        $desc = (isset($setting['desc'])) ? '<br><small>'.wp_kses($setting['desc'], $this->allowed_tags).'</small>' : "";
+        $label = '<label class="pisol-field-label h6 mb-0" for="'.esc_attr($setting['field']).'">'.wp_kses_post($setting['label']).'</label>';
+        $desc = (isset($setting['desc'])) ? '<small>'.wp_kses($setting['desc'], $this->allowed_tags).'</small>' : "";
         
         $field = '<select class="form-control " name="'.esc_attr($setting['field']).'" id="'.esc_attr($setting['field']).'"'
             .(isset($setting['multiple']) ? ' multiple="'.esc_attr($setting['multiple']).'"': '')
@@ -89,14 +89,14 @@ class pisol_dpmw_CustomFields{
      */
     function dpmw_partial_payment_fee_pro($setting, $saved_value){
         ?>
-        <div id="row_pi_dpmw_partial_payment_fee_pro" class="pisol-form-element-row row py-4 border-bottom align-items-center ">
-            <div class="col-12 col-md-5">
-                <label class="h6 mb-0" for="pi_dpmw_partial_payment_fee_pro_text">Partial payment fee</label>
-                <br>
+        <div id="row_pi_dpmw_partial_payment_fee_pro" class="pisol-form-element-row row py-4 border-bottom align-items-center field-type-select">
+            <div class="pisol-form-label-col col-md-6">
+                <label class="pisol-field-label h6 mb-0" for="pi_dpmw_partial_payment_fee_pro_text">Partial payment fee</label>
+                <div class="pisol-field-description">
                 <small>Charge extra fee when customer select partial payment option</small>
-                <br>
+                </div>
             </div>
-            <div class="col-12 col-md-7">
+            <div class="pisol-form-setting-col col-12 col-md-6">
                 <div class="input-group">
                     <input type="text" class="form-control" name="pi_dpmw_partial_payment_fee_pro[text]" id="pi_dpmw_partial_payment_fee_pro_text" value="" placeholder="🔒 Partial payment fee (PRO)" disabled="">
                     <select class="form-control" name="pi_dpmw_partial_payment_fee_pro[dropdown]" id="pi_dpmw_partial_payment_fee_pro_dropdown">
@@ -114,17 +114,17 @@ class pisol_dpmw_CustomFields{
     function bootstrap($setting, $label, $field, $desc = "",$shortcode_html = '',  $title_col = 5){
         $setting_col = 12 - $title_col;
         ?>
-        <div id="row_<?php echo esc_attr($setting['field']); ?>"  class="row py-4 border-bottom align-items-center <?php echo !empty($setting['class']) ? esc_attr($setting['class']) : ''; ?>">
-            <div class="col-12 col-md-<?php echo esc_attr($title_col); ?>">
+        <div id="row_<?php echo esc_attr($setting['field']); ?>"  class="pisol-form-element-row row py-4 border-bottom align-items-center field-type-select">
+            <div class="pisol-form-label-col col-md-6">
             <?php echo wp_kses_post($label, $this->allowed_tags); ?>
-            <?php echo wp_kses_post($desc != "" ? $desc.'<br>': "", $this->allowed_tags); ?>
+            <?php echo wp_kses_post($desc != "" ? '<div class="pisol-field-description">'.$desc.'</div>': "", $this->allowed_tags); ?>
             <?php if(!empty($shortcode_html)): ?>
                 <div class="mt-2">
                     <small><?php esc_html_e('Short codes:','disable-payment-method-for-woocommerce'); ?><br> <?php echo wp_kses($shortcode_html, $this->allowed_tags); ?></small>
                 </div>
             <?php endif; ?>
             </div>
-            <div class="col-12 col-md-<?php echo esc_attr($setting_col); ?>">
+            <div class="pisol-form-setting-col col-12 col-md-6">
             <?php echo wp_kses($field, $this->allowed_tags); ?>
             </div>
         </div>

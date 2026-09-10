@@ -3,7 +3,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 ?>
-<div class="row border-bottom bg-dark2 align-items-center">
+<div class="row border-bottom bg-dark2 align-items-center pi-primary-border-left">
     <div class="col-12 py-2">
         <strong class="h5 text-light"><?php echo esc_html(isset($_GET['action']) && $_GET['action'] === 'edit' ?  __('Edit rule', 'disable-payment-method-for-woocommerce') : __('Add new payment method rule', 'disable-payment-method-for-woocommerce')); ?></strong>
     </div>
@@ -189,5 +189,5 @@ if (! defined('ABSPATH')) {
     <input type="hidden" name="post_type" value="pi_dpmw_rules">
     <input type="hidden" name="post_id" value="<?php echo esc_attr($data['post_id']); ?>">
     <input type="hidden" name="action" value="pisol_dpmw_save_disable_rule">
-    <input type="submit" value="Save Rule" name="submit" class="my-3 btn btn-primary btn-md" id="pi-dpmw-new-rule">
+    <input type="submit" value="Save Rule" name="submit" class="my-3 btn btn-primary btn-md" id="pi-dpmw-new-rule" style="margin-left:0;">
 </form>

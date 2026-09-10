@@ -48,9 +48,8 @@ class Pi_dpmw_Menu{
 
         add_thickbox();
 
+        wp_enqueue_style( $this->plugin_name.'-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
         wp_enqueue_style( $this->plugin_name.'-bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.css', array(), $this->version, 'all' );
-        wp_enqueue_style( $this->plugin_name.'-promotion', plugin_dir_url( __FILE__ ) . 'css/promotion.css', array(), $this->version, 'all' );
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/disable-payment-method-for-woocommerce-admin.css', array(), $this->version, 'all' );
 
         wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/disable-payment-method-for-woocommerce-admin.js', array( 'jquery' ), $this->version, false );
 
@@ -82,59 +81,33 @@ class Pi_dpmw_Menu{
             settings_errors();
         }
         ?>
-        <div id="bootstrap-wrapper" class="pisol-setting-wrapper  pisol-container-wrapper">
-        <div class="pisol-container-fluid mt-2">
-            <div class="pisol-row">
-                    <div class="col-12">
-                        <div class='bg-dark'>
-                        <div class="pisol-row">
-                            <div class="col-12 col-sm-2 py-3 d-flex align-items-center justify-content-center">
-                                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="img-fluid ml-2" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/pi-web-solution.svg"></a>
-                            </div>
-                            <div class="col-12 col-sm-10 d-flex text-center small">
-                                <nav id="pisol-navbar" class="navbar navbar-expand-lg navbar-light mr-0 ml-auto">
-                                    <div>
-                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                            <?php do_action($this->plugin_name.'_tab'); ?>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+        <div class="pisol-container bootstrap-wrapper">
+            <div class="pisol-header">
+                <div id="pisol-header-bar">
+                    <a href="https://www.piwebsolution.com/" target="_blank"><img id="pi-logo" class="pisol-img-fluid" src="<?php echo esc_url( plugin_dir_url( __FILE__ ) ); ?>img/pi-web-solution.svg"></a>
+                </div>
             </div>
-            <div class="pisol-row">
-                <div class="col-12">
+
+            <div class="pisol-left-sidebar">
+                <div id="pisol-side-menu" class="mb-4 rounded">
+                    <?php do_action($this->plugin_name.'_tab'); ?>
+                </div>
+                <?php do_action($this->plugin_name.'_promotion'); ?>
+            </div>
+
+            <div class="pisol-content">
+                <label for="pi-left-sidebar-controller" class="pi-left-sidebar-closing-circle"><input id="pi-left-sidebar-controller" type="checkbox"/></label>
                 <div id="pisol-dpmw-notices"></div>
-                <div class="bg-light border pl-3 pr-3 pt-0">
-                    <div class="pisol-row">
-                        <div class="col border-right">
-                            <div class="pi-dpmw-arrow-circle closed" title="Open / Close sidebar">
-                                <svg class="pi-dpmw-arrow-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <!-- First arrow -->
-                                    <path d="M13 6l-6 6 6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <!-- Second arrow (slightly right-shifted) -->
-                                    <path d="M17 6l-6 6 6 6" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <?php do_action('pisol_dpmw_dependency_install'); ?>
-                            <?php do_action($this->plugin_name.'_tab_content'); ?>
-                        </div>
-                        <?php do_action($this->plugin_name.'_promotion'); ?>
-                    </div>
-                </div>
-                </div>
+                <?php do_action($this->plugin_name.'_tab_content'); ?>
             </div>
-        </div>
-        </div>
+        </div>   
         <?php
         $this->support();
     }
 
     function promotion(){
         ?>
-        <div class="col-12 col-xl-4 col-lg-4 col-md-4" id="promotion-sidebar">
+        <div  id="promotion-sidebar">
             <div class="pisol-pro-banner">
             <div class="pisol-pro-header">
                 <div class="pisol-pro-logo">
