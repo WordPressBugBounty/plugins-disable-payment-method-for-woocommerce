@@ -9,11 +9,13 @@
         }
 
 
-        $('form#order_review').on('click', 'input[name="payment_method"]', () => {
+        $('form#order_review')
+        .off('change.pisolDpmw')                                   // 1. remove my old handler, if any
+        .on('change.pisolDpmw', 'input[name="payment_method"]', updateFees);
 
+        if ($('input[name="payment_method"]:checked').length) {
             updateFees();
-
-        });
+        }
 
         // On page load, if the payment method is not set then set it to the default payment method.
         function updateFees() {
@@ -40,6 +42,7 @@
                 payment_method: paymentMethod,
                 payment_method_title: paymentMethodTitle,
                 order_id: order_id,
+                key: (pisol_dpmw_checkout_order_id.order_key) ? pisol_dpmw_checkout_order_id.order_key : '',
                 security: pisol_dpmw_checkout_order_id.update_payment_method_nonce,
             };
 

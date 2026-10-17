@@ -64,8 +64,9 @@ class Pi_dpmw_Apply_order_fees{
                 'pisol_dpmw_checkout_order_id',
                 array(
                     'order_id'       => get_query_var( 'order-pay' ),
+                    'order_key'      => $order->get_order_key(),
                     'payment_method' => $payment_method,
-                    'update_payment_method_nonce' => wp_create_nonce( 'update-payment-method' ),
+                    'update_payment_method_nonce' => wp_create_nonce( 'update-payment-method-' . $order_id ),
                 )
             );
         }
@@ -76,21 +77,41 @@ class Pi_dpmw_Apply_order_fees{
      */
     function update_order_fees_ajax(){
         global $wp;
-        check_ajax_referer( 'update-payment-method', 'security' );
 
-        if(self::disableOrderPay()) return;
-
-        $payment_method       = isset( $_POST['payment_method'] ) ? sanitize_text_field( wp_unslash( $_POST['payment_method'] ) ) : ''; 
-
-        $order_id             = isset( $_POST['order_id'] ) ? sanitize_key( $_POST['order_id'] ): 0; 
-
-        $payment_method_title = isset( $_POST['payment_method_title'] ) ? sanitize_text_field( wp_unslash( $_POST['payment_method_title'] ) ) : '';
+        $order_id             = isset( $_POST['order_id'] ) ? absint( wp_unslash( $_POST['order_id'] ) ): 0; 
 
         if ( $order_id <= 0 ) {
             wp_die();
         }
 
-        $order    = wc_get_order( $order_id );
+        check_ajax_referer( 'update-payment-method-' . $order_id, 'security' );
+
+        if(self::disableOrderPay()) return;
+
+        $payment_method       = isset( $_POST['payment_method'] ) ? sanitize_text_field( wp_unslash( $_POST['payment_method'] ) ) : ''; 
+
+        $payment_method_title = isset( $_POST['payment_method_title'] ) ? sanitize_text_field( wp_unslash( $_POST['payment_method_title'] ) ) : '';
+
+        $order = wc_get_order( $order_id );
+
+        if ( ! $order instanceof WC_Order ) {
+            wp_die();
+        }
+
+        /**
+         * Ownership check: the nonce alone does not prove the requester owns this order,
+         * so bind the mutation to the order key (as WooCommerce does on the order-pay page),
+         * the logged-in customer, or an admin/shop manager.
+         */
+        $order_key = isset( $_POST['key'] ) ? wc_clean( wp_unslash( $_POST['key'] ) ) : '';
+
+        $is_owner = is_user_logged_in() && (int) $order->get_customer_id() === get_current_user_id();
+        $has_key  = ! empty( $order_key ) && hash_equals( $order->get_order_key(), $order_key );
+
+        if ( ! $is_owner && ! $has_key && ! current_user_can( 'manage_woocommerce' ) ) {
+            wp_die( -1, 403 );
+        }
+
         $add_fees = [];
 
         $this->remove_fees( $order );

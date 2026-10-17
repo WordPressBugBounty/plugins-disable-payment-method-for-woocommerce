@@ -3,25 +3,25 @@ Contributors: rajeshsingh520
 Tags: payment processing fees, cash on delivery, cod, smart cod, WooCommerce partial payment, cod fees 
 Requires at least: 4.0.1
 Tested up to: 7.1
-Stable tag: 1.1.10.7
+Stable tag: 1.1.10.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Disable payment method for WooCommerce, Charge WooCommerce Payment processing FEES, Take Partial payment for Order, Advance COD or Partial payment for Order for WooCommerce
+Disable payment method for WooCommerce, Charge WooCommerce Payment processing fees, Take Partial payment for Order, Advance COD or Partial payment for Order for WooCommerce
 
 == Description ==
 
 = Disable any payment gateway = 
 
-This plugin allows you to disable any payment gateway of WooCommerce based on multiple conditions
+This plugin allows you to disable any payment gateway of WooCommerce based on multiple conditions.
 
 &#9989; WooCommerce Disable payment method for specific product
 
 &#9989; Disable payment method for shipping method in WooCommerce
 
-&#9989; WooCommerce Disable payment method for specific category WooCommerce
+&#9989; WooCommerce Disable payment method for specific category
 
-&#9989; Payment gateways per products for WooCommerce
+&#9989; Payment gateways per product for WooCommerce
 
 &#9989; Set WooCommerce payment gateway by country
 
@@ -33,7 +33,7 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 
 &#9989; Disable payment method based on the postcode
 
-&#9989; Disable payment method based on day of the Week
+&#9989; Disable payment method based on day of the week
 
 &#9989; Disable payment gateway for a specific city
 
@@ -51,11 +51,11 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 
 &#9989; Disable WooCommerce Payment methods based on cart item quantity
 
-&#9989; Disable payment method if there is an back order product present in the user cart
+&#9989; Disable payment method if there is a back order product present in the user cart
 
 &#9989; Restrict payment method by customer email
 
-&#9989; Disable Woocommerce payment processing fee for specific country
+&#9989; Disable WooCommerce payment processing fee for specific country
 
 &#9989; Restrict payment method by customer role
 
@@ -63,7 +63,7 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 
 &#9989; Restrict payment method by coupon code applied by customer
 
-&#9989; Disable COD when user select Different shipping address option during checkout
+&#9989; Disable COD when user selects different shipping address option during checkout
 
 &#9989; In a multi currency site you can disable payment method based on the currency selected by the customer
 
@@ -71,13 +71,13 @@ This plugin allows you to disable any payment gateway of WooCommerce based on mu
 
 &#9989; Disable Stripe payment method for the customer whose billing state is not New York
 
-&#9989; You can give reason to customer why certain payment method is not available for them, so they can understand why that payment method is not available for them
+&#9989; You can give a reason to the customer why a certain payment method is not available for them, so they can understand why that payment method is not available for them
 
-&#9989; Disable payment method based on days passed since user registration, E.g: disable COD for user who have registered less than 15 days ago
+&#9989; Disable payment method based on days passed since user registration, E.g: disable COD for user who has registered less than 15 days ago
 
-= Charge extra fees on use of any payment Gateway =
+= Charge extra fees on use of any payment gateway =
 
-you can charge conditional extra fees on the use of a specific payment gateway. Here are a few of the points you can achieve through this plugin
+You can charge conditional extra fees on the use of a specific payment gateway. Here are a few of the points you can achieve through this plugin
 
 &#9989; Charge extra fees for Cash on delivery order (COD)
 
@@ -85,15 +85,15 @@ you can charge conditional extra fees on the use of a specific payment gateway. 
 
 &#9989; Charge extra fees for Cash on delivery for specific zones
 
-&#9989; Charge extra fees for cash on delivery for specific post code
+&#9989; Charge extra fees for cash on delivery for specific postcode
 
-&#9989; Apply extra fees on use of some specific payment gateway from specific country
+&#9989; Apply extra fees on use of some specific payment gateway from a specific country
 
-&#9989; Apply extra fees on COD order for some specific user roles or category
+&#9989; Apply extra fees on COD order for some specific user roles or categories
 
-&#9989; Apply extra fees on COD order for some specific user only
+&#9989; Apply extra fees on COD order for some specific users only
 
-&#9989; Charge a percentage based WooCommerce credit card processing fee
+&#9989; Charge a percentage-based WooCommerce credit card processing fee
 
 &#9989; Payment Gateway Based Fees 
 
@@ -105,7 +105,7 @@ you can charge conditional extra fees on the use of a specific payment gateway. 
 
 &#9989; WooCommerce credit card processing fee based on the order total
 
-== Advance Fee for Cash on Delivery(COD) OR Partial payment for Order ==
+== Advance Fee for Cash on Delivery (COD) OR Partial payment for Order ==
 
 This feature allows you to take a small amount in advance and then take the remaining amount afterwards during the delivery (if the customer wants, they can pay the remaining amount before delivery as well). So, using this you can avoid fake cash on delivery orders.
 
@@ -117,23 +117,23 @@ You can exclude products from partial payment. There are two ways to exclude: th
 
 You can collect the shipping charge as a partial payment amount, so if you have a shipping charge of $10 and the customer is ordering products worth $1000, then they can pay $10 as partial payment and the remaining amount of $1000 can be paid on delivery. So you can base the partial payment amount on a percentage of the shipping charge, the subtotal of the order, or a fixed amount.
 
-= Blacklist email id or IP address =
+= Blacklist email ID or IP address =
 You can blacklist email IDs or IP addresses so that users with those email IDs or IP addresses will not be able to place an order on your website. This is useful when you want to block a specific user from placing an order on your website.
 
 	
 == PRO version features ==
 	
-&#9989; Create unlimited payment disable rule
+&#9989; Create unlimited payment disable rules
 
 &#9989; Create unlimited payment fees
 
 &#9989; Create unlimited partial payment rules
 
-&#9989; create conditional partial payment rules
+&#9989; Create conditional partial payment rules
 
 &#9989; In multi currency website you can give partial payment option based on the currency selected by the customer
 
-&#9989; Create conditional cod rule, so cod option will only be shown when the condition is met
+&#9989; Create conditional COD rule, so COD option will only be shown when the condition is met
 
 [Buy pro version](https://www.piwebsolution.com/product/disable-payment-method-payment-fees-partial-payment-for-woocommerce/)
 
@@ -156,12 +156,12 @@ You can blacklist email IDs or IP addresses so that users with those email IDs o
 
 == Screenshots ==
 1. List of rules to Disable payment method, Charge fee for Payment method, and Partial payment for Order
-2. Rule consist of 2 section, Basic info and Conditions
+2. Rule consists of 2 sections, Basic info and Conditions
 3. Basic info showing how to configure the rule to charge payment processing fees
-4. How user will decide if they want to make partial payment for the order or not
-5. woocommerce partial payment setting to configure the partial payment amount
-6. How user will see the Partial payment details on the order completion page
-7. Design option for woocommerce partial payment
+4. How users will decide if they want to make partial payment for the order or not
+5. WooCommerce partial payment setting to configure the partial payment amount
+6. How users will see the Partial payment details on the order completion page
+7. Design option for WooCommerce partial payment
 
 == Frequently Asked Questions ==
 
@@ -173,7 +173,7 @@ E.g: Say you have 2 different payment gateways, Gateway A charges 1% processing 
 Yes, you can do that using our Disable payment method plugin. You can set a condition to disable PayPal until the customer's cart subtotal is more than $100.
 
 = I want to offer credit card processing only when the order total is more than $1000 =
-You can do that using our plugin. E.g: say you are using Stripe for card processing, then you can set a rule to disable Stripe card processing for orders below $1000.
+You can do that using our plugin. E.g: Say you are using Stripe for card processing, then you can set a rule to disable Stripe card processing for orders below $1000.
 
 = WooCommerce credit card processing fee? =
 Yes, you can charge a credit card processing fee for orders that are processed through credit card payment gateways. This fee can be a fixed amount or a percentage of the order total.
@@ -211,7 +211,7 @@ Yes, you can disable PayPal or other payment gateways based on the customer's co
 = I want to enable Authorize payment gateway for Wholesale customer role =
 Yes, you can disable payment gateways based on the user or customer role.
 
-= I want to disable payment gateway for when a customer orders a product belonging to a specific category =
+= I want to disable payment gateway when a customer orders a product belonging to a specific category =
 Yes, you can do that using our product category rule.
 
 = I want to give the option of a specific payment gateway when the user adds a specific coupon code =
@@ -235,7 +235,7 @@ You can use our WooCommerce payment processing fees plugin to collect these extr
 = I want to take partial payment for the order =
 Yes, you can do that with this plugin. You can take a small fixed amount as a partial payment amount and then you can take the remaining amount on final product delivery.
 
-= Can user make the remaining amount payment before the order is delivered? =
+= Can the user make the remaining amount payment before the order is delivered? =
 Yes, if the customer wants, they can make the remaining amount payment before the product is delivered.
 
 = What will be the order status of the partially paid or COD deposit order? =
@@ -290,11 +290,14 @@ Yes, you can charge WooCommerce payment processing fees based on the order total
 
 == Changelog ==
 
+= 1.1.10.9 =
+* order ownership check added in the order fee from order pay page
+
 = 1.1.10.7 =
 * WC 11.2 updated
 
 = 1.1.10.6 =
-* Admin ui change
+* Admin UI change
 
 = 1.1.10.4 =
 * Tested for WC 11.0
@@ -311,7 +314,7 @@ Yes, you can charge WooCommerce payment processing fees based on the order total
 * [fix] Ajax loop issue on User email rule.
 
 = 1.1.9.49 =
-* Paypal v4 support
+* PayPal v4 support
 
 = 1.1.9.47 =
 * Tested for WP 7.0
@@ -333,11 +336,11 @@ Yes, you can charge WooCommerce payment processing fees based on the order total
 * Days since user registration rule added
 
 = 1.1.9.30 =
-* disable payment method based on customer ip address based country
-* charge extra payment processing fee based on customer ip address based country
+* Disable payment method based on customer IP address country
+* Charge extra payment processing fee based on customer IP address country
 
 = 1.1.9.24 =
-* Blacklist email id or IP address feature added
+* Blacklist email ID or IP address feature added
 
 = 1.1.9.23 =
 * Payment processing fees not can be based on the subtotal + shipping - discount coupon
