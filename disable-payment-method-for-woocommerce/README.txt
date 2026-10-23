@@ -291,7 +291,7 @@ Yes, you can charge WooCommerce payment processing fees based on the order total
 == Changelog ==
 
 = 1.1.10.10 =
-* analutics fixed
+* analytics togle is now protected by nonce and role check (Issue discoved by Nguyen Vu Thanh Danh (ngvuthdanh))
 
 = 1.1.10.9 =
 * order ownership check added in the order fee from order pay page (Issue discoverd by pnn219)
