@@ -116,7 +116,7 @@ class Pi_dpmw_selection_rule_billing_state{
         
                     $or_result = false;
                     $user_state = $this->getUserState( $package );
-                    $rule_states = $this->separateState($values);
+                    $rule_states = is_array($values) ? $values : array();
                     if($logic == 'equal_to'){
                         if(in_array($user_state, $rule_states)){
                             $or_result = true;
@@ -137,22 +137,15 @@ class Pi_dpmw_selection_rule_billing_state{
     function getUserState( $package ){
         $state = '';
         if(is_a($package, 'WC_Cart')){
-            $state = WC()->customer->get_billing_state();
+            $user_country = ( WC()->customer instanceof WC_Customer ) ? WC()->customer->get_billing_country() : '';
+            $user_state = ( WC()->customer instanceof WC_Customer ) ?  WC()->customer->get_billing_state() : '';
+            $state   = $user_country . ':' . $user_state;
         }elseif(is_a($package, 'WC_Order')){
-            $state = $package->get_billing_state();
+            $billing_state = $package->get_billing_state();
+            $billing_country = $package->get_billing_country();
+            $state = $billing_country . ':' . $billing_state;
         }
         return $state;
-    }
-
-    function separateState($countries_states){
-        $value = array();
-        if(is_array($countries_states)){
-        foreach($countries_states as $countries_state){
-            $array = explode(":",$countries_state);
-            $value[] = $array[1];
-        }
-        }
-        return $value;
     }
 }
 

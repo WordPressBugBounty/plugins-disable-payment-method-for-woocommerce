@@ -116,7 +116,7 @@ class Pi_dpmw_selection_rule_state{
         
                     $or_result = false;
                     $user_state = $this->getUserState( $package );
-                    $rule_states = $this->separateState($values);
+                    $rule_states = is_array($values) ? $values : array();
                     if($logic == 'equal_to'){
                         if(in_array($user_state, $rule_states)){
                             $or_result = true;
@@ -137,28 +137,23 @@ class Pi_dpmw_selection_rule_state{
     function getUserState( $package ){
         $state = '';
         if(is_a($package, 'WC_Cart')){
-            $state = WC()->customer->get_shipping_state();
+            $user_country = ( WC()->customer instanceof WC_Customer ) ? WC()->customer->get_shipping_country() : '';
+            $user_state = ( WC()->customer instanceof WC_Customer ) ? WC()->customer->get_shipping_state() : '';
+            $state   = $user_country . ':' . $user_state;
         }elseif(is_a($package, 'WC_Order')){
-            $billing_state = $package->get_billing_state();
             $shipping_state = $package->get_shipping_state();
-            if(empty($shipping_state)){
-                $state = $billing_state;
-            }else{
-                $state = $shipping_state;
+            $shipping_country = $package->get_shipping_country();
+
+            // Physical order with no saved shipping address: same-as-billing case
+            if ( empty( $shipping_country ) ) {
+                $shipping_country = $package->get_billing_country();
+                $shipping_state   = $package->get_billing_state();
             }
+            
+            $state = $shipping_country . ':' . $shipping_state;
+            
         }
         return $state;
-    }
-
-    function separateState($countries_states){
-        $value = array();
-        if(is_array($countries_states)){
-        foreach($countries_states as $countries_state){
-            $array = explode(":",$countries_state);
-            $value[] = $array[1];
-        }
-        }
-        return $value;
     }
 }
 
