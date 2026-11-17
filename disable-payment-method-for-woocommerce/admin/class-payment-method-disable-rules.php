@@ -39,7 +39,7 @@ class Class_Pisol_Dpmw_Disable_Rules_list{
 
         $action = sanitize_text_field(filter_input(INPUT_GET, 'action'));
         if($action == 'dpmw_disable_rule_delete'){
-            $this->post_id = sanitize_text_field(filter_input(INPUT_GET, 'id'));
+            $this->post_id = (int) filter_input(INPUT_GET, 'id');
             add_action('init',array($this,'deletePost' ));
         }
 
@@ -64,8 +64,14 @@ class Class_Pisol_Dpmw_Disable_Rules_list{
     }
 
     function deletePost(){
+        $post_id = (int) $this->post_id;
+
+        if ( $post_id <= 0 ) {
+            wp_die( esc_html__( 'Invalid rule.', 'disable-payment-method-for-woocommerce' ), '', array( 'response' => 400 ) );
+        }
+
         $submitted_value = isset($_REQUEST['_wpnonce']) ? sanitize_text_field(wp_unslash( $_REQUEST['_wpnonce'] )) : '';
-        if(!wp_verify_nonce($submitted_value, 'dpmw-delete')){
+        if(!wp_verify_nonce($submitted_value, 'dpmw-delete-' . $post_id)){
             wp_die( 'Your page has expired, refresh and try again' );
         }
 
@@ -74,7 +80,17 @@ class Class_Pisol_Dpmw_Disable_Rules_list{
             wp_safe_redirect(  admin_url( '/admin.php?page=pisol-dpmw-settings' )  );
             exit();
         }
-        wp_delete_post($this->post_id);
+
+        /*
+         * The ID comes from the request, so make sure the target really is one of our
+         * payment method rules. Without this check an authorized user could delete any
+         * page or post by changing the "id" parameter.
+         */
+        if ( get_post_type( $post_id ) !== 'pi_dpmw_rules' ) {
+            wp_die( esc_html__( 'Invalid rule.', 'disable-payment-method-for-woocommerce' ), '', array( 'response' => 403 ) );
+        }
+
+        wp_delete_post( $post_id );
         wp_safe_redirect(  admin_url( '/admin.php?page=pisol-dpmw-settings' )  );
         exit();
     }

@@ -65,6 +65,7 @@ class Pi_dpmw_selection_rule_day_of_week{
     }
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $access = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $access )) {
             return;

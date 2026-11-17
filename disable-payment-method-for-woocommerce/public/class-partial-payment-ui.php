@@ -267,6 +267,12 @@ class Pi_dpmw_partial_payment_ui{
 			$order_id = $wp->query_vars['order-received'];
             $order = wc_get_order($order_id);
             if(empty($order)) return;
+
+            $key = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : '';
+            if ( empty( $key ) ||  !$order->key_is_valid( $key ) ) {
+                return;
+            }
+
             $type = $order->get_type();
             if($type == 'pi_pending_amt'){
                 $parent_order_id = $order->get_parent_id();

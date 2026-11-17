@@ -40,6 +40,12 @@ class Pi_dpmw_selection_rule_main{
         include 'pisol_rule_form.php';
     }
 
+    static function verifyAjaxNonce(){
+        if(!check_ajax_referer('pi_dpmw_selection_rule_nonce', 'nonce', false)){
+            wp_die(esc_html__('Invalid request.', 'disable-payment-method-for-woocommerce'), 403);
+        }
+    }
+
     function group($key, $rules, $saved_values = ""){
         if($key == ""){
             $html = '<option>'.esc_html($rules[0]['name']).'</option>';
@@ -112,12 +118,12 @@ class Pi_dpmw_selection_rule_main{
 
     static function createHiddenField($count, $condition ="",  $values = array(), $step = 'any'){
 
-        if(is_array($values) && $values > 0){
-            $value = ' value="'.$values[0].'" ';
+        if(is_array($values) && isset($values[0]) && $values[0] !== ''){
+            $value = ' value="'.esc_attr($values[0]).'" ';
         }else{
             $value = "";
         }
-        $html = '<input type="hidden" class="form-control" data-condition="'.$condition.'" name="pi_selection['.$count.'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$value.' >';
+        $html = '<input type="hidden" class="form-control" data-condition="'.esc_attr($condition).'" name="pi_selection['.esc_attr($count).'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$value.' >';
         return $html;
     }
 
@@ -173,7 +179,7 @@ class Pi_dpmw_selection_rule_main{
         $html .= $this->conditionValue($condition['pi_condition'],$condition['pi_value'], $count);
         $html .= '</div>';
         $html .= '<div class="col-12 col-md-1 text-right ">';
-        $html .= '<a href="javascript:void(0);" class="pi-delete-rule"><span class="dashicons dashicons-trash"></span></a>';
+        $html .= '<a href="#" class="pi-delete-rule"><span class="dashicons dashicons-trash"></span></a>';
         $html .= '</div>';
         $html .= '</div>';
         return $html;
@@ -192,7 +198,7 @@ class Pi_dpmw_selection_rule_main{
             $multiple = '';
         }
 
-        $html = '<select class="form-control pi_condition_value pi_values_'.$dynamic.'" data-condition="'.$condition.'" name="pi_selection['.$count.'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$multiple.' placeholder="Select">';
+        $html = '<select class="form-control pi_condition_value pi_values_'.esc_attr($dynamic).'" data-condition="'.esc_attr($condition).'" name="pi_selection['.esc_attr($count).'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$multiple.' placeholder="Select">';
         foreach ($array as $key => $value){
                 $selected = "";
                 if(is_array($values) && in_array($key, $values)){
@@ -208,8 +214,8 @@ class Pi_dpmw_selection_rule_main{
 
     static function createNumberField($count, $condition ="",  $values = array(), $step = 'any'){
 
-        if(is_array($values) && $values > 0){
-            $value = ' value="'.$values[0].'" ';
+        if(is_array($values) && isset($values[0]) && $values[0] !== ''){
+            $value = ' value="'.esc_attr($values[0]).'" ';
         }else{
             $value = "";
         }
@@ -219,12 +225,12 @@ class Pi_dpmw_selection_rule_main{
 
     static function createTextField($count, $condition ="",  $values = array()){
 
-        if(is_array($values) && $values > 0){
-            $value = ' value="'.$values[0].'" ';
+        if(is_array($values) && isset($values[0]) && $values[0] !== ''){
+            $value = ' value="'.esc_attr($values[0]).'" ';
         }else{
             $value = "";
         }
-        $html = '<input required type="text" class="form-control" data-condition="'.$condition.'" name="pi_selection['.esc_attr($count).'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$value.' >';
+        $html = '<input required type="text" class="form-control" data-condition="'.esc_attr($condition).'" name="pi_selection['.esc_attr($count).'][pi_'.PI_DPMW_SELECTION_RULE_SLUG.'_condition_value][]" '.$value.' >';
         return $html;
     }
 
@@ -236,6 +242,9 @@ add_action( 'admin_enqueue_scripts', 'pisol_dpmw_dynamic_rule_main_script');
 function pisol_dpmw_dynamic_rule_main_script(){
     if(isset($_GET['page']) && 'pisol-dpmw-settings' == $_GET['page']){
     wp_enqueue_script( 'pisol_dpmw_dynamic_rule_main_script', plugin_dir_url( __FILE__ ) . 'js/dynamic_form.js', array( 'jquery' ), DISABLE_PAYMENT_METHOD_FOR_WOOCOMMERCE_VERSION );
+    wp_localize_script( 'pisol_dpmw_dynamic_rule_main_script', 'pi_dpmw_rule_ajax', array(
+        'nonce' => wp_create_nonce( 'pi_dpmw_selection_rule_nonce' ),
+    ) );
     wp_enqueue_script( 'selectWoo', WC()->plugin_url() . '/assets/js/selectWoo/selectWoo.full.min.js', array( 'jquery' ), '1.0.4' );
     wp_enqueue_style( 'select2', WC()->plugin_url() . '/assets/css/select2.css');
     }

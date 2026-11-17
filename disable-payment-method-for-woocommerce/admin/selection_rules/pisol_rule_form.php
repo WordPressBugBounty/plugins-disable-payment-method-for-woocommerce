@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </select>
     </div>
     <div class="col-12 col-md-2 text-right">
-        <a href="javascript:void(0);" class="btn btn-primary btn-sm" id="pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
+        <a href="#" class="btn btn-primary btn-sm" id="pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
     </div>
 </div>
 <?php 
@@ -93,12 +93,13 @@ echo wp_kses($this->savedRows(),
         )
     ),
     array(
-        'javascript'
+        'http',
+        'https'
     )
 ); ?>
 </div>
 <div class="row ">
     <div class="col-12 text-right py-3">
-    <a href="javascript:void(0);" class="btn btn-primary btn-sm pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
+    <a href="#" class="btn btn-primary btn-sm pi-add-<?php echo esc_attr($this->slug); ?>-rule" data-target="#pisol-rules-container-<?php echo esc_attr($this->slug); ?>"><?php echo esc_html__('Add Condition','disable-payment-method-for-woocommerce'); ?></a>
     </div>
 </div>

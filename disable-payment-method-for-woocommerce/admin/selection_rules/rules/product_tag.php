@@ -62,6 +62,7 @@ class Pi_dpmw_selection_rule_product_tag{
 
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $access = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $access )) {
             return;
@@ -107,6 +108,7 @@ class Pi_dpmw_selection_rule_product_tag{
     }
 
     public function search_tag( $x = '', $post_types = array( 'product' ) ) {
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
 		$access = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $access )) {
             return;

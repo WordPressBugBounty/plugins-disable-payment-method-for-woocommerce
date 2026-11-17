@@ -247,7 +247,26 @@ class Class_Pi_Dpmw_Add_Edit{
         
         $post_type = sanitize_text_field(filter_input( INPUT_POST, 'post_type'));
         if ( isset( $post_type ) && 'pi_dpmw_rules' === $post_type ) {
-            if ( isset( $_POST['post_id'] ) && ( $_POST['post_id'] === '' || empty($_POST['post_id']) ) ) {
+
+            $target_post_id = isset( $_POST['post_id'] ) && is_scalar( $_POST['post_id'] ) ? (int) wp_unslash( $_POST['post_id'] ) : 0;
+
+            if ( $target_post_id > 0 ) {
+                /*
+                 * The "post_type" value above is supplied by the client, so it can not be used
+                 * to decide which post is updated. Only allow the update when the actual post
+                 * being modified is one of our own rules.
+                 */
+                if ( get_post_type( $target_post_id ) !== 'pi_dpmw_rules' ) {
+                    return false;
+                }
+
+                $shipping_method_post = array(
+                    'ID'          => $target_post_id,
+                    'post_title'  => sanitize_text_field( wp_unslash( isset( $_POST['pi_title'] ) ? $_POST['pi_title'] : '' ) ),
+                    'post_status' => 'publish',
+                );
+                $post_id  = wp_update_post( $shipping_method_post );
+            } else {
                 $shipping_method_post = array(
                     'post_title'  => sanitize_text_field( wp_unslash( isset( $_POST['pi_title'] ) ? $_POST['pi_title'] : '' ) ),
                     'post_status' => 'publish',
@@ -255,13 +274,10 @@ class Class_Pi_Dpmw_Add_Edit{
                 );
                 $post_id  = wp_insert_post( $shipping_method_post );
                 $redirect_url = admin_url( '/admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule&action=edit&id='.$post_id);
-            } else {
-                $shipping_method_post = array(
-                    'ID'          => (int)sanitize_text_field( wp_unslash( isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0 ) ),
-                    'post_title'  => sanitize_text_field( wp_unslash( isset( $_POST['pi_title'] ) ? $_POST['pi_title'] : '' ) ),
-                    'post_status' => 'publish',
-                );
-                $post_id  = wp_update_post( $shipping_method_post );
+            }
+
+            if ( is_wp_error( $post_id ) || empty( $post_id ) ) {
+                return false;
             }
             
             if ( isset( $_POST['pi_status'] ) ) {

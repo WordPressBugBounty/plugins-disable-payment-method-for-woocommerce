@@ -68,6 +68,7 @@ class Pi_dpmw_selection_rule_advance_shipping{
     }
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $access = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $access )) {
             return;

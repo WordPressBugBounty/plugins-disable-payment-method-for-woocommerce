@@ -63,6 +63,7 @@ class Pi_dpmw_selection_rule_user{
 
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $cap = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $cap )) {
             return;
@@ -109,6 +110,7 @@ class Pi_dpmw_selection_rule_user{
     }
 
     public function search_user( $x = '', $post_types = array( 'user' ) ) {
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $cap = Pi_dpmw_Menu::getCapability();
 		if ( ! current_user_can( $cap ) ) {
 			return;

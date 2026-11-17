@@ -71,6 +71,7 @@ class Pi_dpmw_selection_rule_diff_shipping_add{
     }
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $access = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $access )) {
             return;

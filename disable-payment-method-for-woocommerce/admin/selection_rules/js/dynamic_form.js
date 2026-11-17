@@ -1,6 +1,8 @@
 (function ($) {
     'use strict';
 
+    var dpmwAjaxNonce = (window.pi_dpmw_rule_ajax && window.pi_dpmw_rule_ajax.nonce) ? window.pi_dpmw_rule_ajax.nonce : '';
+
     function pisol_efrs_select_rule_main() {
         this.init = function () {
             this.slug = 'dpmw';
@@ -26,7 +28,8 @@
 
         this.addRule = function () {
             var parent = this;
-            jQuery("#pi-add-" + parent.slug + "-rule, .pi-add-" + parent.slug + "-rule").click(function () {
+            jQuery("#pi-add-" + parent.slug + "-rule, .pi-add-" + parent.slug + "-rule").click(function (e) {
+                e.preventDefault();
                 parent.target = $(this).data('target');
                 parent.addRow();
                 parent.increaseCounter();
@@ -70,7 +73,8 @@
                     data: function (params) {
                         return {
                             keyword: params.term,
-                            action: "pi_" + parent.slug + "_options_" + jQuery(this).data("condition")
+                            action: "pi_" + parent.slug + "_options_" + jQuery(this).data("condition"),
+                            nonce: dpmwAjaxNonce
                         };
                     },
                     processResults: function (data) {
@@ -104,7 +108,7 @@
         }
 
         this.deleteRow = function () {
-            var html = '<a href="javascript:void(0);" class="pi-delete-rule"><span class="dashicons dashicons-trash"></span></a>';
+            var html = '<a href="#" class="pi-delete-rule"><span class="dashicons dashicons-trash"></span></a>';
             return html;
         }
 
@@ -156,7 +160,7 @@
             jQuery(".pi_logic_container", row).html(logic);
             this.blockUi(row);
             jQuery.post(window.ajaxurl,
-                { action: 'pi_' + parent.slug + '_value_field_' + condition_val, count: count },
+                { action: 'pi_' + parent.slug + '_value_field_' + condition_val, count: count, nonce: dpmwAjaxNonce },
                 function (data) {
                     jQuery(".pi_condition_value_container", row).html(data);
                     jQuery(".pi_condition_value").selectWoo();
@@ -186,7 +190,8 @@
                     data: function (params) {
                         return {
                             keyword: params.term,
-                            action: "pi_" + parent.slug + "_options_" + jQuery(this).data("condition")
+                            action: "pi_" + parent.slug + "_options_" + jQuery(this).data("condition"),
+                            nonce: dpmwAjaxNonce
                         };
                     },
                     processResults: function (data) {

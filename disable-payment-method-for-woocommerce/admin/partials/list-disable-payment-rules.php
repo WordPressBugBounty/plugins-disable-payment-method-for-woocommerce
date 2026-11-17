@@ -61,7 +61,7 @@ foreach($disable_rules as $disable_rule){
     echo '</td>';
     echo '<td>';
     echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&tab=pi_dpmw_add_disable_rule&action=edit&id='.$disable_rule->ID ), 'dpmw-edit')).'" class="btn btn-primary btn-sm m-2" title="'.esc_attr__('Edit disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-admin-customizer"></span></a>';
-    echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&action=dpmw_disable_rule_delete&id='.$disable_rule->ID ), 'dpmw-delete')).'" class="btn btn-primary btn-sm m-2 pi-dpmw-delete"  title="'.esc_attr__('Delete disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-trash "></span></a>';
+    echo '<a href="'.esc_url(wp_nonce_url(admin_url( '/admin.php?page=pisol-dpmw-settings&action=dpmw_disable_rule_delete&id='.$disable_rule->ID ), 'dpmw-delete-' . $disable_rule->ID)).'" class="btn btn-primary btn-sm m-2 pi-dpmw-delete"  title="'.esc_attr__('Delete disabling rule','disable-payment-method-for-woocommerce').'"><span class="dashicons dashicons-trash "></span></a>';
     echo '</td>';
     echo '</tr>';
 }

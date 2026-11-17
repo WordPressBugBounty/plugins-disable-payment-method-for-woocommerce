@@ -62,6 +62,7 @@ class Pi_dpmw_selection_rule_user_email{
 
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $cap = Pi_dpmw_Menu::getCapability();
         if(!current_user_can( $cap )) {
             return;

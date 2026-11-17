@@ -61,6 +61,7 @@ class Pi_dpmw_selection_rule_billing_city{
     }
 
     function ajaxCall(){
+        Pi_dpmw_selection_rule_main::verifyAjaxNonce();
         $cap = class_exists('Pi_Dpmw_Menu') ? Pi_Dpmw_Menu::getCapability() : 'manage_options';
         if(!current_user_can( $cap )) {
             die();

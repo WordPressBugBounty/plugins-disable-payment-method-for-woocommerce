@@ -72,6 +72,10 @@ class pisol_dpmw_blacklist_settings {
     }
 
     function piws_handle_blacklist_add() {
+        if ( ! current_user_can( Pi_dpmw_Menu::getCapability() ) ) {
+            wp_die( esc_html__( 'You do not have permission to do this.', 'disable-payment-method-for-woocommerce' ), '', array( 'response' => 403 ) );
+        }
+
         if (
             !isset($_POST['blacklist_value'], $_POST['blacklist_type']) ||
             !wp_verify_nonce($_POST['piws_blacklist_nonce'], 'piws_blacklist_add_entry')
@@ -147,6 +151,10 @@ class pisol_dpmw_blacklist_settings {
 
 
     function piws_handle_blacklist_delete() {
+        if ( ! current_user_can( Pi_dpmw_Menu::getCapability() ) ) {
+            wp_die( esc_html__( 'You do not have permission to do this.', 'disable-payment-method-for-woocommerce' ), '', array( 'response' => 403 ) );
+        }
+
         if (
             !isset($_POST['id'], $_POST['type'], $_POST['piws_blacklist_delete_nonce']) ||
             !wp_verify_nonce($_POST['piws_blacklist_delete_nonce'], 'piws_blacklist_delete_entry_' . $_POST['id'])
