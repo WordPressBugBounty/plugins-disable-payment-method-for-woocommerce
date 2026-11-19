@@ -22,6 +22,10 @@ class Session{
      */
     static function partialPaymentSelected(){
 
+        if ( empty( get_option( 'pi_dpmw_enable_partial_payment', 0 ) ) ) {
+            return false;
+        }
+
         $name = 'pi-cod-deposit';
         if(isset($_POST[$name])){
             $fees_id = sanitize_text_field( wp_unslash( $_POST[$name] ));
